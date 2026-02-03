@@ -9,9 +9,20 @@ export default function HeroSection() {
     ];
 
     return (
-        <section id="inicio" className="relative pt-24 md:pt-32 pb-16 md:pb-24 overflow-hidden">
-            {/* Background gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white via-[var(--powip-teal-light)]/20 to-[var(--powip-purple)]/5 -z-10" />
+        <section id="inicio" className="relative min-h-screen flex items-center overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 -z-20">
+                <Image
+                    src="/landing/hero-bg.png"
+                    alt="POWIP Dashboard"
+                    fill
+                    className="object-cover object-center"
+                    priority
+                />
+            </div>
+
+            {/* Overlay for text legibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/95 via-white/85 to-white/40 -z-10" />
 
             {/* Decorative elements */}
             <div className="absolute top-32 right-10 w-4 h-4 text-[var(--powip-purple)] animate-pulse">✦</div>
@@ -19,8 +30,8 @@ export default function HeroSection() {
             <div className="absolute bottom-32 left-20 w-6 h-6 rounded-full bg-[var(--powip-teal-light)]/50" />
             <div className="absolute top-40 left-10 w-4 h-4 rounded-full bg-[var(--powip-purple)]/20" />
 
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 md:pt-32 pb-16 md:pb-24 w-full">
+                <div className="max-w-2xl">
                     {/* Left content */}
                     <div className="space-y-8">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
@@ -39,7 +50,7 @@ export default function HeroSection() {
                         <ul className="space-y-4">
                             {benefits.map((benefit, index) => (
                                 <li key={index} className="flex items-start gap-3">
-                                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--powip-teal)] flex items-center justify-center mt-0.5">
+                                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[var(--powip-teal)] flex items-center justify-center mt-0.5 shadow-md">
                                         <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                         </svg>
@@ -70,27 +81,6 @@ export default function HeroSection() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
                             </Link>
-                        </div>
-                    </div>
-
-                    {/* Right content - Mockup */}
-                    <div className="relative lg:pl-8">
-                        <div className="relative">
-                            {/* Laptop mockup container */}
-                            <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl transform hover:scale-[1.02] transition-transform duration-500">
-                                <Image
-                                    src="/landing/hero-mockup.png"
-                                    alt="Dashboard de POWIP"
-                                    width={700}
-                                    height={500}
-                                    className="w-full h-auto"
-                                    priority
-                                />
-                            </div>
-
-                            {/* Decorative background shapes */}
-                            <div className="absolute -top-8 -right-8 w-32 h-32 bg-[var(--powip-teal-light)] rounded-full opacity-50 -z-10" />
-                            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-[var(--powip-purple)]/20 rounded-full -z-10" />
                         </div>
                     </div>
                 </div>

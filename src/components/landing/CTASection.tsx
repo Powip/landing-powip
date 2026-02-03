@@ -27,7 +27,7 @@ export default function CTASection() {
 
                 {/* CTA Button */}
                 <Link
-                    href="https://wa.me/51999999999?text=Hola,%20quiero%20una%20demo%20de%20POWIP"
+                    href="https://wa.me/51947424006?text=Hola,%20quiero%20una%20demo%20de%20POWIP"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-10 py-4 bg-[var(--powip-teal)] text-white font-bold text-lg rounded-xl hover:bg-[var(--powip-teal-dark)] transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
