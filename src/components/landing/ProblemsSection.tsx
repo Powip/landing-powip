@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function ProblemsSection() {
     const problems = [
         {
@@ -6,6 +8,7 @@ export default function ProblemsSection() {
             description: "Perderse entre conversaciones y olvidar pedidos importantes",
             color: "bg-red-50",
             iconBg: "bg-red-100",
+            image: "/landing/problems/chats.jpg",
         },
         {
             icon: "📋",
@@ -13,6 +16,7 @@ export default function ProblemsSection() {
             description: "(2 horas/día perdidas)",
             color: "bg-orange-50",
             iconBg: "bg-orange-100",
+            image: "/landing/problems/excel.jpg",
         },
         {
             icon: "📦",
@@ -20,6 +24,7 @@ export default function ProblemsSection() {
             description: "Confusión en el estado de los envíos y entregas",
             color: "bg-yellow-50",
             iconBg: "bg-yellow-100",
+            image: "/landing/problems/envios.jpg",
         },
     ];
 
@@ -40,9 +45,14 @@ export default function ProblemsSection() {
                             key={index}
                             className={`${problem.color} rounded-2xl p-6 md:p-8 text-center transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl`}
                         >
-                            {/* Icon */}
-                            <div className={`${problem.iconBg} w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6`}>
-                                <span className="text-4xl">{problem.icon}</span>
+                            {/* Image */}
+                            <div className="relative w-full aspect-square rounded-xl overflow-hidden mb-6 shadow-md">
+                                <Image
+                                    src={problem.image}
+                                    alt={problem.title}
+                                    fill
+                                    className="object-cover"
+                                />
                             </div>
 
                             {/* X mark */}
