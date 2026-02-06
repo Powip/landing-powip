@@ -15,12 +15,25 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "POWIP - ERP para negocios que venden por WhatsApp, Instagram, TikTok y Web",
-  description: "Centraliza tus pedidos en un solo lugar reduciendo operaciones manuales al gestionar tus entregas a tu cliente final.",
-  keywords: ["ERP", "WhatsApp", "Instagram", "TikTok", "ventas", "pedidos", "inventario", "cobranzas"],
+  title:
+    "POWIP - ERP para negocios que venden por WhatsApp, Instagram, TikTok y Web",
+
+  description:
+    "Centraliza tus pedidos en un solo lugar reduciendo operaciones manuales al gestionar tus entregas a tu cliente final.",
+  keywords: [
+    "ERP",
+    "WhatsApp",
+    "Instagram",
+    "TikTok",
+    "ventas",
+    "pedidos",
+    "inventario",
+    "cobranzas",
+  ],
   openGraph: {
     title: "POWIP - ERP para negocios digitales",
-    description: "Centraliza tus pedidos, gestiona tu inventario y haz seguimiento a tus cobranzas.",
+    description:
+      "Centraliza tus pedidos, gestiona tu inventario y haz seguimiento a tus cobranzas.",
     type: "website",
   },
 };
@@ -32,9 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth">
-      <body
-        className={`${montserrat.variable} ${inter.variable} antialiased`}
-      >
+      <body className={`${montserrat.variable} ${inter.variable} antialiased`}>
         {children}
       </body>
     </html>
