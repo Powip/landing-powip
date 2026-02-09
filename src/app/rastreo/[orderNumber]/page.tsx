@@ -10,6 +10,7 @@ import {
   Clock,
   AlertCircle,
   ShoppingBag,
+  Send,
 } from "lucide-react";
 
 /* -----------------------------------------
@@ -54,6 +55,14 @@ interface TrackingData {
     trackingNumber?: string | null;
     pickupKey?: string | null;
   };
+  // Información de envío
+  courier?: string | null;
+  shippingInfo?: {
+    shippingKey?: string | null;
+    shippingCode?: string | null;
+    shippingOffice?: string | null;
+    externalTrackingNumber?: string | null;
+  } | null;
 }
 
 /* -----------------------------------------
@@ -330,8 +339,59 @@ export default function RastreoPage() {
                 {data.deliveryType.replace("_", " ").toLowerCase()}
               </p>
             </div>
+            {/* Courier asignado */}
+            {data.courier && (
+              <div>
+                <p className="text-white/50 text-sm">Courier asignado</p>
+                <p className="text-white font-medium">{data.courier}</p>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Shipping Info - Solo visible si está pagado y tiene datos */}
+        {data.shippingInfo && (
+          <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-lg rounded-3xl p-6 border border-green-500/30">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+              <Send className="h-5 w-5 text-green-400" />
+              Datos de tu envío
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {data.shippingInfo.externalTrackingNumber && (
+                <div>
+                  <p className="text-white/50 text-sm">Número de guía</p>
+                  <p className="text-white font-mono font-medium">
+                    {data.shippingInfo.externalTrackingNumber}
+                  </p>
+                </div>
+              )}
+              {data.shippingInfo.shippingCode && (
+                <div>
+                  <p className="text-white/50 text-sm">Código de envío</p>
+                  <p className="text-white font-mono font-medium">
+                    {data.shippingInfo.shippingCode}
+                  </p>
+                </div>
+              )}
+              {data.shippingInfo.shippingKey && (
+                <div>
+                  <p className="text-white/50 text-sm">Clave de retiro</p>
+                  <p className="text-white font-mono font-medium text-green-300">
+                    {data.shippingInfo.shippingKey}
+                  </p>
+                </div>
+              )}
+              {data.shippingInfo.shippingOffice && (
+                <div className="md:col-span-2">
+                  <p className="text-white/50 text-sm">Oficina de retiro</p>
+                  <p className="text-white">
+                    {data.shippingInfo.shippingOffice}
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Products */}
         <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10">
