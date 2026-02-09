@@ -10,6 +10,7 @@ import {
   Clock,
   AlertCircle,
   ShoppingBag,
+  Send,
 } from "lucide-react";
 
 /* -----------------------------------------
@@ -49,6 +50,14 @@ interface TrackingData {
     pendingAmount: number;
   };
   timeline: TrackingTimeline[];
+  // Información de envío
+  courier?: string | null;
+  shippingInfo?: {
+    shippingKey?: string | null;
+    shippingCode?: string | null;
+    shippingOffice?: string | null;
+    externalTrackingNumber?: string | null;
+  } | null;
 }
 
 /* -----------------------------------------
@@ -191,23 +200,21 @@ export default function RastreoPage() {
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-6">
         {/* Status Card */}
         <div
-          className={`rounded-3xl p-6 ${
-            isCancelled
-              ? "bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30"
-              : isDelivered
-                ? "bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30"
-                : "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30"
-          }`}
+          className={`rounded-3xl p-6 ${isCancelled
+            ? "bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30"
+            : isDelivered
+              ? "bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30"
+              : "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30"
+            }`}
         >
           <div className="flex items-center gap-4">
             <div
-              className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
-                isCancelled
-                  ? "bg-red-500/30"
-                  : isDelivered
-                    ? "bg-green-500/30"
-                    : "bg-purple-500/30"
-              }`}
+              className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isCancelled
+                ? "bg-red-500/30"
+                : isDelivered
+                  ? "bg-green-500/30"
+                  : "bg-purple-500/30"
+                }`}
             >
               {isCancelled ? (
                 <AlertCircle className="h-8 w-8 text-red-400" />
@@ -241,12 +248,11 @@ export default function RastreoPage() {
               <div
                 className="absolute left-[18px] top-2 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 transition-all duration-500"
                 style={{
-                  height: `${
-                    (data.timeline.filter((t) => t.completed || t.current)
-                      .length /
-                      data.timeline.length) *
+                  height: `${(data.timeline.filter((t) => t.completed || t.current)
+                    .length /
+                    data.timeline.length) *
                     100
-                  }%`,
+                    }%`,
                 }}
               ></div>
 
@@ -258,13 +264,12 @@ export default function RastreoPage() {
                     className="flex items-center gap-4 relative"
                   >
                     <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center z-10 transition-all ${
-                        item.completed
-                          ? "bg-gradient-to-r from-purple-500 to-pink-500"
-                          : item.current
-                            ? "bg-gradient-to-r from-purple-500 to-pink-500 ring-4 ring-purple-500/30 animate-pulse"
-                            : "bg-white/10 border border-white/20"
-                      }`}
+                      className={`w-9 h-9 rounded-full flex items-center justify-center z-10 transition-all ${item.completed
+                        ? "bg-gradient-to-r from-purple-500 to-pink-500"
+                        : item.current
+                          ? "bg-gradient-to-r from-purple-500 to-pink-500 ring-4 ring-purple-500/30 animate-pulse"
+                          : "bg-white/10 border border-white/20"
+                        }`}
                     >
                       {item.completed ? (
                         <CheckCircle2 className="h-5 w-5 text-white" />
@@ -276,11 +281,10 @@ export default function RastreoPage() {
                     </div>
                     <div>
                       <p
-                        className={`font-medium ${
-                          item.completed || item.current
-                            ? "text-white"
-                            : "text-white/40"
-                        }`}
+                        className={`font-medium ${item.completed || item.current
+                          ? "text-white"
+                          : "text-white/40"
+                          }`}
                       >
                         {item.label}
                       </p>
@@ -306,27 +310,76 @@ export default function RastreoPage() {
             {(data.customer.district ||
               data.customer.city ||
               data.customer.province) && (
-              <div>
-                <p className="text-white/50 text-sm">Ubicación</p>
-                <p className="text-white">
-                  {[
-                    data.customer.district,
-                    data.customer.city,
-                    data.customer.province,
-                  ]
-                    .filter(Boolean)
-                    .join(", ")}
-                </p>
-              </div>
-            )}
+                <div>
+                  <p className="text-white/50 text-sm">Ubicación</p>
+                  <p className="text-white">
+                    {[
+                      data.customer.district,
+                      data.customer.city,
+                      data.customer.province,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </p>
+                </div>
+              )}
             <div>
               <p className="text-white/50 text-sm">Tipo de entrega</p>
               <p className="text-white capitalize">
                 {data.deliveryType.replace("_", " ").toLowerCase()}
               </p>
             </div>
+            {/* Courier asignado */}
+            {data.courier && (
+              <div>
+                <p className="text-white/50 text-sm">Courier asignado</p>
+                <p className="text-white font-medium">{data.courier}</p>
+              </div>
+            )}
           </div>
         </div>
+
+        {/* Shipping Info - Solo visible si está pagado y tiene datos */}
+        {data.shippingInfo && (
+          <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-lg rounded-3xl p-6 border border-green-500/30">
+            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
+              <Send className="h-5 w-5 text-green-400" />
+              Datos de tu envío
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {data.shippingInfo.externalTrackingNumber && (
+                <div>
+                  <p className="text-white/50 text-sm">Número de guía</p>
+                  <p className="text-white font-mono font-medium">
+                    {data.shippingInfo.externalTrackingNumber}
+                  </p>
+                </div>
+              )}
+              {data.shippingInfo.shippingCode && (
+                <div>
+                  <p className="text-white/50 text-sm">Código de envío</p>
+                  <p className="text-white font-mono font-medium">
+                    {data.shippingInfo.shippingCode}
+                  </p>
+                </div>
+              )}
+              {data.shippingInfo.shippingKey && (
+                <div>
+                  <p className="text-white/50 text-sm">Clave de retiro</p>
+                  <p className="text-white font-mono font-medium text-green-300">
+                    {data.shippingInfo.shippingKey}
+                  </p>
+                </div>
+              )}
+              {data.shippingInfo.shippingOffice && (
+                <div className="md:col-span-2">
+                  <p className="text-white/50 text-sm">Oficina de retiro</p>
+                  <p className="text-white">{data.shippingInfo.shippingOffice}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
 
         {/* Products */}
         <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10">
