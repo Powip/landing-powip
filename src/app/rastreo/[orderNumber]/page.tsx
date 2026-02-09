@@ -49,6 +49,11 @@ interface TrackingData {
     pendingAmount: number;
   };
   timeline: TrackingTimeline[];
+  shipping?: {
+    courierName?: string | null;
+    trackingNumber?: string | null;
+    pickupKey?: string | null;
+  };
 }
 
 /* -----------------------------------------
@@ -384,6 +389,92 @@ export default function RastreoPage() {
                 </span>
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Aviso de Estado / Mensaje Personalizado */}
+        <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10 space-y-4">
+          <p className="text-white">
+            Hola <span className="font-bold">{data.customer.fullName}</span>, te
+            saludamos de LIVII. Te informamos que tu pedido ya ha sido procesado
+            y se encuentra en manos de la empresa de transporte:
+          </p>
+
+          <div className="bg-white/5 rounded-xl p-4 space-y-2 text-sm">
+            <p className="text-white">
+              📦 <span className="font-bold">EMPRESA:</span>{" "}
+              {data.shipping?.courierName || "POR ASIGNAR"}
+            </p>
+            <p className="text-white">
+              🎫 <span className="font-bold">Nº DE GUÍA:</span>{" "}
+              {data.shipping?.trackingNumber || "PENDIENTE"}
+            </p>
+            {data.shipping?.pickupKey && (
+              <p className="text-white">
+                💰 <span className="font-bold">CLAVE:</span>{" "}
+                {data.shipping.pickupKey}
+              </p>
+            )}
+            <p className="text-white">
+              <span className="font-bold">SALDO PENDIENTE:</span> S/{" "}
+              {data.totals.pendingAmount.toFixed(2)}
+            </p>
+          </div>
+
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 space-y-2">
+            <p className="text-amber-200 font-bold flex items-center gap-2">
+              <AlertCircle className="h-5 w-5" />
+              ADVERTENCIA DE SEGURIDAD Y RECOJO
+            </p>
+            <p className="text-white/80 text-sm">
+              El paquete ya está en tránsito. Es obligatorio cancelar el saldo
+              pendiente hoy mismo para evitar que la mercadería sea retenida.
+            </p>
+            <p className="text-white/80 text-sm">
+              Según las políticas de transporte, si el paquete no es retirado en
+              el tiempo establecido, pasará a{" "}
+              <span className="font-bold text-red-400">
+                ZONA DE DESTRUCCIÓN / ABANDONO LEGAL
+              </span>
+              .
+            </p>
+            <p className="text-white/60 text-xs mt-2 italic">
+              IMPORTANTE: LIVII no se hace responsable por la pérdida definitiva
+              del producto, ni se realizarán reembolsos por paquetes que pasen a
+              destrucción debido a la falta de pago o recojo del cliente.
+            </p>
+          </div>
+
+          {data.totals.pendingAmount > 0 && (
+            <div className="space-y-2">
+              <p className="text-white font-bold text-sm">
+                💳 MÉTODOS DE PAGO DISPONIBLES:
+              </p>
+              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+                <p className="text-white font-bold">YAPE: 970334874</p>
+                <p className="text-white/60 text-sm">
+                  (Corporación Aranni SAC)
+                </p>
+              </div>
+            </div>
+          )}
+
+          <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+            <p className="text-green-200 font-bold mb-2">✅ CONFIRMACIÓN</p>
+            <p className="text-white/80 text-sm mb-3">
+              Envía el comprobante de pago a WhatsApp para validar tu entrega.
+            </p>
+            <p className="text-white font-bold text-center">
+              Enviar Comprobante al{" "}
+              <a
+                href="https://wa.me/51960255616"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-green-400 hover:text-green-300 underline"
+              >
+                960 255 616
+              </a>
+            </p>
           </div>
         </div>
 
