@@ -527,12 +527,12 @@ export default function RastreoPage() {
             <p className="text-white font-bold text-center">
               Enviar Comprobante al{" "}
               <a
-                href="https://wa.me/51960255616"
+                href="https://wa.me/51924948378"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-green-400 hover:text-green-300 underline"
               >
-                960 255 616
+                924 948 378
               </a>
             </p>
           </div>
