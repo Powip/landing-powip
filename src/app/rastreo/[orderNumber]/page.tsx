@@ -57,6 +57,8 @@ interface TrackingData {
   };
   // Información de envío
   courier?: string | null;
+  businessName?: string;
+  businessPhone?: string | null;
   shippingInfo?: {
     shippingKey?: string | null;
     shippingCode?: string | null;
@@ -205,23 +207,21 @@ export default function RastreoPage() {
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-6">
         {/* Status Card */}
         <div
-          className={`rounded-3xl p-6 ${
-            isCancelled
+          className={`rounded-3xl p-6 ${isCancelled
               ? "bg-gradient-to-r from-red-500/20 to-red-600/20 border border-red-500/30"
               : isDelivered
                 ? "bg-gradient-to-r from-green-500/20 to-emerald-600/20 border border-green-500/30"
                 : "bg-gradient-to-r from-purple-500/20 to-pink-500/20 border border-purple-500/30"
-          }`}
+            }`}
         >
           <div className="flex items-center gap-4">
             <div
-              className={`w-16 h-16 rounded-2xl flex items-center justify-center ${
-                isCancelled
+              className={`w-16 h-16 rounded-2xl flex items-center justify-center ${isCancelled
                   ? "bg-red-500/30"
                   : isDelivered
                     ? "bg-green-500/30"
                     : "bg-purple-500/30"
-              }`}
+                }`}
             >
               {isCancelled ? (
                 <AlertCircle className="h-8 w-8 text-red-400" />
@@ -255,12 +255,11 @@ export default function RastreoPage() {
               <div
                 className="absolute left-[18px] top-2 w-0.5 bg-gradient-to-b from-purple-500 to-pink-500 transition-all duration-500"
                 style={{
-                  height: `${
-                    (data.timeline.filter((t) => t.completed || t.current)
+                  height: `${(data.timeline.filter((t) => t.completed || t.current)
                       .length /
                       data.timeline.length) *
                     100
-                  }%`,
+                    }%`,
                 }}
               ></div>
 
@@ -272,13 +271,12 @@ export default function RastreoPage() {
                     className="flex items-center gap-4 relative"
                   >
                     <div
-                      className={`w-9 h-9 rounded-full flex items-center justify-center z-10 transition-all ${
-                        item.completed
+                      className={`w-9 h-9 rounded-full flex items-center justify-center z-10 transition-all ${item.completed
                           ? "bg-gradient-to-r from-purple-500 to-pink-500"
                           : item.current
                             ? "bg-gradient-to-r from-purple-500 to-pink-500 ring-4 ring-purple-500/30 animate-pulse"
                             : "bg-white/10 border border-white/20"
-                      }`}
+                        }`}
                     >
                       {item.completed ? (
                         <CheckCircle2 className="h-5 w-5 text-white" />
@@ -290,11 +288,10 @@ export default function RastreoPage() {
                     </div>
                     <div>
                       <p
-                        className={`font-medium ${
-                          item.completed || item.current
+                        className={`font-medium ${item.completed || item.current
                             ? "text-white"
                             : "text-white/40"
-                        }`}
+                          }`}
                       >
                         {item.label}
                       </p>
@@ -320,19 +317,19 @@ export default function RastreoPage() {
             {(data.customer.district ||
               data.customer.city ||
               data.customer.province) && (
-              <div>
-                <p className="text-white/50 text-sm">Ubicación</p>
-                <p className="text-white">
-                  {[
-                    data.customer.district,
-                    data.customer.city,
-                    data.customer.province,
-                  ]
-                    .filter(Boolean)
-                    .join(", ")}
-                </p>
-              </div>
-            )}
+                <div>
+                  <p className="text-white/50 text-sm">Ubicación</p>
+                  <p className="text-white">
+                    {[
+                      data.customer.district,
+                      data.customer.city,
+                      data.customer.province,
+                    ]
+                      .filter(Boolean)
+                      .join(", ")}
+                  </p>
+                </div>
+              )}
             <div>
               <p className="text-white/50 text-sm">Tipo de entrega</p>
               <p className="text-white capitalize">
@@ -456,7 +453,7 @@ export default function RastreoPage() {
         <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10 space-y-4">
           <p className="text-white">
             Hola <span className="font-bold">{data.customer.fullName}</span>, te
-            saludamos de LIVII. Te informamos que tu pedido ya ha sido procesado
+            saludamos de {data.businessName || "nuestra empresa"}. Te informamos que tu pedido ya ha sido procesado
             y se encuentra en manos de la empresa de transporte:
           </p>
 
@@ -499,7 +496,7 @@ export default function RastreoPage() {
               .
             </p>
             <p className="text-white/60 text-xs mt-2 italic">
-              IMPORTANTE: LIVII no se hace responsable por la pérdida definitiva
+              IMPORTANTE: {data.businessName || "La empresa"} no se hace responsable por la pérdida definitiva
               del producto, ni se realizarán reembolsos por paquetes que pasen a
               destrucción debido a la falta de pago o recojo del cliente.
             </p>
@@ -526,14 +523,18 @@ export default function RastreoPage() {
             </p>
             <p className="text-white font-bold text-center">
               Enviar Comprobante al{" "}
-              <a
-                href="https://wa.me/51924948378"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-green-400 hover:text-green-300 underline"
-              >
-                924 948 378
-              </a>
+              {data.businessPhone ? (
+                <a
+                  href={`https://wa.me/51${data.businessPhone.replace(/\\D/g, "")}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-green-400 hover:text-green-300 underline"
+                >
+                  {data.businessPhone}
+                </a>
+              ) : (
+                <span className="text-green-400">número de atención correspondiente</span>
+              )}
             </p>
           </div>
         </div>
