@@ -1,21 +1,52 @@
-import LandingHeader from "@/components/landing/LandingHeader";
-import HeroSection from "@/components/landing/HeroSection";
-import ProblemsSection from "@/components/landing/ProblemsSection";
-import FeaturesSection from "@/components/landing/FeaturesSection";
-import TestimonialsSection from "@/components/landing/TestimonialsSection";
-import CTASection from "@/components/landing/CTASection";
-import Footer from "@/components/landing/Footer";
+import Navbar from "@/components/Navbar";
+import HeroSection from "@/components/HeroSection";
+import ProblemsSection from "@/components/ProblemsSection";
+import FeaturesSection from "@/components/FeaturesSection";
+import StepsSection from "@/components/StepsSection";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import PricingSection from "@/components/PricingSection";
+import IntegrationsSection from "@/components/IntegrationsSection";
+import BottomCTA from "@/components/BottomCTA";
+import Footer from "@/components/Footer";
+import ScrollReveal from "@/components/ScrollReveal";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
-      <LandingHeader />
+    <main className="min-h-screen font-inter bg-white w-full overflow-x-hidden">
+      <Navbar />
       <HeroSection />
-      <ProblemsSection />
-      <FeaturesSection />
-      <TestimonialsSection />
-      <CTASection />
+
+      <ScrollReveal>
+        <ProblemsSection />
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <FeaturesSection />
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <StepsSection />
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <TestimonialsSection />
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <PricingSection />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <IntegrationsSection />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <BottomCTA />
+      </ScrollReveal>
+
       <Footer />
+      <WhatsAppButton />
     </main>
   );
 }
