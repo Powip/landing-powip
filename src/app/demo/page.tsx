@@ -27,6 +27,12 @@ export default function DemoPage() {
     e.preventDefault();
     setLoading(true);
 
+    if (!supabase) {
+      setLoading(false);
+      alert('Error de configuración: Las credenciales de Supabase no están configuradas correctamente.');
+      return;
+    }
+
     const { error } = await supabase
       .from('landing_leads')
       .insert([
