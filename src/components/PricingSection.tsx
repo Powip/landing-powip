@@ -5,30 +5,30 @@ import Link from 'next/link';
 const plans = [
   {
     name: 'BASIC',
-    monthly: 149,
-    annual: 99,
+    monthly: 99,
+    annual: 799,
     oldMonthly: null,
-    oldAnnual: 149,
+    oldAnnual: 1188,
     features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify'],
     orders: 'Hasta 999',
     highlighted: false,
   },
   {
     name: 'STANDARD',
-    monthly: 239,
-    annual: 189,
+    monthly: 179,
+    annual: 1399,
     oldMonthly: null,
-    oldAnnual: 239,
+    oldAnnual: 2268,
     features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify'],
     orders: 'Hasta 1999',
     highlighted: true,
   },
   {
-    name: 'FULL',
+    name: 'PREMIUM',
     monthly: 299,
-    annual: 269,
+    annual: 1999,
     oldMonthly: null,
-    oldAnnual: 299,
+    oldAnnual: 3228,
     features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify', 'Integración SUNAT'],
     orders: 'Hasta 5999',
     highlighted: false,
@@ -137,7 +137,7 @@ export default function PricingSection() {
               </div>
 
               <Link
-                href="/demo"
+                href="https://www.powip.tech/login"
                 className={`w-full font-bold py-3 rounded-lg text-center inline-block transition-all duration-300 ${
                   isHighlighted
                     ? 'bg-white hover:bg-gray-100 text-[#4F3A96] text-lg py-4 mt-2'
@@ -162,7 +162,7 @@ export default function PricingSection() {
               <li className="text-[#006B82] text-xs">Desarrollo custom</li>
             </ul>
           </div>
-          <Link href="/demo" className="w-full bg-[#006B82] hover:bg-[#005a6e] transition-colors text-white font-bold text-base py-3 rounded-lg mt-auto text-center inline-block">
+          <Link href="https://www.powip.tech/login" className="w-full bg-[#006B82] hover:bg-[#005a6e] transition-colors text-white font-bold text-base py-3 rounded-lg mt-auto text-center inline-block">
             Solicitar ahora
           </Link>
         </div>

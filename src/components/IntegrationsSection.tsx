@@ -1,78 +1,99 @@
 import React from 'react';
 
 export default function IntegrationsSection() {
-  return (
-    <section className="w-full flex flex-col items-center py-20 px-6 md:px-20 gap-12 bg-white overflow-hidden">
+  const integrations = [
+    {
+      name: 'SUNAT',
+      logo: '/sunat-logo.png',
+      content: <div className="flex items-center gap-2 px-8">
+        <img src="/sunat-logo.png" alt="SUNAT Logo" className="h-8 w-auto object-contain" />
+        <span className="text-[#006B82] font-black text-2xl whitespace-nowrap">SUNAT</span>
+      </div>
+    },
+    {
+      name: 'Shopify',
+      logo: '/shopify.png',
+      content: <div className="flex items-center gap-2 px-8">
+        <img src="/shopify.png" alt="Shopify Icon" className="h-8 w-auto object-contain" />
+        <div className="flex items-end gap-1">
+          <span className="text-[#333333] font-bold text-2xl leading-none">shopify</span>
+          <span className="text-[#666666] font-normal text-lg leading-none mb-0.5">partners</span>
+        </div>
+      </div>
+    },
+    {
+      name: 'Olva',
+      logo: '/olva-logo.png',
+      content: <div className="flex items-center gap-2 px-8">
+        <img src="/olva-logo.png" alt="Olva Logo" className="h-8 w-auto object-contain" />
+        <div className="flex items-center gap-1">
+          <span className="text-[#ECA329] font-black text-2xl">OLVA</span>
+          <span className="text-[#666666] font-black text-2xl">COURIER</span>
+        </div>
+      </div>
+    },
+    {
+      name: 'Shalom',
+      content: <div className="flex items-center px-8">
+        <span className="text-[#E02D3B] font-black text-2xl md:text-3xl whitespace-nowrap">SHALOM</span>
+      </div>
+    },
+    {
+      name: 'Google',
+      content: <div className="flex items-center px-8 tracking-tight">
+        <span className="text-[#4285F4] font-bold text-2xl">G</span>
+        <span className="text-[#EA4335] font-bold text-2xl">o</span>
+        <span className="text-[#FBBC05] font-bold text-2xl">o</span>
+        <span className="text-[#4285F4] font-bold text-2xl">g</span>
+        <span className="text-[#34A853] font-bold text-2xl">l</span>
+        <span className="text-[#EA4335] font-bold text-2xl">e</span>
+      </div>
+    },
+    {
+      name: 'AWS',
+      logo: '/aws.png',
+      content: <div className="flex items-center gap-2 px-8">
+        <img src="/aws.png" alt="AWS Icon" className="h-10 w-auto object-contain" />
+      </div>
+    },
+    {
+      name: 'MercadoPago',
+      logo: '/mercadopago-logo.png',
+      content: <div className="flex items-center gap-2 px-8">
+        <img src="/mercadopago-logo.png" alt="MercadoPago Logo" className="h-8 w-auto object-contain" />
+        <span className="text-[#001B6B] font-bold text-lg whitespace-nowrap uppercase">mercado pago</span>
+      </div>
+    },
+    {
+      name: 'Meta',
+      logo: '/meta.png',
+      content: <div className="flex items-center gap-2 px-8">
+        <img src="/meta.png" alt="Meta Icon" className="h-8 w-auto object-contain" />
+        <span className="text-[#333333] font-bold text-2xl">Meta</span>
+      </div>
+    }
+  ];
 
-      <div className="flex flex-col items-center text-center w-full">
-        <h2 className="text-[#006B82] font-bold text-center text-lg md:text-xl mb-12">
+  // Double the items for seamless loop
+  const duplicatedIntegrations = [...integrations, ...integrations];
+
+  return (
+    <section className="w-full bg-white py-16 overflow-hidden">
+      <div className="flex flex-col items-center gap-12">
+        <h2 className="text-[#006B82] font-bold text-center text-lg md:text-xl px-6">
           +1200 negocios ecommerce ya usan Powip
         </h2>
 
-        <div className="flex flex-col gap-12 md:gap-16 w-full items-center">
-
-          {/* Row 1 */}
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 w-full">
-            {/* SUNAT */}
-            <div className="flex items-center">
-              <span className="text-[#006B82] font-black text-2xl md:text-[28px]">SUNAT</span>
-            </div>
-
-            {/* Shopify Partners */}
-            <div className="flex items-center gap-2">
-              <img src="/shopify.png" alt="Shopify Icon" className="w-8 h-8 object-contain" />
-              <div className="flex items-end gap-1">
-                <span className="text-[#333333] font-bold text-2xl md:text-[28px] leading-none">shopify</span>
-                <span className="text-[#666666] font-normal text-lg md:text-[22px] leading-none mb-0.5">partners</span>
+        <div className="relative w-full flex overflow-hidden">
+          <div className="animate-marquee flex items-center whitespace-nowrap">
+            {duplicatedIntegrations.map((item, idx) => (
+              <div key={idx} className="flex-shrink-0 flex items-center justify-center h-16">
+                {item.content}
               </div>
-            </div>
-
-            {/* OLVA */}
-            <div className="flex items-center gap-1">
-              <span className="text-[#ECA329] font-black text-2xl md:text-[26px]">OLVA</span>
-              <span className="text-[#666666] font-black text-2xl md:text-[26px]">COURIER</span>
-            </div>
-
-            {/* SHALOM */}
-            <div className="flex items-center">
-              <span className="text-[#E02D3B] font-black text-[28px] md:text-[32px]">SHALOM</span>
-            </div>
+            ))}
           </div>
-
-          {/* Row 2 */}
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-16 w-full">
-            {/* Google */}
-            <div className="flex items-center tracking-tight">
-              <span className="text-[#4285F4] font-bold text-2xl md:text-[28px]">G</span>
-              <span className="text-[#EA4335] font-bold text-2xl md:text-[28px]">o</span>
-              <span className="text-[#FBBC05] font-bold text-2xl md:text-[28px]">o</span>
-              <span className="text-[#4285F4] font-bold text-2xl md:text-[28px]">g</span>
-              <span className="text-[#34A853] font-bold text-2xl md:text-[28px]">l</span>
-              <span className="text-[#EA4335] font-bold text-2xl md:text-[28px]">e</span>
-            </div>
-
-            {/* AWS */}
-            <div className="flex items-center gap-2">
-              <img src="/aws.png" alt="AWS Icon" className="w-16 h-16 object-contain" />
-              <span className="text-[#333333] font-bold text-[28px] md:text-[32px] leading-none mt-1"></span>
-            </div>
-
-            {/* MercadoPago */}
-            <div className="flex flex-col">
-              <span className="text-[#001B6B] font-bold text-base md:text-[18px] leading-none">mercado</span>
-              <span className="text-[#001B6B] font-bold text-base md:text-[18px] leading-none">pago</span>
-            </div>
-
-            {/* Meta */}
-            <div className="flex items-center gap-2">
-              <img src="/meta.png" alt="Meta Icon" className="w-10 h-10 object-contain" />
-              <span className="text-[#333333] font-bold text-2xl md:text-[28px]">Meta</span>
-            </div>
-          </div>
-
         </div>
       </div>
-
     </section>
   );
 }

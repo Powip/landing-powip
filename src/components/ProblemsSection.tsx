@@ -118,9 +118,8 @@ export default function ProblemsSection() {
         </div>
       </div>
 
-      {/* Button Area */}
       <div className="w-full flex justify-center pt-8">
-        <Link href="/demo" className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-lg px-12 py-4 rounded-lg">
+        <Link href="https://www.powip.tech/login" className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-lg px-12 py-4 rounded-lg">
           Empieza a usar Powip
         </Link>
       </div>

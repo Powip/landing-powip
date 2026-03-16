@@ -10,7 +10,7 @@ export default function Navbar() {
         <div className="flex items-center justify-center w-10 h-10 bg-white rounded-md overflow-hidden border border-gray-100 shadow-sm">
           <img src="/icon.jpeg" alt="Powip Logo" className="w-full h-full object-cover" />
         </div>
-        <span className="text-[#4F3A96] font-bold text-[28px] tracking-tight">POWIP</span>
+        <span className="text-[#4F3A96] font-bold text-[28px] tracking-tight font-heading">POWIP</span>
       </Link>
 
       {/* Navigation Links & CTA */}
