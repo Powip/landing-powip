@@ -79,7 +79,11 @@ export default function IntegrationsSection() {
 
   return (
     <section className="w-full bg-white py-16 overflow-hidden">
+
       <div className="flex flex-col items-center gap-12">
+        <h2 className="text-[#4F3A96] font-bold text-3xl md:text-5xl leading-tight">
+          Aliados que confían en Powip
+        </h2>
         <h2 className="text-[#006B82] font-bold text-center text-lg md:text-xl px-6">
           +1200 negocios ecommerce ya usan Powip
         </h2>

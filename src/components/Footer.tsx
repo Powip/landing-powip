@@ -15,14 +15,17 @@ export default function Footer() {
         </Link>
 
         <div className="flex flex-col gap-3">
-          <Link href="https://facebook.com" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
+          <Link href="https://www.facebook.com/POwip.pe/" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
             Facebook
           </Link>
-          <Link href="https://instagram.com" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
+          <Link href="https://www.instagram.com/powip.pe?igsh=czcwNmYyeHI4eTQ0&utm_source=qr" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
             Instagram
           </Link>
-          <Link href="https://linkedin.com" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
+          <Link href="https://www.linkedin.com/company/powip/?viewAsMember=true" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
             LinkedIn
+          </Link>
+          <Link href="https://www.tiktok.com/@powip.pe?_r=1&_t=ZS-94kNq3ZG10z" target="_blank" className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors">
+            TikTok
           </Link>
         </div>
       </div>

@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { supabase } from "@/lib/supabase";
 import { CheckCircle2, X } from 'lucide-react';
+import Link from 'next/link';
 
 export default function DemoPage() {
   const [loading, setLoading] = useState(false);
@@ -218,6 +219,31 @@ export default function DemoPage() {
           <div className="absolute inset-0 bg-[#3E308F]/10 pointer-events-none rounded-[15%] m-8 md:m-12 lg:m-16" />
         </div>
 
+      </section>
+
+      {/* Video section */}
+      <section className="w-full bg-[#3E308F] flex flex-col items-center pb-24 px-6 md:px-20 gap-10">
+        <h2 className="text-white font-bold text-3xl md:text-5xl text-center max-w-4xl leading-tight">
+          Muchos negocios ecommerce gestionan sus pedidos con Powip
+        </h2>
+        
+        <div className="w-full max-w-4xl aspect-video rounded-xl overflow-hidden bg-gray-200/20 shadow-2xl relative flex items-center justify-center border border-white/10">
+          <iframe 
+            className="absolute top-0 left-0 w-full h-full"
+            src="https://www.youtube.com/embed/" 
+            title="Powip Onboarding" 
+            frameBorder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowFullScreen
+          ></iframe>
+        </div>
+
+        <Link 
+          href="/#precios" 
+          className="h-12 px-8 flex items-center justify-center bg-[#B2EBF2] hover:bg-[#9ddfe7] transition-colors rounded text-[#473995] font-semibold text-[15px]"
+        >
+          Ver Planes y Precios
+        </Link>
       </section>
 
       <Footer />

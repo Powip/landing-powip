@@ -20,11 +20,14 @@ export default function FeaturesSection() {
         <h2 className="text-white font-bold text-3xl md:text-[32px] leading-tight whitespace-pre-line">
           {"Todo tu ecommerce en un solo lugar.\n Pedidos, pagos y envíos sin caos."}
         </h2>
+        <h4 className="text-white  text-3xl md:text-[18px] leading-tight whitespace-pre-line">
+          {"Deja de usar excel, chats, facturación electrónica y couriers en plataformas separadas. Con Powip controlas toda tu operación desde un solo panel."}
+        </h4>
 
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-3">
           {features.map((feature, idx) => (
-            <li key={idx} className="flex items-center gap-3 justify-center lg:justify-start">
-              <CircleCheck className="w-5 h-5 text-gray-400 shrink-0" />
+            <li key={idx} className="flex items-center gap-6 justify-center lg:justify-start">
+              <CircleCheck className=" gap-6 w-5 h-5 text-gray-400 shrink-0" />
               <span className="text-gray-100 text-sm md:text-base">{feature}</span>
             </li>
           ))}

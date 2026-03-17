@@ -5,7 +5,7 @@ import { ShoppingBag, Truck, CreditCard } from 'lucide-react';
 const steps = [
   {
     number: '01',
-    title: 'Recibe tus pedidos',
+    title: 'Conecta tus canales de venta',
     description: 'Centraliza los pedidos de WhatsApp, Instagram, TikTok y tu web en un solo lugar. Sin copiar y pegar.',
     icon: ShoppingBag,
     color: '#4F3A96',
@@ -14,7 +14,7 @@ const steps = [
   },
   {
     number: '02',
-    title: 'Gestiona envíos',
+    title: 'Gestiona tus pedidos sin errores',
     description: 'Conecta con Olva, Shalom y otros couriers. Genera guías y rastrea todos tus paquetes automáticamente.',
     icon: Truck,
     color: '#006B82',
@@ -23,12 +23,12 @@ const steps = [
   },
   {
     number: '03',
-    title: 'Cobra y factura',
+    title: 'Genera envíos y haz seguimiento',
     description: 'Registra pagos contraentrega, genera boletas y facturas electrónicas SUNAT desde la misma plataforma.',
     icon: CreditCard,
-    color: '#E67E22',
-    bgLight: '#FFF8E1',
-    borderColor: '#FFD54F',
+    color: '#4F3A96',
+    bgLight: '#F3EEFF',
+    borderColor: '#C9B8FF',
   },
 ];
 
@@ -96,7 +96,7 @@ export default function StepsSection() {
                       backgroundImage: `linear-gradient(to right, ${steps[index].color}, ${steps[index + 1].color})`
                     }} />
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2 1L10 6L2 11" stroke={steps[index + 1].color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M2 1L10 6L2 11" stroke={steps[index + 1].color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </div>
@@ -108,7 +108,7 @@ export default function StepsSection() {
                       backgroundImage: `linear-gradient(to bottom, ${steps[index].color}, ${steps[index + 1].color})`
                     }} />
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M1 2L6 10L11 2" stroke={steps[index + 1].color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M1 2L6 10L11 2" stroke={steps[index + 1].color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
                 </div>

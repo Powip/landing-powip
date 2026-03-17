@@ -39,23 +39,24 @@ export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(true);
 
   return (
-    <section className="w-full flex flex-col items-center py-24 px-6 md:px-20 gap-16 bg-white" id="precios">
 
+    <section className="w-full flex flex-col items-center py-24 px-6 md:px-20 gap-16 bg-white" id="precios">
+      <h2 className="text-[#4F3A96] font-bold text-3xl md:text-5xl leading-tight">
+        Planes que crecen contigo
+      </h2>
       {/* Toggle */}
       <div className="flex items-center rounded-full overflow-hidden bg-[#E0F2F4] p-1 shadow-inner">
         <button
           onClick={() => setIsAnnual(false)}
-          className={`px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${
-            !isAnnual ? 'bg-[#006B82] text-white shadow-md' : 'bg-transparent text-[#006B82]'
-          }`}
+          className={`px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${!isAnnual ? 'bg-[#006B82] text-white shadow-md' : 'bg-transparent text-[#006B82]'
+            }`}
         >
           MENSUAL
         </button>
         <button
           onClick={() => setIsAnnual(true)}
-          className={`px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${
-            isAnnual ? 'bg-[#006B82] text-white shadow-md' : 'bg-transparent text-[#006B82]'
-          }`}
+          className={`px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${isAnnual ? 'bg-[#006B82] text-white shadow-md' : 'bg-transparent text-[#006B82]'
+            }`}
         >
           ANUAL 30%
         </button>
@@ -72,11 +73,10 @@ export default function PricingSection() {
           return (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 flex flex-col justify-between gap-8 w-full flex-1 min-w-[250px] transition-all duration-500 ease-out border-2 ${
-                isHighlighted
-                  ? 'bg-[#4F3A96] max-w-[290px] shadow-[0_12px_40px_rgba(79,58,150,0.3)] md:scale-105 z-10 border-[#6B52C4]'
-                  : 'bg-white max-w-[260px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[#E0E7E8] hover:shadow-[0_8px_30px_rgba(0,107,130,0.12)] hover:border-[#006B82]/40'
-              }`}
+              className={`rounded-2xl p-8 flex flex-col justify-between gap-8 w-full flex-1 min-w-[250px] transition-all duration-500 ease-out border-2 ${isHighlighted
+                ? 'bg-[#4F3A96] max-w-[290px] shadow-[0_12px_40px_rgba(79,58,150,0.3)] md:scale-105 z-10 border-[#6B52C4]'
+                : 'bg-white max-w-[260px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[#E0E7E8] hover:shadow-[0_8px_30px_rgba(0,107,130,0.12)] hover:border-[#006B82]/40'
+                }`}
             >
               <div className="flex flex-col gap-6 w-full items-center text-center">
                 <h3 className={`font-bold text-2xl ${isHighlighted ? 'text-white' : 'text-[#006B82]'}`}>
@@ -88,9 +88,8 @@ export default function PricingSection() {
                   <div className="h-6 flex items-center">
                     {oldPrice && (
                       <span
-                        className={`font-bold text-lg line-through transition-all duration-500 ${
-                          isHighlighted ? 'text-gray-300 decoration-gray-300' : 'text-[#006B82] decoration-[#006B82]'
-                        } decoration-2`}
+                        className={`font-bold text-lg line-through transition-all duration-500 ${isHighlighted ? 'text-gray-300 decoration-gray-300' : 'text-[#006B82] decoration-[#006B82]'
+                          } decoration-2`}
                       >
                         S/ {oldPrice}.00
                       </span>
@@ -104,9 +103,8 @@ export default function PricingSection() {
                     </span>
                     <span
                       key={`${plan.name}-${price}`}
-                      className={`font-bold leading-none animate-price-pop ${
-                        isHighlighted ? 'text-white text-6xl' : 'text-[#006B82] text-5xl'
-                      }`}
+                      className={`font-bold leading-none animate-price-pop ${isHighlighted ? 'text-white text-6xl' : 'text-[#006B82] text-5xl'
+                        }`}
                     >
                       {price}
                     </span>
@@ -117,9 +115,8 @@ export default function PricingSection() {
                   {plan.features.map((feat, i) => (
                     <li
                       key={i}
-                      className={`text-xs ${
-                        isHighlighted ? 'text-gray-200' : 'text-[#006B82]'
-                      } ${feat.includes('SUNAT') ? 'font-semibold' : ''}`}
+                      className={`text-xs ${isHighlighted ? 'text-gray-200' : 'text-[#006B82]'
+                        } ${feat.includes('SUNAT') ? 'font-semibold' : ''}`}
                     >
                       {feat}
                     </li>
@@ -138,11 +135,10 @@ export default function PricingSection() {
 
               <Link
                 href="https://www.powip.tech/login"
-                className={`w-full font-bold py-3 rounded-lg text-center inline-block transition-all duration-300 ${
-                  isHighlighted
-                    ? 'bg-white hover:bg-gray-100 text-[#4F3A96] text-lg py-4 mt-2'
-                    : 'bg-[#006B82] hover:bg-[#005a6e] text-white text-base'
-                }`}
+                className={`w-full font-bold py-3 rounded-lg text-center inline-block transition-all duration-300 ${isHighlighted
+                  ? 'bg-white hover:bg-gray-100 text-[#4F3A96] text-lg py-4 mt-2'
+                  : 'bg-[#006B82] hover:bg-[#005a6e] text-white text-base'
+                  }`}
               >
                 Comprar ahora
               </Link>
