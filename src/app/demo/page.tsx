@@ -230,7 +230,7 @@ export default function DemoPage() {
         <div className="w-full max-w-4xl aspect-video rounded-xl overflow-hidden bg-gray-200/20 shadow-2xl relative flex items-center justify-center border border-white/10">
           <iframe
             className="absolute top-0 left-0 w-full h-full"
-            src="https://youtu.be/eR3NaHgyLC0"
+            src="https://www.youtube.com/embed/eR3NaHgyLC0"
             title="Powip Demo"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
