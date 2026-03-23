@@ -222,7 +222,7 @@ export default function DemoPage() {
       </section>
 
       {/* Video section */}
-      <section className="w-full bg-[#3E308F] flex flex-col items-center pb-24 px-6 md:px-20 gap-10">
+      <section id="video" className="w-full bg-[#3E308F] flex flex-col items-center pb-24 px-6 md:px-20 gap-10">
         <h2 className="text-white font-bold text-3xl md:text-5xl text-center max-w-4xl leading-tight">
           Muchos negocios ecommerce gestionan sus pedidos con Powip
         </h2>

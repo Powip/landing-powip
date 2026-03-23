@@ -15,7 +15,7 @@ const plans = [
   },
   {
     name: 'STANDARD',
-    monthly: 179,
+    monthly: 189,
     annual: 1399,
     oldMonthly: null,
     oldAnnual: 2268,
@@ -36,7 +36,7 @@ const plans = [
 ];
 
 export default function PricingSection() {
-  const [isAnnual, setIsAnnual] = useState(true);
+  const [isAnnual, setIsAnnual] = useState(false);
 
   return (
 
@@ -163,6 +163,63 @@ export default function PricingSection() {
           </Link>
         </div>
 
+      </div>
+      {/* ADD-ONS SECTION */}
+      <div className="w-full max-w-7xl flex flex-col gap-8 mt-12">
+        <div className="flex flex-col gap-4">
+          <h3 className="text-[#4F3A96] font-bold text-2xl md:text-3xl">&quot;Add-ons disponibles&quot;</h3>
+          <div className="w-full h-px bg-gray-200" />
+        </div>
+
+        <div className="flex flex-wrap gap-8 justify-center lg:justify-start">
+
+          {/* Card 1: Couriers */}
+          <div className="bg-[#E0F2F4] rounded-2xl p-6 md:p-8 flex flex-col gap-4 w-full md:max-w-[500px] relative shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex justify-between items-start gap-4">
+              <div className="flex flex-col gap-1">
+                <h4 className="text-[#006B82] font-bold text-xl md:text-2xl leading-tight">
+                  Integración con Couriers:  S/29.90/ mes
+                </h4>
+                <p className="text-[#4F3A96] font-bold text-base md:text-lg">
+                  Conecta Shalom y Olva Courier
+                </p>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2 max-w-[80%] md:max-w-[70%]">
+                  Genera guías, rastrea envíos y registra pagos contraentrega sin salir de la plataforma. Disponible para todos los planes.
+                </p>
+              </div>
+              <Link
+                href="https://www.powip.tech/login"
+                className="bg-[#4F3A96] hover:bg-[#3d2d75] text-white font-bold px-6 py-2.5 rounded-lg transition-all text-sm md:text-base absolute bottom-6 right-6 md:bottom-8 md:right-8"
+              >
+                Activar
+              </Link>
+            </div>
+          </div>
+
+          {/* Card 2: SUNAT */}
+          <div className="bg-[#E0F2F4] rounded-2xl p-6 md:p-8 flex flex-col gap-4 w-full md:max-w-[500px] relative shadow-sm hover:shadow-md transition-shadow">
+            <div className="flex justify-between items-start gap-4">
+              <div className="flex flex-col gap-1">
+                <h4 className="text-[#006B82] font-bold text-xl md:text-2xl leading-tight">
+                  Integración con SUNAT S/29.90/ mes
+                </h4>
+                <p className="text-[#4F3A96] font-bold text-base md:text-lg">
+                  Emite boletas, facturas y más
+                </p>
+                <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2 max-w-[80%] md:max-w-[70%]">
+                  Genera guías, boletas, facturas y envía a tu cliente. Disponible para todos los planes
+                </p>
+              </div>
+              <Link
+                href="https://www.powip.tech/login"
+                className="bg-[#4F3A96] hover:bg-[#3d2d75] text-white font-bold px-6 py-2.5 rounded-lg transition-all text-sm md:text-base absolute bottom-6 right-6 md:bottom-8 md:right-8"
+              >
+                Activar
+              </Link>
+            </div>
+          </div>
+
+        </div>
       </div>
     </section>
   );

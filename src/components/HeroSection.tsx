@@ -8,11 +8,11 @@ export default function HeroSection() {
 
         {/* Responsive heading layout */}
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
-          <h1 className="text-[#4F3A96] font-bold text-4xl md:text-[64px] leading-tight">
+          <h1 className="text-[#4F3A96] font-bold text-4xl md:text-[54px] leading-tight">
             Deja de usar
           </h1>
           <div className="bg-[#C5E6E8] px-4 py-1 rounded">
-            <h1 className="text-[#4F3A96] font-bold text-4xl md:text-[64px] leading-tight">
+            <h1 className="text-[#4F3A96] font-bold text-4xl md:text-[60px] leading-tight">
               excel y whatsapp
             </h1>
           </div>
@@ -20,7 +20,7 @@ export default function HeroSection() {
         </div>
 
         <div className="flex items-center justify-center">
-          <h1 className="text-[#4F3A96] font-bold text-4xl md:text-[64px] leading-tight">
+          <h1 className="text-[#4F3A96] font-bold text-4xl md:text-[54px] leading-tight">
             para gestionar tu negocio ecommerce
           </h1>
         </div>
@@ -29,7 +29,7 @@ export default function HeroSection() {
 
       {/* Main Mockup Image */}
       <div className="w-full max-w-[1000px] h-auto relative">
-        <img src="/hero-image.png" alt="Powip platform on desktop and mobile" className="w-full h-auto object-contain drop-shadow-2xl" />
+        <img src="/hero-image.jpeg" alt="Powip platform on desktop and mobile" className="w-full h-auto object-contain drop-shadow-2xl" />
       </div>
     </section>
   );
