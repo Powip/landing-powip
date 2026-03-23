@@ -25,7 +25,7 @@ const plans = [
   },
   {
     name: 'PREMIUM',
-    monthly: 299,
+    monthly: 269,
     annual: 1999,
     oldMonthly: null,
     oldAnnual: 3228,
