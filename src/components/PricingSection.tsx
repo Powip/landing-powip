@@ -7,7 +7,7 @@ const plans = [
     name: 'BASIC',
     monthly: 99,
     annual: 799,
-    oldMonthly: null,
+    oldMonthly: 149,
     oldAnnual: 1188,
     features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify'],
     orders: 'Hasta 999',
@@ -17,17 +17,17 @@ const plans = [
     name: 'STANDARD',
     monthly: 189,
     annual: 1399,
-    oldMonthly: null,
+    oldMonthly: 239,
     oldAnnual: 2268,
     features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify'],
     orders: 'Hasta 1999',
     highlighted: true,
   },
   {
-    name: 'PREMIUM',
+    name: 'FULL',
     monthly: 269,
     annual: 1999,
-    oldMonthly: null,
+    oldMonthly: 299,
     oldAnnual: 3228,
     features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify', 'Integración SUNAT'],
     orders: 'Hasta 5999',
@@ -73,13 +73,18 @@ export default function PricingSection() {
           return (
             <div
               key={plan.name}
-              className={`rounded-2xl p-8 flex flex-col justify-between gap-8 w-full flex-1 min-w-[250px] transition-all duration-500 ease-out border-2 ${isHighlighted
+              className={`rounded-2xl p-8 flex flex-col justify-between gap-8 w-full flex-1 min-w-[250px] transition-all duration-500 ease-out border-2 relative ${isHighlighted
                 ? 'bg-[#4F3A96] max-w-[290px] shadow-[0_12px_40px_rgba(79,58,150,0.3)] md:scale-105 z-10 border-[#6B52C4]'
-                : 'bg-white max-w-[260px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[#E0E7E8] hover:shadow-[0_8px_30px_rgba(0,107,130,0.12)] hover:border-[#006B82]/40'
+                : 'bg-[#006B82] max-w-[260px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[#006B82] hover:shadow-[0_8px_30px_rgba(0,107,130,0.2)]'
                 }`}
             >
+              {isHighlighted && (
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00D1B2] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap z-20">
+                  Más popular
+                </div>
+              )}
               <div className="flex flex-col gap-6 w-full items-center text-center">
-                <h3 className={`font-bold text-2xl ${isHighlighted ? 'text-white' : 'text-[#006B82]'}`}>
+                <h3 className="font-bold text-2xl text-white">
                   {plan.name}
                 </h3>
 
@@ -88,8 +93,7 @@ export default function PricingSection() {
                   <div className="h-6 flex items-center">
                     {oldPrice && (
                       <span
-                        className={`font-bold text-lg line-through transition-all duration-500 ${isHighlighted ? 'text-gray-300 decoration-gray-300' : 'text-[#006B82] decoration-[#006B82]'
-                          } decoration-2`}
+                        className={`font-bold text-lg line-through transition-all duration-500 text-white/70 decoration-white/70 decoration-2`}
                       >
                         S/ {oldPrice}.00
                       </span>
@@ -98,12 +102,12 @@ export default function PricingSection() {
 
                   {/* Current Price */}
                   <div className="flex items-end gap-1 transition-all duration-500">
-                    <span className={`font-bold mb-1 ${isHighlighted ? 'text-white text-4xl' : 'text-[#006B82] text-3xl'}`}>
+                    <span className={`font-bold mb-1 text-white ${isHighlighted ? 'text-4xl' : 'text-3xl'}`}>
                       S/.
                     </span>
                     <span
                       key={`${plan.name}-${price}`}
-                      className={`font-bold leading-none animate-price-pop ${isHighlighted ? 'text-white text-6xl' : 'text-[#006B82] text-5xl'
+                      className={`font-bold leading-none animate-price-pop text-white ${isHighlighted ? 'text-6xl' : 'text-5xl'
                         }`}
                     >
                       {price}
@@ -115,8 +119,7 @@ export default function PricingSection() {
                   {plan.features.map((feat, i) => (
                     <li
                       key={i}
-                      className={`text-xs ${isHighlighted ? 'text-gray-200' : 'text-[#006B82]'
-                        } ${feat.includes('SUNAT') ? 'font-semibold' : ''}`}
+                      className={`text-xs text-white/90 ${feat.includes('SUNAT') ? 'font-semibold' : ''}`}
                     >
                       {feat}
                     </li>
@@ -124,10 +127,10 @@ export default function PricingSection() {
                 </ul>
 
                 <div className="flex flex-col items-center mt-2">
-                  <span className={`text-base ${isHighlighted ? 'text-white text-lg' : 'text-[#006B82]'}`}>
+                  <span className={`text-white font-medium ${isHighlighted ? 'text-xl' : 'text-lg'}`}>
                     {plan.orders}
                   </span>
-                  <span className={`text-base ${isHighlighted ? 'text-white text-lg' : 'text-[#006B82]'}`}>
+                  <span className={`text-white/80 ${isHighlighted ? 'text-lg' : 'text-base'}`}>
                     Pedidos / mes
                   </span>
                 </div>
@@ -137,7 +140,7 @@ export default function PricingSection() {
                 href="https://www.powip.tech/login"
                 className={`w-full font-bold py-3 rounded-lg text-center inline-block transition-all duration-300 ${isHighlighted
                   ? 'bg-white hover:bg-gray-100 text-[#4F3A96] text-lg py-4 mt-2'
-                  : 'bg-[#006B82] hover:bg-[#005a6e] text-white text-base'
+                  : 'bg-white hover:bg-gray-50 text-[#006B82] text-base'
                   }`}
               >
                 Comprar ahora
@@ -147,18 +150,21 @@ export default function PricingSection() {
         })}
 
         {/* ENTERPRISE */}
-        <div className="bg-white rounded-2xl p-8 flex flex-col justify-between gap-8 w-full max-w-[260px] flex-1 min-w-[250px] border-2 border-[#E0E7E8] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,107,130,0.12)] hover:border-[#006B82]/40 transition-all duration-500">
+        <div className="bg-[#006B82] text-white rounded-2xl p-8 flex flex-col justify-between gap-8 w-full max-w-[260px] flex-1 min-w-[250px] border-2 border-[#006B82] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,107,130,0.2)] transition-all duration-500">
           <div className="flex flex-col gap-8 w-full items-center text-center">
-            <h3 className="text-[#006B82] font-bold text-2xl">ENTERPRISE</h3>
-            <div className="flex flex-col items-center pt-4">
-              <span className="text-[#006B82] font-bold text-lg">PERSONALIZADO</span>
+            <div className="flex flex-col items-center gap-1">
+              <span className="text-white/80 font-bold text-sm">Desde S./499.00</span>
+              <h3 className="text-white font-bold text-2xl">ENTERPRISE</h3>
+            </div>
+            <div className="flex flex-col items-center">
+              <span className="text-white font-bold text-lg">PERSONALIZADO</span>
             </div>
             <ul className="flex flex-col gap-2 w-full text-center mt-2">
-              <li className="text-[#006B82] text-xs">Dominio Propio</li>
-              <li className="text-[#006B82] text-xs">Desarrollo custom</li>
+              <li className="text-white/90 text-xs">Dominio Propio</li>
+              <li className="text-white/90 text-xs">Desarrollo custom</li>
             </ul>
           </div>
-          <Link href="https://www.powip.tech/login" className="w-full bg-[#006B82] hover:bg-[#005a6e] transition-colors text-white font-bold text-base py-3 rounded-lg mt-auto text-center inline-block">
+          <Link href="https://www.powip.tech/login" className="w-full bg-white hover:bg-gray-50 transition-colors text-[#006B82] font-bold text-base py-3 rounded-lg mt-auto text-center inline-block">
             Solicitar ahora
           </Link>
         </div>
