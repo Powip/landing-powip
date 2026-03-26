@@ -135,8 +135,12 @@ export default function ProblemsSection() {
         </div>
       </div>
 
-      <div className="w-full flex justify-center pt-8">
-        <Link href="https://www.powip.tech/login" className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-lg px-12 py-4 rounded-lg">
+      <div className="w-full max-w-6xl flex flex-col md:flex-row justify-between items-center gap-8 pt-16 mt-8 border-t border-gray-100">
+        <p className="text-[#4F3A96] font-bold text-xl md:text-2xl text-center md:text-left leading-tight max-w-xl">
+          Cuando tu negocio crece, el desorden también crece.<br />
+          Powip pone orden en tu operación.
+        </p>
+        <Link href="https://www.powip.tech/login" className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-lg px-12 py-4 rounded-lg whitespace-nowrap">
           Empieza a usar Powip
         </Link>
       </div>

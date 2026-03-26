@@ -25,7 +25,7 @@ export default function Navbar() {
           Iniciar sesión
         </Link>
         <Link href="/demo" className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-sm px-6 py-3 rounded-md">
-          Demo en vivo
+          Agenda tu demo GRATIS
         </Link>
       </div>
 
