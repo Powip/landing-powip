@@ -485,56 +485,37 @@ export default function RastreoPage() {
             </p>
             <p className="text-white/80 text-sm">
               El paquete ya está en tránsito. Es obligatorio cancelar el saldo
-              pendiente hoy mismo para evitar que la mercadería sea retenida.
+              pendiente para evitar que la mercadería sea retenida.
             </p>
             <p className="text-white/80 text-sm">
               Según las políticas de transporte, si el paquete no es retirado en
-              el tiempo establecido, pasará a{" "}
+              el tiempo establecido, pasará a{' '}
               <span className="font-bold text-red-400">
                 ZONA DE DESTRUCCIÓN / ABANDONO LEGAL
               </span>
               .
             </p>
             <p className="text-white/60 text-xs mt-2 italic">
-              IMPORTANTE: {data.businessName || "La empresa"} no se hace responsable por la pérdida definitiva
-              del producto, ni se realizarán reembolsos por paquetes que pasen a
-              destrucción debido a la falta de pago o recojo del cliente.
+              IMPORTANTE:{' '}
+              {data.businessName || 'La empresa'} no se hace responsable por la
+              pérdida definitiva del producto, ni se realizarán reembolsos por
+              paquetes que pasen a destrucción debido a la falta de pago o
+              recojo del cliente.
             </p>
           </div>
 
-          {data.totals.pendingAmount > 0 && (
-            <div className="space-y-2">
-              <p className="text-white font-bold text-sm">
-                💳 MÉTODOS DE PAGO DISPONIBLES:
-              </p>
-              <div className="bg-white/5 rounded-xl p-4 border border-white/10">
-                <p className="text-white font-bold">YAPE: 970334874</p>
-                <p className="text-white/60 text-sm">
-                  (Corporación Aranni SAC)
-                </p>
-              </div>
-            </div>
-          )}
-
-          <div className="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
-            <p className="text-green-200 font-bold mb-2">✅ CONFIRMACIÓN</p>
-            <p className="text-white/80 text-sm mb-3">
-              Envía el comprobante de pago a WhatsApp para validar tu entrega.
+          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center space-y-4">
+            <p className="text-blue-200 font-bold flex items-center justify-center gap-2">
+              <Clock className="h-5 w-5" />
+              ATENCIÓN: VALIDACIÓN DE PAGO
             </p>
-            <p className="text-white font-bold text-center">
-              Enviar Comprobante al{" "}
-              {data.businessPhone ? (
-                <a
-                  href={`https://wa.me/51${data.businessPhone.replace(/\\D/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-green-400 hover:text-green-300 underline"
-                >
-                  {data.businessPhone}
-                </a>
-              ) : (
-                <span className="text-green-400">número de atención correspondiente</span>
-              )}
+            <p className="text-white/90">
+              El vendedor se contactará con usted a la brevedad para validar su
+              pago y coordinar la entrega definitiva.
+            </p>
+            <p className="text-white/70 text-sm italic">
+              Por favor, tenga al alcance su comprobante de pago para agilizar el
+              proceso cuando sea contactado.
             </p>
           </div>
         </div>
