@@ -11,6 +11,7 @@ import {
   AlertCircle,
   ShoppingBag,
   Send,
+  Lock,
 } from "lucide-react";
 
 /* -----------------------------------------
@@ -55,15 +56,15 @@ interface TrackingData {
     trackingNumber?: string | null;
     pickupKey?: string | null;
   };
-  // Información de envío
   courier?: string | null;
   businessName?: string;
   businessPhone?: string | null;
   shippingInfo?: {
     shippingKey?: string | null;
     shippingCode?: string | null;
-    shippingOffice?: string | null;
+    shalomDestinationAgency?: string | null;
     externalTrackingNumber?: string | null;
+    trackingUrl?: string | null;
   } | null;
 }
 
@@ -346,46 +347,87 @@ export default function RastreoPage() {
           </div>
         </div>
 
-        {/* Shipping Info - Solo visible si está pagado y tiene datos */}
+        {/* Sección de Envío con Shalom */}
         {data.shippingInfo && (
-          <div className="bg-gradient-to-r from-green-500/10 to-emerald-500/10 backdrop-blur-lg rounded-3xl p-6 border border-green-500/30">
-            <h3 className="text-white font-semibold mb-4 flex items-center gap-2">
-              <Send className="h-5 w-5 text-green-400" />
-              Datos de tu envío
+          <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 backdrop-blur-lg rounded-3xl p-6 border border-blue-500/30">
+            <h3 className="text-white font-semibold mb-1 flex items-center gap-2">
+              <Send className="h-5 w-5 text-blue-400" />
+              Tu pedido fue despachado
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <p className="text-white/50 text-xs mb-5">
+              {data.courier || "Courier"} ya tiene tu paquete en camino
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Nro guía con link */}
               {data.shippingInfo.externalTrackingNumber && (
-                <div>
-                  <p className="text-white/50 text-sm">Número de guía</p>
-                  <p className="text-white font-mono font-medium">
-                    {data.shippingInfo.externalTrackingNumber}
-                  </p>
+                <div className="bg-white/5 rounded-2xl p-4">
+                  <p className="text-white/50 text-xs mb-1">Número de guía</p>
+                  {data.shippingInfo.trackingUrl ? (
+                    <a
+                      href={data.shippingInfo.trackingUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-300 font-mono font-bold text-lg hover:text-blue-200 underline underline-offset-2"
+                    >
+                      {data.shippingInfo.externalTrackingNumber}
+                    </a>
+                  ) : (
+                    <p className="text-white font-mono font-bold text-lg">
+                      {data.shippingInfo.externalTrackingNumber}
+                    </p>
+                  )}
+                  {data.shippingInfo.trackingUrl && (
+                    <p className="text-white/30 text-[10px] mt-1">Toca para rastrear en línea</p>
+                  )}
                 </div>
               )}
+
+              {/* Código */}
               {data.shippingInfo.shippingCode && (
-                <div>
-                  <p className="text-white/50 text-sm">Código de envío</p>
-                  <p className="text-white font-mono font-medium">
+                <div className="bg-white/5 rounded-2xl p-4">
+                  <p className="text-white/50 text-xs mb-1">Código de envío</p>
+                  <p className="text-white font-mono font-bold text-lg">
                     {data.shippingInfo.shippingCode}
                   </p>
                 </div>
               )}
-              {data.shippingInfo.shippingKey && (
-                <div>
-                  <p className="text-white/50 text-sm">Clave de retiro</p>
-                  <p className="text-white font-mono font-medium text-green-300">
-                    {data.shippingInfo.shippingKey}
+
+              {/* Agencia destino */}
+              {data.shippingInfo.shalomDestinationAgency && (
+                <div className="bg-white/5 rounded-2xl p-4">
+                  <p className="text-white/50 text-xs mb-1">Agencia de retiro</p>
+                  <p className="text-white font-semibold">
+                    {data.shippingInfo.shalomDestinationAgency}
                   </p>
                 </div>
               )}
-              {data.shippingInfo.shippingOffice && (
-                <div className="md:col-span-2">
-                  <p className="text-white/50 text-sm">Oficina de retiro</p>
-                  <p className="text-white">
-                    {data.shippingInfo.shippingOffice}
-                  </p>
-                </div>
-              )}
+
+              {/* Clave — condicional según saldo */}
+              <div className="bg-white/5 rounded-2xl p-4 relative overflow-hidden">
+                <p className="text-white/50 text-xs mb-1">Clave de retiro</p>
+                {data.totals.pendingAmount <= 0 ? (
+                  <>
+                    <p className="text-green-300 font-mono font-bold text-2xl tracking-widest">
+                      {data.shippingInfo.shippingKey || "—"}
+                    </p>
+                    <p className="text-white/30 text-[10px] mt-1">Necesaria para retirar en agencia</p>
+                  </>
+                ) : (
+                  <>
+                    <p className="text-white font-mono font-bold text-2xl tracking-widest blur-sm select-none">
+                      {data.shippingInfo.shippingKey ? "●●●●" : "—"}
+                    </p>
+                    <div className="mt-2 flex items-start gap-1.5">
+                      <Lock className="h-3 w-3 text-amber-400 mt-0.5 flex-shrink-0" />
+                      <p className="text-amber-300 text-[11px] leading-snug">
+                        Para ver la clave debes saldar el total del pedido{" "}
+                        <span className="font-bold">(S/ {data.totals.pendingAmount.toFixed(2)} pendiente)</span>
+                      </p>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         )}
@@ -449,35 +491,9 @@ export default function RastreoPage() {
           </div>
         </div>
 
-        {/* Aviso de Estado / Mensaje Personalizado */}
+        {/* Aviso de pago — solo si tiene saldo pendiente */}
+        {data.totals.pendingAmount > 0 && (
         <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10 space-y-4">
-          <p className="text-white">
-            Hola <span className="font-bold">{data.customer.fullName}</span>, te
-            saludamos de {data.businessName || "nuestra empresa"}. Te informamos que tu pedido ya ha sido procesado
-            y se encuentra en manos de la empresa de transporte:
-          </p>
-
-          <div className="bg-white/5 rounded-xl p-4 space-y-2 text-sm">
-            <p className="text-white">
-              📦 <span className="font-bold">EMPRESA:</span>{" "}
-              {data.shipping?.courierName || "POR ASIGNAR"}
-            </p>
-            <p className="text-white">
-              🎫 <span className="font-bold">Nº DE GUÍA:</span>{" "}
-              {data.shipping?.trackingNumber || "PENDIENTE"}
-            </p>
-            {data.shipping?.pickupKey && (
-              <p className="text-white">
-                💰 <span className="font-bold">CLAVE:</span>{" "}
-                {data.shipping.pickupKey}
-              </p>
-            )}
-            <p className="text-white">
-              <span className="font-bold">SALDO PENDIENTE:</span> S/{" "}
-              {data.totals.pendingAmount.toFixed(2)}
-            </p>
-          </div>
-
           <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 space-y-2">
             <p className="text-amber-200 font-bold flex items-center gap-2">
               <AlertCircle className="h-5 w-5" />
@@ -519,6 +535,7 @@ export default function RastreoPage() {
             </p>
           </div>
         </div>
+        )}
 
         {/* Footer */}
         <div className="text-center text-white/40 text-sm py-4">
