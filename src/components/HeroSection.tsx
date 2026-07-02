@@ -4,7 +4,7 @@ import Link from 'next/link';
 export default function HeroSection() {
   return (
     <section className="w-full flex flex-col items-center justify-center pt-20 pb-16 px-6 md:px-20 gap-16 bg-white overflow-hidden">
-      {/* Text Content */}
+      {/* Text Conten */}
       <div className="flex flex-col items-center text-center max-w-6xl mx-auto gap-4">
 
         {/* Responsive heading layout */}
