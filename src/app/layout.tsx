@@ -15,10 +15,15 @@ const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata: Metadata = {
-  title:
-    "POWIP - ERP para negocios que venden por WhatsApp, Instagram, TikTok y Web",
+const siteUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://www.powip.lat";
 
+export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  title: {
+    default:
+      "POWIP - ERP para negocios que venden por WhatsApp, Instagram, TikTok y Web",
+    template: "%s | POWIP",
+  },
   description:
     "Centraliza tus pedidos en un solo lugar reduciendo operaciones manuales al gestionar tus entregas a tu cliente final.",
   keywords: [
@@ -30,12 +35,43 @@ export const metadata: Metadata = {
     "pedidos",
     "inventario",
     "cobranzas",
+    "ecommerce Peru",
+    "courier",
+    "contraentrega",
+    "COD",
+    "facturación electrónica SUNAT",
   ],
+  authors: [{ name: "POWIP" }],
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
     title: "POWIP - ERP para negocios digitales",
     description:
       "Centraliza tus pedidos, gestiona tu inventario y haz seguimiento a tus cobranzas.",
     type: "website",
+    url: "/",
+    siteName: "POWIP",
+    locale: "es_PE",
+    images: [
+      {
+        url: "/hero-image.jpeg",
+        width: 1250,
+        height: 770,
+        alt: "Panel de operaciones de POWIP",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "POWIP - ERP para negocios digitales",
+    description:
+      "Centraliza tus pedidos, gestiona tu inventario y haz seguimiento a tus cobranzas.",
+    images: ["/hero-image.jpeg"],
   },
 };
 

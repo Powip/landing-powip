@@ -164,3 +164,60 @@ html {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* Hides the scrollbar on swipeable mobile carousels while keeping them scrollable */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ===== ACCESIBILIDAD ===== */
+
+/* Foco visible consistente para navegación por teclado en toda la landing */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--powip-purple);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Respeta la preferencia del sistema de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Link para saltar directo al contenido, oculto hasta recibir foco */
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -3rem;
+  z-index: 100;
+  background: var(--powip-purple);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  transition: top 0.2s ease-out;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
