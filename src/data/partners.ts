@@ -16,6 +16,8 @@ export interface PartnerVsCol {
 export interface PartnerLogo {
   name: string;
   color: string;
+  /** Logo real en /public, si existe. Si no, se muestra el nombre en el color de marca. */
+  img?: string;
 }
 
 export interface PartnerData {
@@ -62,9 +64,9 @@ const BASE_LOGOS: PartnerLogo[] = [
   { name: "yavendió!", color: "#00A877" },
   { name: "SHALOM", color: "#E02D3B" },
   { name: "Mercado Libre", color: "#2D3277" },
-  { name: "Shopify", color: "#333333" },
-  { name: "SUNAT", color: "#006B82" },
-  { name: "Mercado Pago", color: "#00B1EA" },
+  { name: "Shopify", color: "#333333", img: "/shopify.png" },
+  { name: "SUNAT", color: "#006B82", img: "/sunat-logo.png" },
+  { name: "Mercado Pago", color: "#00B1EA", img: "/mercadopago-logo.png" },
 ];
 
 function logosFor(first: PartnerLogo): PartnerLogo[] {

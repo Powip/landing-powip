@@ -17,17 +17,43 @@ const poppins = Poppins({
 
 const siteUrl = process.env.NEXT_PUBLIC_FRONTEND_URL || "https://www.powip.lat";
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "POWIP",
+  url: siteUrl,
+  logo: `${siteUrl}/logo-powip.svg`,
+  description:
+    "Plataforma que centraliza canales de venta y couriers para ecommerce contraentrega en Perú.",
+  sameAs: [
+    "https://www.facebook.com/POwip.pe",
+    "https://www.instagram.com/powip.pe",
+    "https://www.linkedin.com/company/powip/",
+    "https://www.tiktok.com/@powip.lat",
+  ],
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+51-923-101-193",
+    contactType: "customer service",
+    email: "hola@powip.lat",
+    areaServed: "PE",
+    availableLanguage: "Spanish",
+  },
+};
+
+const HOME_TITLE = "POWIP - Centraliza tus canales de venta y tus couriers";
+const HOME_DESCRIPTION =
+  "POWIP es la plataforma que centraliza tus pedidos de WhatsApp, Instagram, TikTok y marketplaces, y los conecta con tus couriers para despachar en 1 clic. Cobranza contraentrega, facturación SUNAT y tu rentabilidad real, todo en un solo lugar.";
+
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default:
-      "POWIP - ERP para negocios que venden por WhatsApp, Instagram, TikTok y Web",
+    default: HOME_TITLE,
     template: "%s | POWIP",
   },
-  description:
-    "Centraliza tus pedidos en un solo lugar reduciendo operaciones manuales al gestionar tus entregas a tu cliente final.",
+  description: HOME_DESCRIPTION,
   keywords: [
-    "ERP",
+    "ERP ecommerce",
     "WhatsApp",
     "Instagram",
     "TikTok",
@@ -37,6 +63,7 @@ export const metadata: Metadata = {
     "cobranzas",
     "ecommerce Peru",
     "courier",
+    "Shalom",
     "contraentrega",
     "COD",
     "facturación electrónica SUNAT",
@@ -50,9 +77,8 @@ export const metadata: Metadata = {
     follow: true,
   },
   openGraph: {
-    title: "POWIP - ERP para negocios digitales",
-    description:
-      "Centraliza tus pedidos, gestiona tu inventario y haz seguimiento a tus cobranzas.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     type: "website",
     url: "/",
     siteName: "POWIP",
@@ -68,9 +94,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "POWIP - ERP para negocios digitales",
-    description:
-      "Centraliza tus pedidos, gestiona tu inventario y haz seguimiento a tus cobranzas.",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
     images: ["/hero-image.jpeg"],
   },
 };
@@ -83,6 +108,10 @@ export default function RootLayout({
   return (
     <html lang="es" className="scroll-smooth">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
         {/* Google Tag (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-XRJ1Q6BCLP"

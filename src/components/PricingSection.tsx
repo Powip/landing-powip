@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 
 const plans = [
@@ -9,7 +9,7 @@ const plans = [
     annual: 799,
     oldMonthly: 149,
     oldAnnual: 1188,
-    features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify'],
+    features: ['Todos los módulos', 'Usuarios ilimitados', 'Integración con couriers', 'Facturación SUNAT', 'Soporte por chat'],
     orders: 'Hasta 999',
     highlighted: false,
   },
@@ -19,7 +19,7 @@ const plans = [
     annual: 1399,
     oldMonthly: 239,
     oldAnnual: 2268,
-    features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify'],
+    features: ['Todo lo de BASIC', 'Reportes y métricas', 'Automatizaciones', 'Soporte prioritario'],
     orders: 'Hasta 1999',
     highlighted: true,
   },
@@ -29,7 +29,7 @@ const plans = [
     annual: 1999,
     oldMonthly: 299,
     oldAnnual: 3228,
-    features: ['Accesos a todos los módulos', 'Usuarios ilimitados', 'Integración Shopify', 'Integración SUNAT'],
+    features: ['Todo lo de STANDARD', 'Múltiples almacenes', 'Liquidaciones COD', 'Soporte premium'],
     orders: 'Hasta 5999',
     highlighted: false,
   },
@@ -37,194 +37,123 @@ const plans = [
 
 export default function PricingSection() {
   const [isAnnual, setIsAnnual] = useState(false);
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const standardCardRef = useRef<HTMLDivElement>(null);
+
+  // En el carrusel mobile, el plan que se muestra por defecto es el destacado (STANDARD).
+  // Se mueve el scrollLeft del carrusel directamente (no scrollIntoView) para no
+  // arrastrar también el scroll vertical de la página al cargar.
+  useLayoutEffect(() => {
+    const scroller = scrollerRef.current;
+    const card = standardCardRef.current;
+    if (!scroller || !card) return;
+    scroller.scrollLeft = card.offsetLeft - (scroller.clientWidth - card.clientWidth) / 2;
+  }, []);
 
   return (
+    <section id="precios" className="w-full py-24 px-6 md:px-20 bg-white">
+      <div className="max-w-7xl mx-auto flex flex-col items-center gap-10">
+        <div className="text-center">
+          <span className="inline-block text-[#006B82] font-bold uppercase text-xs tracking-wide bg-[#E0F7FA] border border-[#80DEEA] px-3.5 py-1.5 rounded-full">
+            Precios
+          </span>
+          <h2 className="mt-4 text-[#4F3A96] font-bold text-3xl md:text-5xl leading-tight">
+            Un precio simple. <span className="bg-[#C5E6E8] px-2 rounded box-decoration-clone">Todo incluido.</span>
+          </h2>
+          <p className="text-gray-500 text-base md:text-lg mt-3">
+            Sin permanencia. Escala cuando quieras. Todos los módulos en cada plan.
+          </p>
+        </div>
 
-    <section className="w-full flex flex-col items-center py-24 px-6 md:px-20 gap-16 bg-white" id="precios">
-      <h2 className="text-[#4F3A96] font-bold text-3xl md:text-5xl leading-tight">
-        Planes que crecen contigo
-      </h2>
-      {/* Toggle */}
-      <div className="flex items-center rounded-full overflow-hidden bg-[#E0F2F4] p-1 shadow-inner">
-        <button
-          onClick={() => setIsAnnual(false)}
-          className={`px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${!isAnnual ? 'bg-[#006B82] text-white shadow-md' : 'bg-transparent text-[#006B82]'
-            }`}
+        <div className="w-full max-w-4xl bg-gradient-to-r from-[#22D3A6] to-[#12b98c] text-[#04352a] rounded-2xl px-5 py-4 md:px-8 text-center font-semibold text-[13.5px] md:text-base leading-relaxed shadow-[0_10px_30px_rgba(34,211,166,0.25)]">
+          ✅ Sin permanencia · sin contratos · todos los módulos incluidos · cambia o cancela cuando quieras
+        </div>
+
+        <div role="group" aria-label="Ciclo de facturación" className="inline-flex bg-[#eef0f8] rounded-full p-1 gap-1">
+          <button
+            onClick={() => setIsAnnual(false)}
+            aria-pressed={!isAnnual}
+            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${!isAnnual ? 'bg-[#4F3A96] text-white' : 'text-[#3a2389]'}`}
+          >
+            Mensual
+          </button>
+          <button
+            onClick={() => setIsAnnual(true)}
+            aria-pressed={isAnnual}
+            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${isAnnual ? 'bg-[#4F3A96] text-white' : 'text-[#3a2389]'}`}
+          >
+            Anual −30%
+          </button>
+        </div>
+
+        <div
+          ref={scrollerRef}
+          role="region"
+          aria-label="Planes disponibles, desliza para ver más"
+          tabIndex={0}
+          className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar -mx-6 px-6 pt-6 pb-8 sm:mx-0 sm:px-0 sm:pt-0 sm:pb-0 mask-[linear-gradient(90deg,#000_92%,transparent)] sm:mask-none"
         >
-          MENSUAL
-        </button>
-        <button
-          onClick={() => setIsAnnual(true)}
-          className={`px-8 py-3 rounded-full font-bold text-base transition-all duration-300 ${isAnnual ? 'bg-[#006B82] text-white shadow-md' : 'bg-transparent text-[#006B82]'
-            }`}
-        >
-          ANUAL 30%
-        </button>
-      </div>
-
-      {/* Plans Row */}
-      <div className="flex flex-wrap items-stretch justify-center gap-6 w-full max-w-7xl">
-
-        {plans.map((plan) => {
-          const price = isAnnual ? plan.annual : plan.monthly;
-          const oldPrice = isAnnual ? plan.oldAnnual : plan.oldMonthly;
-          const isHighlighted = plan.highlighted;
-
-          return (
-            <div
-              key={plan.name}
-              className={`rounded-2xl p-8 flex flex-col justify-between gap-8 w-full flex-1 min-w-[250px] transition-all duration-500 ease-out border-2 relative ${isHighlighted
-                ? 'bg-[#4F3A96] max-w-[290px] shadow-[0_12px_40px_rgba(79,58,150,0.3)] md:scale-105 z-10 border-[#6B52C4]'
-                : 'bg-[#006B82] max-w-[260px] shadow-[0_4px_20px_rgba(0,0,0,0.06)] border-[#006B82] hover:shadow-[0_8px_30px_rgba(0,107,130,0.2)]'
+          {plans.map((plan) => {
+            const price = isAnnual ? plan.annual : plan.monthly;
+            const oldPrice = isAnnual ? plan.oldAnnual : plan.oldMonthly;
+            return (
+              <div
+                key={plan.name}
+                ref={plan.highlighted ? standardCardRef : undefined}
+                className={`shrink-0 w-[78%] sm:w-auto snap-center rounded-2xl p-7 flex flex-col text-center border transition-transform hover:-translate-y-1 relative ${
+                  plan.highlighted
+                    ? 'bg-[#4F3A96] text-white border-transparent shadow-[0_30px_80px_rgba(78,55,168,0.35)]'
+                    : 'bg-white border-gray-100 shadow-[0_4px_18px_rgba(46,33,104,0.08)]'
                 }`}
-            >
-              {isHighlighted && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#00D1B2] text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-lg whitespace-nowrap z-20">
-                  Más popular
+              >
+                {plan.highlighted && (
+                  <span className="absolute -top-[15px] left-1/2 -translate-x-1/2 bg-[#22D3A6] text-[#04352a] font-extrabold text-xs px-4 py-1.5 rounded-full whitespace-nowrap">
+                    ⭐ Más popular
+                  </span>
+                )}
+                <div className={`font-extrabold text-[19px] tracking-wide ${plan.highlighted ? 'text-white' : 'text-[#3a2389]'}`}>{plan.name}</div>
+                <div className={`mt-3.5 text-[15px] line-through opacity-60 ${plan.highlighted ? 'text-white' : 'text-gray-400'}`}>S/ {oldPrice}</div>
+                <div className={`text-[42px] font-black leading-none tracking-tight ${plan.highlighted ? 'text-white' : 'text-[#1B1730]'}`}>
+                  S/{price}
+                  <small className="text-[15px] font-semibold opacity-75"> {isAnnual ? '/año' : '/mes'}</small>
                 </div>
-              )}
-              <div className="flex flex-col gap-6 w-full items-center text-center">
-                <h3 className="font-bold text-2xl text-white">
-                  {plan.name}
-                </h3>
-
-                <div className="flex flex-col items-center gap-1">
-                  {/* Old Price (strikethrough) */}
-                  <div className="h-6 flex items-center">
-                    {oldPrice && (
-                      <span
-                        className={`font-bold text-lg line-through transition-all duration-500 text-white/70 decoration-white/70 decoration-2`}
-                      >
-                        S/ {oldPrice}.00
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Current Price */}
-                  <div className="flex items-end gap-1 transition-all duration-500">
-                    <span className={`font-bold mb-1 text-white ${isHighlighted ? 'text-4xl' : 'text-3xl'}`}>
-                      S/.
-                    </span>
-                    <span
-                      key={`${plan.name}-${price}`}
-                      className={`font-bold leading-none animate-price-pop text-white ${isHighlighted ? 'text-6xl' : 'text-5xl'
-                        }`}
-                    >
-                      {price}
-                    </span>
-                  </div>
-                </div>
-
-                <ul className="flex flex-col gap-2 w-full text-center">
-                  {plan.features.map((feat, i) => (
-                    <li
-                      key={i}
-                      className={`text-xs text-white/90 ${feat.includes('SUNAT') ? 'font-semibold' : ''}`}
-                    >
-                      {feat}
+                <ul className="mt-[18px] mb-[18px] text-[13.5px] flex flex-col gap-2 text-left">
+                  {plan.features.map((f) => (
+                    <li key={f} className={`flex gap-2 ${plan.highlighted ? 'text-white/90' : 'text-[#4a4860]'}`}>
+                      <span className={plan.highlighted ? 'text-[#8ff0d0]' : 'text-[#1E8C86]'} aria-hidden="true">✓</span>
+                      {f}
                     </li>
                   ))}
                 </ul>
-
-                <div className="flex flex-col items-center mt-2">
-                  <span className={`text-white font-medium ${isHighlighted ? 'text-xl' : 'text-lg'}`}>
-                    {plan.orders}
-                  </span>
-                  <span className={`text-white/80 ${isHighlighted ? 'text-lg' : 'text-base'}`}>
-                    Pedidos / mes
-                  </span>
+                <div className={`font-extrabold text-lg ${plan.highlighted ? 'text-white' : 'text-[#3a2389]'}`}>
+                  {plan.orders}
+                  <small className="block font-medium text-[12.5px] opacity-70">pedidos / mes</small>
                 </div>
-              </div>
-
-              <Link
-                href="https://www.powip.tech/login"
-                className={`w-full font-bold py-3 rounded-lg text-center inline-block transition-all duration-300 ${isHighlighted
-                  ? 'bg-white hover:bg-gray-100 text-[#4F3A96] text-lg py-4 mt-2'
-                  : 'bg-white hover:bg-gray-50 text-[#006B82] text-base'
+                <Link
+                  href={`/crear-cuenta?plan=${plan.name}`}
+                  aria-label={`Crear cuenta con el plan ${plan.name}`}
+                  className={`mt-auto pt-5 w-full font-bold py-3 rounded-xl text-center ${
+                    plan.highlighted ? 'bg-white text-[#4F3A96]' : 'bg-[#4F3A96] text-white'
                   }`}
-              >
-                Comprar ahora
-              </Link>
-            </div>
-          );
-        })}
+                >
+                  Crear cuenta
+                </Link>
+              </div>
+            );
+          })}
 
-        {/* ENTERPRISE */}
-        <div className="bg-[#006B82] text-white rounded-2xl p-8 flex flex-col justify-between gap-8 w-full max-w-[260px] flex-1 min-w-[250px] border-2 border-[#006B82] shadow-[0_4px_20px_rgba(0,0,0,0.06)] hover:shadow-[0_8px_30px_rgba(0,107,130,0.2)] transition-all duration-500">
-          <div className="flex flex-col gap-8 w-full items-center text-center">
-            <div className="flex flex-col items-center gap-1">
-              <span className="text-white/80 font-bold text-sm">Desde S./499.00</span>
-              <h3 className="text-white font-bold text-2xl">ENTERPRISE</h3>
-            </div>
-            <div className="flex flex-col items-center">
-              <span className="text-white font-bold text-lg">PERSONALIZADO</span>
-            </div>
-            <ul className="flex flex-col gap-2 w-full text-center mt-2">
-              <li className="text-white/90 text-xs">Dominio Propio</li>
-              <li className="text-white/90 text-xs">Desarrollo custom</li>
+          <div className="shrink-0 w-[78%] sm:w-auto snap-center rounded-2xl p-7 flex flex-col text-center bg-white border border-gray-100 shadow-[0_4px_18px_rgba(46,33,104,0.08)] transition-transform hover:-translate-y-1">
+            <div className="font-extrabold text-[19px] tracking-wide text-[#3a2389]">ENTERPRISE</div>
+            <div className="mt-3.5 text-[26px] font-black text-[#1B1730]">A tu medida</div>
+            <ul className="mt-[18px] mb-[18px] text-[13.5px] flex flex-col gap-2 text-left text-[#4a4860]">
+              {['Dominio propio', 'Desarrollo custom', 'SLA y soporte 24/7', 'Account manager'].map((f) => (
+                <li key={f} className="flex gap-2"><span className="text-[#1E8C86]" aria-hidden="true">✓</span>{f}</li>
+              ))}
             </ul>
+            <Link href="/crear-cuenta?plan=ENTERPRISE" aria-label="Solicitar el plan Enterprise" className="mt-auto w-full font-bold py-3 rounded-xl text-center bg-[#4F3A96] text-white">
+              Hablemos
+            </Link>
           </div>
-          <Link href="https://www.powip.tech/login" className="w-full bg-white hover:bg-gray-50 transition-colors text-[#006B82] font-bold text-base py-3 rounded-lg mt-auto text-center inline-block">
-            Solicitar ahora
-          </Link>
-        </div>
-
-      </div>
-      {/* ADD-ONS SECTION */}
-      <div className="w-full max-w-7xl flex flex-col gap-8 mt-12">
-        <div className="flex flex-col gap-4">
-          <h3 className="text-[#4F3A96] font-bold text-2xl md:text-3xl">&quot;Add-ons disponibles&quot;</h3>
-          <div className="w-full h-px bg-gray-200" />
-        </div>
-
-        <div className="flex flex-wrap gap-8 justify-center lg:justify-start">
-
-          {/* Card 1: Couriers */}
-          <div className="bg-[#E0F2F4] rounded-2xl p-6 md:p-8 flex flex-col gap-4 w-full md:max-w-[500px] relative shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex justify-between items-start gap-4">
-              <div className="flex flex-col gap-1">
-                <h4 className="text-[#006B82] font-bold text-xl md:text-2xl leading-tight">
-                  Integración con Couriers:  S/29.90/ mes
-                </h4>
-                <p className="text-[#4F3A96] font-bold text-base md:text-lg">
-                  Conecta Shalom y Olva Courier
-                </p>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2 max-w-[80%] md:max-w-[70%]">
-                  Genera guías, rastrea envíos y registra pagos contraentrega sin salir de la plataforma. Disponible para todos los planes.
-                </p>
-              </div>
-              <Link
-                href="https://www.powip.tech/login"
-                className="bg-[#4F3A96] hover:bg-[#3d2d75] text-white font-bold px-6 py-2.5 rounded-lg transition-all text-sm md:text-base absolute bottom-6 right-6 md:bottom-8 md:right-8"
-              >
-                Activar
-              </Link>
-            </div>
-          </div>
-
-          {/* Card 2: SUNAT */}
-          <div className="bg-[#E0F2F4] rounded-2xl p-6 md:p-8 flex flex-col gap-4 w-full md:max-w-[500px] relative shadow-sm hover:shadow-md transition-shadow">
-            <div className="flex justify-between items-start gap-4">
-              <div className="flex flex-col gap-1">
-                <h4 className="text-[#006B82] font-bold text-xl md:text-2xl leading-tight">
-                  Integración con SUNAT S/29.90/ mes
-                </h4>
-                <p className="text-[#4F3A96] font-bold text-base md:text-lg">
-                  Emite boletas, facturas y más
-                </p>
-                <p className="text-gray-600 text-xs md:text-sm leading-relaxed mt-2 max-w-[80%] md:max-w-[70%]">
-                  Genera guías, boletas, facturas y envía a tu cliente. Disponible para todos los planes
-                </p>
-              </div>
-              <Link
-                href="https://www.powip.tech/login"
-                className="bg-[#4F3A96] hover:bg-[#3d2d75] text-white font-bold px-6 py-2.5 rounded-lg transition-all text-sm md:text-base absolute bottom-6 right-6 md:bottom-8 md:right-8"
-              >
-                Activar
-              </Link>
-            </div>
-          </div>
-
         </div>
       </div>
     </section>
