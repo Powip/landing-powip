@@ -3,8 +3,8 @@ import { CircleCheck } from 'lucide-react';
 
 const CARDS = [
   {
-    img: '/problems-card1.png',
-    alt: 'Vendedora revisando pedidos y pagos en su laptop con POWIP',
+    img: '/problems-card1.jpg',
+    alt: 'Vendedora revisando pedidos por WhatsApp en su celular junto a su laptop',
     title: '¿Tus pedidos se pierden entre los chats?',
     lead: 'Vendes por WhatsApp, Instagram o Facebook, pero cuando llegan muchos mensajes:',
     items: ['Se pierden pedidos entre tantas conversaciones', 'No sabes quién ya pagó y quién no', 'Te vuelven a escribir preguntando por su pedido'],
@@ -13,8 +13,8 @@ const CARDS = [
     statLabel: 'de pedidos que se caen por desorden',
   },
   {
-    img: '/problems-card2.png',
-    alt: 'Hoja de cálculo desordenada usada para registrar pedidos y pagos',
+    img: '/problems-card2.jpg',
+    alt: 'Vendedora registrando pedidos en una hoja de cálculo junto a paquetes listos para enviar',
     title: '¿Sigues gestionando tus pedidos en Excel?',
     lead: 'Cada venta contraentrega termina en una hoja de cálculo:',
     items: ['Alguien borra una celda y se pierde todo', 'Se duplican pedidos y no cuadras stock', 'No sabes qué pedidos ya se entregaron', 'El courier te pide la guía urgente'],
@@ -23,8 +23,8 @@ const CARDS = [
     statLabel: 'apps distintas que no se hablan entre sí',
   },
   {
-    img: '/problems-card3.png',
-    alt: 'Pedidos empacados y listos para envío tras una venta en vivo',
+    img: '/problems-card3.jpg',
+    alt: 'Vendedora en un TikTok Live con comentarios de clientes y pedidos empacados sobre la mesa',
     title: '¿Vendes por TikTok Live y los pedidos se vuelven un caos?',
     lead: 'Mientras haces el live:',
     items: ['Los clientes escriben por WhatsApp', 'Faltan direcciones', 'No sabes qué pedidos confirmar', 'Pierdes ventas por el desorden'],

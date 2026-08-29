@@ -1,7 +1,6 @@
-'use client';
-import React, { useState } from 'react';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import React from 'react';
+import { ArrowRight, CalendarClock } from 'lucide-react';
+import { DEMO_CALENDAR_LINK } from '@/lib/constants';
 
 const BENEFITS = [
   'Demostración personalizada a tu operación',
@@ -10,53 +9,6 @@ const BENEFITS = [
 ];
 
 export default function LandingDemoTeaser() {
-  const [loading, setLoading] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    company: '',
-    email: '',
-    message: '',
-  });
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setError('');
-
-    if (!supabase) {
-      setError('Error de configuración: no se pudo conectar con el formulario. Escríbenos por WhatsApp.');
-      return;
-    }
-
-    setLoading(true);
-    const { error: submitError } = await supabase.from('landing_leads').insert([
-      {
-        full_name: `${form.firstName} ${form.lastName}`.trim(),
-        email: form.email,
-        phone: form.phone,
-        company: form.company,
-        message: form.message,
-      },
-    ]);
-    setLoading(false);
-
-    if (submitError) {
-      console.error('Error submitting lead:', submitError);
-      setError('Hubo un error al enviar tus datos. Intenta de nuevo o escríbenos por WhatsApp.');
-      return;
-    }
-
-    setSubmitted(true);
-  };
-
   return (
     <section id="demo" className="w-full py-24 px-6 md:px-20 bg-[#FAFAFA]">
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -86,130 +38,27 @@ export default function LandingDemoTeaser() {
           </ul>
         </div>
 
-        <div className="bg-white border border-gray-100 rounded-[28px] shadow-[0_18px_50px_rgba(46,33,104,0.1)] p-8 md:p-10">
-          {submitted ? (
-            <div className="text-center py-6 flex flex-col items-center gap-4">
-              <div className="w-16 h-16 rounded-full bg-[#EAF8F5] text-[#0d9c78] flex items-center justify-center">
-                <CheckCircle2 className="w-8 h-8" aria-hidden="true" />
-              </div>
-              <h3 className="text-[#1B1730] font-bold text-xl tracking-tight">¡Gracias!</h3>
-              <p className="text-gray-500 text-[14.5px] max-w-xs">
-                Hemos recibido tu solicitud. Te contactamos el mismo día hábil para coordinar tu demo.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} noValidate>
-              <h3 className="text-[#1B1730] font-bold text-xl tracking-tight text-center">Cuéntanos de tu negocio</h3>
-              <p className="text-gray-500 text-[14.5px] mt-2 mb-6 text-center">
-                Completa el formulario y te contactamos el mismo día hábil.
-              </p>
+        <div className="bg-white border border-gray-100 rounded-[28px] shadow-[0_18px_50px_rgba(46,33,104,0.1)] p-8 md:p-10 flex flex-col items-center text-center gap-5">
+          <div className="w-16 h-16 rounded-full bg-[#EAF8F5] text-[#1E8C86] flex items-center justify-center">
+            <CalendarClock className="w-8 h-8" aria-hidden="true" />
+          </div>
+          <div>
+            <h3 className="text-[#1B1730] font-bold text-xl tracking-tight">Elige el horario que prefieras</h3>
+            <p className="text-gray-500 text-[14.5px] mt-2 max-w-xs">
+              Agenda directamente en nuestro calendario, sin llenar formularios. Duración: 20 minutos.
+            </p>
+          </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
-                <div>
-                  <label htmlFor="demo-firstName" className="block text-[12.5px] font-bold text-[#4F3A96] mb-1.5">
-                    Nombre
-                  </label>
-                  <input
-                    id="demo-firstName"
-                    name="firstName"
-                    type="text"
-                    required
-                    value={form.firstName}
-                    onChange={handleChange}
-                    className="w-full text-[14.5px] border border-gray-200 rounded-xl px-3.5 py-2.5 bg-[#fbfbfe] focus:outline-none focus:border-[#4F3A96] focus:bg-white transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="demo-lastName" className="block text-[12.5px] font-bold text-[#4F3A96] mb-1.5">
-                    Apellido
-                  </label>
-                  <input
-                    id="demo-lastName"
-                    name="lastName"
-                    type="text"
-                    required
-                    value={form.lastName}
-                    onChange={handleChange}
-                    className="w-full text-[14.5px] border border-gray-200 rounded-xl px-3.5 py-2.5 bg-[#fbfbfe] focus:outline-none focus:border-[#4F3A96] focus:bg-white transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 mb-3.5">
-                <div>
-                  <label htmlFor="demo-phone" className="block text-[12.5px] font-bold text-[#4F3A96] mb-1.5">
-                    Celular / WhatsApp
-                  </label>
-                  <input
-                    id="demo-phone"
-                    name="phone"
-                    type="tel"
-                    value={form.phone}
-                    onChange={handleChange}
-                    className="w-full text-[14.5px] border border-gray-200 rounded-xl px-3.5 py-2.5 bg-[#fbfbfe] focus:outline-none focus:border-[#4F3A96] focus:bg-white transition-colors"
-                  />
-                </div>
-                <div>
-                  <label htmlFor="demo-company" className="block text-[12.5px] font-bold text-[#4F3A96] mb-1.5">
-                    Nombre de negocio
-                  </label>
-                  <input
-                    id="demo-company"
-                    name="company"
-                    type="text"
-                    value={form.company}
-                    onChange={handleChange}
-                    className="w-full text-[14.5px] border border-gray-200 rounded-xl px-3.5 py-2.5 bg-[#fbfbfe] focus:outline-none focus:border-[#4F3A96] focus:bg-white transition-colors"
-                  />
-                </div>
-              </div>
-
-              <div className="mb-3.5">
-                <label htmlFor="demo-email" className="block text-[12.5px] font-bold text-[#4F3A96] mb-1.5">
-                  Correo electrónico
-                </label>
-                <input
-                  id="demo-email"
-                  name="email"
-                  type="email"
-                  required
-                  value={form.email}
-                  onChange={handleChange}
-                  className="w-full text-[14.5px] border border-gray-200 rounded-xl px-3.5 py-2.5 bg-[#fbfbfe] focus:outline-none focus:border-[#4F3A96] focus:bg-white transition-colors"
-                />
-              </div>
-
-              <div className="mb-5">
-                <label htmlFor="demo-message" className="block text-[12.5px] font-bold text-[#4F3A96] mb-1.5">
-                  ¿Qué vendes y por qué canales?
-                </label>
-                <textarea
-                  id="demo-message"
-                  name="message"
-                  value={form.message}
-                  onChange={handleChange}
-                  rows={3}
-                  className="w-full resize-y text-[14.5px] border border-gray-200 rounded-xl px-3.5 py-2.5 bg-[#fbfbfe] focus:outline-none focus:border-[#4F3A96] focus:bg-white transition-colors"
-                />
-              </div>
-
-              {error && (
-                <p role="alert" className="text-[#EF4444] text-[13px] font-medium mb-3.5">
-                  {error}
-                </p>
-              )}
-
-              <button
-                type="submit"
-                disabled={loading}
-                className="inline-flex items-center justify-center gap-2 w-full bg-[#4F3A96] hover:bg-[#3d2d75] disabled:opacity-60 transition-colors text-white font-bold text-base px-8 py-4 rounded-2xl"
-              >
-                {loading ? 'Enviando…' : 'Agendar demostración'}
-                {!loading && <ArrowRight className="w-4 h-4" aria-hidden="true" />}
-              </button>
-              <p className="text-gray-400 text-[12px] mt-4 text-center">Sin compromiso de permanencia</p>
-            </form>
-          )}
+          <a
+            href={DEMO_CALENDAR_LINK}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 w-full bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-bold text-base px-8 py-4 rounded-2xl"
+          >
+            Agendar demostración
+            <ArrowRight className="w-4 h-4" aria-hidden="true" />
+          </a>
+          <p className="text-gray-400 text-[12px]">Sin compromiso de permanencia</p>
         </div>
       </div>
     </section>

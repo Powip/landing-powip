@@ -1,12 +1,13 @@
 import React from 'react';
 import Link from 'next/link';
-import PowipMark from './PowipMark';
 
 export default function PartnersNavbar({ signupHref }: { signupHref: string }) {
   return (
     <nav className="w-full h-20 px-6 md:px-20 bg-white/85 backdrop-blur-md shadow-[0_4px_24px_rgba(0,0,0,0.06)] flex items-center justify-between sticky top-0 z-50 border-b border-gray-100">
-      <Link href="/" aria-label="POWIP — ir al inicio" className="flex items-center gap-2.5 cursor-pointer">
-        <PowipMark className="w-8 h-8 text-[#4F3A96]" />
+      <Link href="/" aria-label="POWIP — ir al inicio" className="flex items-center gap-2 cursor-pointer">
+        <div className="flex items-center justify-center w-10 h-10 bg-white rounded-md overflow-hidden border border-gray-100 shadow-sm">
+          <img src="/icon.jpeg" alt="" aria-hidden="true" className="w-full h-full object-cover" />
+        </div>
         <span aria-hidden="true" className="hidden md:inline text-[#4F3A96] font-bold text-[28px] tracking-tight font-heading">POWIP</span>
       </Link>
 

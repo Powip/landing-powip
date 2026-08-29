@@ -113,8 +113,8 @@ export default function LandingFeatureRows() {
             visual={
               <div className="rounded-2xl overflow-hidden border border-gray-100 shadow-[0_18px_50px_rgba(46,33,104,0.1)]">
                 <img
-                  src="/features-image.png"
-                  alt="Panel de operaciones de POWIP con la lista de pedidos entregados, cada uno con su guía de courier y su estado de cobro"
+                  src="/features-image.jpg"
+                  alt="Panel de operaciones de POWIP con la lista de pedidos listos para despacho junto a un rótulo de envío con guía y cobro contraentrega"
                   className="w-full h-auto bg-[#fbfbfd]"
                 />
                 <div className="flex flex-wrap gap-2 p-4 bg-white">

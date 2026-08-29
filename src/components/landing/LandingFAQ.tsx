@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const FAQS = [
   {
@@ -57,6 +58,15 @@ export default function LandingFAQ() {
               <div className="px-6 pb-5 text-[14.5px] text-gray-500 leading-relaxed">{f.a}</div>
             </details>
           ))}
+        </div>
+
+        <div className="mt-8 text-center">
+          <Link
+            href="/preguntas-frecuentes"
+            className="inline-flex items-center gap-1.5 text-[#4F3A96] font-bold text-[15px] hover:underline"
+          >
+            Ver todas las preguntas frecuentes →
+          </Link>
         </div>
       </div>
     </section>

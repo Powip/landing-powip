@@ -585,7 +585,7 @@ export default function TerminosPage() {
           </LegalSection>
 
           <p className="pt-10 text-[12.5px] text-[#9895ad] border-t border-gray-100 mt-4">
-            Corporación Aranni S.A.C. · Todos los derechos reservados · 24 de mayo de 2026
+            POWIP TECHNOLOGY SAC · Todos los derechos reservados · 24 de mayo de 2026
           </p>
         </article>
       </div>

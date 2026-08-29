@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Link from 'next/link';
 import { CalendarClock } from 'lucide-react';
+import { DEMO_CALENDAR_LINK } from '@/lib/constants';
 
 /**
  * Botón flotante "Agenda una demo" que aparece apenas el usuario empieza a
@@ -19,8 +19,10 @@ export default function LandingDemoStickyBar() {
   }, []);
 
   return (
-    <Link
-      href="#demo"
+    <a
+      href={DEMO_CALENDAR_LINK}
+      target="_blank"
+      rel="noopener noreferrer"
       title="Agenda una demostración de POWIP"
       className={`fixed bottom-6 left-6 z-50 flex items-center gap-2 bg-[#4F3A96] hover:bg-[#3d2d75] text-white font-bold text-sm md:text-[15px] pl-5 pr-4 py-3.5 rounded-full shadow-[0_10px_30px_rgba(46,33,104,0.4)] transition-all duration-300 hover:scale-105 ${
         show ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-4 pointer-events-none'
@@ -28,6 +30,6 @@ export default function LandingDemoStickyBar() {
     >
       <CalendarClock className="w-4 h-4" aria-hidden="true" />
       Agenda una demo
-    </Link>
+    </a>
   );
 }

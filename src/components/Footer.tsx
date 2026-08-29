@@ -72,12 +72,6 @@ export default function Footer() {
         >
           Términos y condiciones
         </Link>
-        <Link
-          href="/legal"
-          className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors"
-        >
-          Legal
-        </Link>
       </div>
 
       {/* Column 3: Resources */}

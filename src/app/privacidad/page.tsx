@@ -329,7 +329,7 @@ export default function PrivacidadPage() {
           </LegalSection>
 
           <p className="pt-10 text-[12.5px] text-[#9895ad] border-t border-gray-100 mt-4">
-            Corporación Aranni S.A.C. · Política de Privacidad · 24 de mayo de 2026
+            POWIP TECHNOLOGY SAC · Política de Privacidad · 24 de mayo de 2026
           </p>
         </article>
       </div>

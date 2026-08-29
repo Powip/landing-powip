@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import LegalHeader from '@/components/legal/LegalHeader';
 import LegalNote from '@/components/legal/LegalNote';
+import { DEMO_CALENDAR_LINK } from '@/lib/constants';
 
 export const metadata: Metadata = {
   title: 'Preguntas Frecuentes',
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   alternates: { canonical: '/preguntas-frecuentes' },
 };
 
-const DEMO_LINK = 'https://calendar.app.google/vZCCwwygCZFvAd5f6';
+const DEMO_LINK = DEMO_CALENDAR_LINK;
 
 type FaqItem = { q: string; a: ReactNode };
 type FaqCategory = { id: string; title: string; items: FaqItem[] };
@@ -558,7 +559,7 @@ export default function PreguntasFrecuentesPage() {
           — respondemos en menos de 24 horas hábiles.
         </p>
         <p className="max-w-3xl mx-auto pt-3 text-center text-[12.5px] text-[#9895ad]">
-          Corporación Aranni S.A.C. · Preguntas Frecuentes · 24 de mayo de 2026
+          POWIP TECHNOLOGY SAC · Preguntas Frecuentes · 24 de mayo de 2026
         </p>
       </div>
 
