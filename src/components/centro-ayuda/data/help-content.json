@@ -1,0 +1,1318 @@
+{
+  "chapters": [
+    {
+      "id": "c0",
+      "n": "0",
+      "name": "Primeros pasos",
+      "desc": "Deja lista tu empresa, tiendas y equipo antes de vender.",
+      "mods": [
+        "primeros-pasos",
+        "tiendas-almacenes",
+        "usuarios"
+      ]
+    },
+    {
+      "id": "c1",
+      "n": "1",
+      "name": "Comercial",
+      "desc": "Registra ventas, clientes y promociones.",
+      "mods": [
+        "ventas-panel",
+        "registrar-venta",
+        "packs-promos",
+        "clientes",
+        "google-sheets"
+      ]
+    },
+    {
+      "id": "c2",
+      "n": "2",
+      "name": "Operaciones",
+      "desc": "Despacho, guías, couriers y liquidaciones.",
+      "mods": [
+        "op-pedidos",
+        "op-guias",
+        "op-shalom",
+        "op-liquidaciones"
+      ]
+    },
+    {
+      "id": "c3",
+      "n": "3",
+      "name": "Productos",
+      "desc": "Catálogo, inventario, compras y proveedores.",
+      "mods": [
+        "prod-lista",
+        "prod-inventario",
+        "prod-compras",
+        "prod-proveedores"
+      ]
+    },
+    {
+      "id": "c4",
+      "n": "4",
+      "name": "Atención al cliente",
+      "desc": "Call center, confirmación COD y métricas.",
+      "mods": [
+        "cc-gestion-cod",
+        "cc-movimientos",
+        "cc-llamadas",
+        "cc-agentes"
+      ]
+    },
+    {
+      "id": "c5",
+      "n": "5",
+      "name": "Finanzas",
+      "desc": "Pagos, liquidaciones y facturación SUNAT.",
+      "mods": [
+        "fin-pagos",
+        "fin-liq-courier",
+        "fin-facturacion"
+      ]
+    },
+    {
+      "id": "c6",
+      "n": "6",
+      "name": "Integraciones",
+      "desc": "Conecta couriers, Shopify y WhatsApp/IA.",
+      "mods": [
+        "int-centro",
+        "int-shopify",
+        "int-yavendio",
+        "int-couriers"
+      ]
+    }
+  ],
+  "modules": {
+    "primeros-pasos": {
+      "id": "primeros-pasos",
+      "ch": "c0",
+      "title": "Configura tu cuenta",
+      "one": "El primer paso: deja lista tu empresa, tus tiendas y tu equipo antes de empezar a vender.",
+      "para": "Desde Configuración defines los datos de tu empresa y suscripción, tus datos personales, tus tiendas e integraciones. Es lo primero que hace un negocio nuevo en POWIP.",
+      "steps": [
+        {
+          "t": "Entra a Configuración",
+          "d": "En el menú lateral abre Configuración. Verás cuatro secciones: Datos Personales, Empresa + Suscripción, Gestión de Tiendas e Integraciones.",
+          "img": "config",
+          "cap": "Configuración → las cuatro áreas de tu cuenta."
+        },
+        {
+          "t": "Completa los datos de tu empresa",
+          "d": "En Empresa + Suscripción registras la información de tu negocio y gestionas tu plan."
+        },
+        {
+          "t": "Crea tus tiendas y tu equipo",
+          "d": "En Gestión de Tiendas administras tiendas y almacenes, y en Usuarios das de alta a tu equipo con sus roles."
+        }
+      ],
+      "tips": [
+        "Deja la configuración lista antes de cargar productos y registrar ventas.",
+        "Puedes tener más de una tienda, cada una con sus almacenes."
+      ],
+      "faq": [
+        {
+          "q": "¿Por dónde empiezo?",
+          "a": "Por Configuración → Empresa, luego crea tu tienda y tus usuarios."
+        }
+      ]
+    },
+    "tiendas-almacenes": {
+      "id": "tiendas-almacenes",
+      "ch": "c0",
+      "title": "Tiendas, almacenes, canales y couriers",
+      "one": "Administra tus puntos de venta, almacenes, marcas, canales y los couriers con los que trabajas.",
+      "para": "En Administración de la Empresa organizas todo lo que la plataforma necesita para operar: tiendas (pueden estar vinculadas a Shopify), almacenes donde vive tu stock, marcas, canales de venta y couriers.",
+      "steps": [
+        {
+          "t": "Revisa tus tiendas",
+          "d": "En la pestaña de tiendas ves cada tienda, su estado y si está vinculada con Shopify.",
+          "img": "tiendas",
+          "cap": "Tus tiendas → con estado y vínculo Shopify."
+        },
+        {
+          "t": "Crea una nueva tienda",
+          "d": "Con 'Nueva tienda' agregas puntos de venta; con 'Sincronizar con Shopify' traes la tienda conectada."
+        },
+        {
+          "t": "Configura almacenes, canales y couriers",
+          "d": "En sus pestañas das de alta los almacenes, los canales (WhatsApp, Instagram, TikTok, Shopify…) y los couriers que usas."
+        }
+      ],
+      "tips": [
+        "El almacén es de dónde se descuenta el stock al vender.",
+        "Los canales que actives aquí son los que aparecen al registrar una venta."
+      ],
+      "faq": [
+        {
+          "q": "¿Puedo vincular mi tienda Shopify?",
+          "a": "Sí, con 'Sincronizar con Shopify' la tienda queda vinculada y trae pedidos y productos."
+        }
+      ]
+    },
+    "usuarios": {
+      "id": "usuarios",
+      "ch": "c0",
+      "title": "Usuarios y roles",
+      "one": "Crea las cuentas de tu equipo y asigna a cada quien solo lo que necesita ver.",
+      "para": "En Configuración → Usuarios das de alta a tu equipo con roles específicos (ventas, operaciones, courier, gestión COD, administrador). Cada rol ve únicamente su parte de la plataforma.",
+      "steps": [
+        {
+          "t": "Abre Usuarios",
+          "d": "En Configuración → Usuarios ves las cuentas de tu empresa."
+        },
+        {
+          "t": "Crea un usuario y asígnale un rol",
+          "d": "Registra al integrante y elige su rol: ventas, operaciones, courier, gestión COD o administrador."
+        },
+        {
+          "t": "Verifica accesos",
+          "d": "Cada rol tiene su propio menú; por ejemplo, un asesor de ventas no ve Finanzas."
+        }
+      ],
+      "tips": [
+        "Da a cada persona el rol mínimo que necesita.",
+        "El rol define qué capítulos de esta ayuda le sirven a cada quien."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué roles existen?",
+          "a": "Ventas, operaciones, courier, gestión COD y administrador."
+        }
+      ]
+    },
+    "ventas-panel": {
+      "id": "ventas-panel",
+      "ch": "c1",
+      "title": "Panel de Ventas",
+      "one": "El tablero donde ves y gestionas todos los pedidos pendientes por procesar.",
+      "para": "Reúne las ventas pendientes y anuladas en un solo panel, con indicadores de pendientes, por cobrar y adelantado, y acciones masivas: cambiar estado, imprimir, WhatsApp y copiar.",
+      "steps": [
+        {
+          "t": "Revisa tus indicadores",
+          "d": "Arriba ves Pendientes, Anuladas, Por cobrar y Adelantado del rango de fechas elegido.",
+          "img": "ventas",
+          "cap": "Panel de Ventas con indicadores y ventas pendientes."
+        },
+        {
+          "t": "Filtra y selecciona pedidos",
+          "d": "Cambia entre Ventas Pendientes, Anuladas o Todas; filtra y marca varias para acciones masivas."
+        },
+        {
+          "t": "Actúa en lote",
+          "d": "Con la selección puedes Cambiar estado, Imprimir seleccionados, enviar WhatsApp Masivo o Copiar."
+        }
+      ],
+      "tips": [
+        "Usa 'Nueva venta' para cargar un pedido; 'Importar Excel' para carga masiva.",
+        "El botón verde de WhatsApp por fila abre el chat con ese cliente."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué significa 'Por cobrar'?",
+          "a": "La suma de los saldos pendientes de los pedidos del periodo."
+        }
+      ]
+    },
+    "registrar-venta": {
+      "id": "registrar-venta",
+      "ch": "c1",
+      "title": "Registrar una venta",
+      "one": "Carga una venta completa en un solo flujo: cliente, productos, cierre y entrega. POWIP te guía con un checklist de 8 pasos hasta que puedas confirmar.",
+      "para": "Ya sea un pedido que llega por WhatsApp, Instagram o TikTok, lo registras identificando al cliente por su teléfono, eliges los productos con sus variantes, aplicas promos y defines cómo se paga y cómo se entrega. Al confirmar, la venta pasa a Operaciones para su despacho.",
+      "steps": [
+        {
+          "t": "Identifica al cliente por su teléfono",
+          "d": "Escribe el número: si el cliente ya existe, POWIP autocompleta sus datos; si es nuevo, lo creas ahí mismo con nombre, tipo (tradicional o mayorista), DNI y dirección. El DNI es obligatorio para ventas a provincia.",
+          "img": "reg_form",
+          "cap": "Registrar venta → datos del cliente y región (Lima/Provincia se calcula solo)."
+        },
+        {
+          "t": "Elige la tienda, el almacén y los productos",
+          "d": "Busca por modelo, color, talla o SKU. Selecciona variantes y cantidades; el Detalle de la venta se arma en vivo y POWIP te sugiere packs para cerrar con mejor ticket.",
+          "img": "reg_prod",
+          "cap": "Búsqueda de productos por almacén y detalles de la venta."
+        },
+        {
+          "t": "Define el cierre: pago y envío",
+          "d": "Selecciona el método de pago (Yape, efectivo…), adjunta el comprobante si lo tienes, y define costo de envío y adelanto. Marca canal de venta, canal de cierre y tipo de entrega (domicilio o retiro)."
+        },
+        {
+          "t": "Confirma con el checklist de 8 pasos",
+          "d": "El panel de la derecha marca en verde lo que ya está listo y bloquea 'Confirmar venta' hasta completar todo. Al confirmar, comparte la nota por WhatsApp, imprímela o descárgala en PDF, o genera el enlace de rastreo.",
+          "img": "reg_check",
+          "cap": "'2 de 8 pasos completados' → el checklist guía hasta poder confirmar."
+        }
+      ],
+      "tips": [
+        "Usa siempre el teléfono como identificador: acelera el cierre y evita duplicados.",
+        "Pega el ID de publicidad de Meta para medir qué anuncio trajo cada pedido.",
+        "¿Venta para después? Marca 'Programar venta para otra fecha'.",
+        "Agrega productos antes de cerrar: POWIP detecta los packs y promos configurados y los aplica solo."
+      ],
+      "faq": [
+        {
+          "q": "¿Cómo sabe el sistema si el cliente ya existe?",
+          "a": "Por el número de teléfono: al buscarlo, consulta la base y autocompleta; si no, creas el perfil nuevo en el momento."
+        },
+        {
+          "q": "¿El DNI es obligatorio?",
+          "a": "Para ventas a provincia sí (el checklist lo exige). Para Lima puede quedar opcional según tu configuración."
+        },
+        {
+          "q": "¿Qué pasa con la venta después de confirmarla?",
+          "a": "Pasa a Operaciones como pedido pendiente por procesar, listo para picking, packing y guía. El cliente sigue su estado con el enlace de rastreo."
+        }
+      ]
+    },
+    "packs-promos": {
+      "id": "packs-promos",
+      "ch": "c1",
+      "title": "Packs & Promos",
+      "one": "Configura descuentos por volumen y combos que se aplican solos al registrar la venta.",
+      "para": "Creas promociones de tres tipos —volumen, bundle y regalo— y POWIP las detecta automáticamente cuando el asesor arma el pedido, sin que tenga que acordarse de aplicarlas.",
+      "steps": [
+        {
+          "t": "Crea un nuevo pack",
+          "d": "En Comercial → Packs & Promos pulsa 'Nuevo pack' y elige el tipo: Volumen, Bundle o Regalo.",
+          "img": "packs",
+          "cap": "Nuevo pack → tipo, producto, cantidades y canales."
+        },
+        {
+          "t": "Define las reglas",
+          "d": "Nombre, producto, variantes libres (el vendedor elige tallas/colores), cantidad mínima/máxima y precio del pack."
+        },
+        {
+          "t": "Elige en qué canales aplica",
+          "d": "Marca dónde vale la promo: Tienda física, WhatsApp, Shopify, Rappi o Pedidos Ya."
+        }
+      ],
+      "tips": [
+        "Con 'variantes libres' el asesor arma el combo con las tallas/colores que el cliente quiera.",
+        "Los packs suben el ticket promedio sin depender de la memoria del vendedor."
+      ],
+      "faq": [
+        {
+          "q": "¿El asesor tiene que aplicar la promo?",
+          "a": "No. Se detecta sola al agregar los productos que cumplen la regla."
+        }
+      ]
+    },
+    "clientes": {
+      "id": "clientes",
+      "ch": "c1",
+      "title": "Clientes",
+      "one": "Tu base de clientes: quién es cada quien, cómo contactarlo y su historial.",
+      "para": "Centraliza los clientes que se crean al vender. Cada cliente se identifica por su teléfono, con sus datos, tipo (tradicional o mayorista) y dirección.",
+      "steps": [
+        {
+          "t": "Abre Clientes",
+          "d": "En Comercial → Clientes ves tu base con nombre, teléfono y tipo."
+        },
+        {
+          "t": "Consulta o edita un cliente",
+          "d": "Busca por teléfono para ver o corregir sus datos y dirección."
+        },
+        {
+          "t": "Aprovecha el historial",
+          "d": "Al registrar una venta, si el cliente ya existe, sus datos se autocompletan."
+        }
+      ],
+      "tips": [
+        "El teléfono es el identificador único; evita duplicados.",
+        "Marca 'mayorista' a los clientes que compran al por mayor para precios distintos."
+      ],
+      "faq": [
+        {
+          "q": "¿Cómo se crea un cliente?",
+          "a": "Automáticamente al registrar una venta con un teléfono nuevo, o manualmente aquí."
+        }
+      ]
+    },
+    "google-sheets": {
+      "id": "google-sheets",
+      "ch": "c1",
+      "title": "Conecta Google Sheets",
+      "one": "Trae pedidos externos que no están conectados directamente, vía una hoja de Google.",
+      "para": "Si tienes pedidos en una fuente no integrada, puedes cargarlos a POWIP conectando un Google Sheet, para que entren al mismo flujo de operaciones.",
+      "steps": [
+        {
+          "t": "Abre 'Conecta Google Sheets'",
+          "d": "Está en el menú Comercial."
+        },
+        {
+          "t": "Vincula tu hoja",
+          "d": "Sigue el asistente para conectar el Sheet con los pedidos. El equipo de POWIP te apoya con la vinculación."
+        },
+        {
+          "t": "Verifica que los pedidos entren",
+          "d": "Una vez conectado, los pedidos de la hoja aparecen para despacho."
+        }
+      ],
+      "tips": [
+        "Útil para couriers o canales sin integración directa.",
+        "Mantén las columnas de la hoja con el formato que indique el equipo."
+      ],
+      "faq": [
+        {
+          "q": "¿Necesito ayuda para conectarlo?",
+          "a": "Sí, el equipo de POWIP brinda asistencia técnica para la vinculación."
+        }
+      ]
+    },
+    "op-pedidos": {
+      "id": "op-pedidos",
+      "ch": "c2",
+      "title": "Pedidos: despacho y seguimiento",
+      "one": "El flujo completo del pedido en un solo lugar: por despachar, en camino, historial y anulados.",
+      "para": "Operaciones toma las ventas confirmadas y las lleva por picking, packing, despacho y seguimiento hasta la entrega y liquidación.",
+      "steps": [
+        {
+          "t": "Prepara los pedidos de hoy (Por Despachar)",
+          "d": "Filtra por fecha, tipo de entrega o canal, arma la lista de picking e imprime etiquetas (individual o masivo). Al confirmar, el pedido pasa a 'Preparado'.",
+          "img": "ped_desp",
+          "cap": "Pedidos de hoy, listos para picking y generar guía."
+        },
+        {
+          "t": "Sigue los envíos (En Camino)",
+          "d": "Ves los pedidos despachados por courier, con días en tránsito y alertas (p. ej. más de 15 días). Puedes sincronizar con el courier y marcar entregados.",
+          "img": "ped_camino",
+          "cap": "En camino → días en tránsito y aviso de pedidos trabados."
+        },
+        {
+          "t": "Consulta el Historial",
+          "d": "Los pedidos entregados quedan con su guía, courier y estado de liquidación (liquidado o pendiente).",
+          "img": "ped_hist",
+          "cap": "Historial de pedidos entregados y su liquidación."
+        }
+      ],
+      "tips": [
+        "El aviso de '+15 días en tránsito' detecta pedidos trabados aunque el courier no reporte.",
+        "Usa 'Generar Guía' para agrupar pedidos preparados en una guía de salida.",
+        "Cada pedido tiene un chat interno del equipo para coordinar la gestión sin salir de la plataforma.",
+        "Los pedidos con entrega fallida caen en 'Necesita atención' para reprogramarlos."
+      ],
+      "faq": [
+        {
+          "q": "¿Cuándo pasa un pedido a 'Preparado'?",
+          "a": "Al confirmar el picking/packing; ahí queda listo para generar guía."
+        }
+      ]
+    },
+    "op-guias": {
+      "id": "op-guias",
+      "ch": "c2",
+      "title": "Guías & Courier",
+      "one": "Planifica lo que sale, controla las guías activas y su rastreo, y administra couriers y tarifas.",
+      "para": "Gestionas las guías de salida hacia los couriers: agendamiento por día, aprobación, rastreo por courier y las tarifas de cada uno.",
+      "steps": [
+        {
+          "t": "Planifica la semana",
+          "d": "El calendario muestra los pedidos agendados por día; se liberan para despacho manual o automáticamente a las 11:00 AM del día programado.",
+          "img": "guia_plan",
+          "cap": "Planificación semanal de despachos."
+        },
+        {
+          "t": "Gestiona las guías activas",
+          "d": "Revisa guías por estado y courier, con su 'por cobrar'. El sistema avisa las guías creadas hace +24h sin aprobar.",
+          "img": "guia_act",
+          "cap": "Guías activas con estado, courier y por cobrar."
+        },
+        {
+          "t": "Rastrea por courier",
+          "d": "En Rastreo Courier ves todos los pedidos despachados con su Nº de tracking, por cada courier.",
+          "img": "guia_rastreo",
+          "cap": "Rastreo de pedidos despachados por courier."
+        }
+      ],
+      "tips": [
+        "Genera guías para couriers como Shalom o Urpi; para los no integrados, exporta a Excel y coordina el envío manual.",
+        "La clave de retiro del cliente se libera solo cuando el pedido está pagado."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué es una guía de salida?",
+          "a": "El documento que agrupa pedidos para entregarlos a un courier y controlar cargos de almacén."
+        }
+      ]
+    },
+    "op-shalom": {
+      "id": "op-shalom",
+      "ch": "c2",
+      "title": "Integración con Shalom",
+      "one": "Genera guías de Shalom directamente desde POWIP, sin procesos manuales.",
+      "para": "Para el courier Shalom existe integración directa: generas la guía, registras la agencia de origen y confirmas los detalles de envío, con respuesta inmediata del sistema.",
+      "steps": [
+        {
+          "t": "Elige Shalom al generar la guía",
+          "d": "Desde el pedido o la guía, selecciona Shalom como courier."
+        },
+        {
+          "t": "Registra origen y modalidad",
+          "d": "Indica la agencia de origen, el distrito y la modalidad (terrestre o aéreo)."
+        },
+        {
+          "t": "Confirma y recibe respuesta",
+          "d": "El registro exitoso devuelve la guía al instante, sin la coordinación manual de otros couriers."
+        }
+      ],
+      "tips": [
+        "La integración de Shalom simplifica mucho el despacho a provincia.",
+        "Configura tu cuenta de Shalom en el Centro de Integraciones."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué couriers tienen integración directa?",
+          "a": "Shalom hoy; Aliclik y EVA también están disponibles en el Centro de Integraciones."
+        }
+      ]
+    },
+    "op-liquidaciones": {
+      "id": "op-liquidaciones",
+      "ch": "c2",
+      "title": "Liquidaciones COD",
+      "one": "La plata que los couriers cobraron en la entrega y todavía no depositaron.",
+      "para": "Controla el dinero contra entrega (COD) pendiente de que el courier te deposite: total por liquidar, vencidos y neto a recibir por pedido.",
+      "steps": [
+        {
+          "t": "Revisa el total por liquidar",
+          "d": "Arriba ves total por liquidar, vencido y couriers con pendiente.",
+          "img": "liq",
+          "cap": "Liquidaciones COD → pedidos cobrados sin depositar."
+        },
+        {
+          "t": "Filtra por antigüedad y courier",
+          "d": "Separa 'Vencido' de 'En plazo' y filtra por courier o ciudad."
+        },
+        {
+          "t": "Gestiona y exporta",
+          "d": "Marca pedidos para gestionar el depósito y exporta el detalle cuando lo necesites."
+        }
+      ],
+      "tips": [
+        "El plazo estándar de liquidación es 15 días; los vencidos requieren seguimiento.",
+        "'Neto a recibir' es lo que te queda tras descontar lo que corresponda."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué significa 'COD sin depositar'?",
+          "a": "Pedidos entregados cuyo cobro el courier aún no te transfiere."
+        }
+      ]
+    },
+    "prod-lista": {
+      "id": "prod-lista",
+      "ch": "c3",
+      "title": "Crear y cargar productos",
+      "one": "Tres formas de cargar tu catálogo: manual, por Excel o sincronizado desde Shopify.",
+      "para": "Das de alta tus productos con sus variantes (tallas, colores), categorías, descripciones y precios.",
+      "steps": [
+        {
+          "t": "Elige cómo cargar",
+          "d": "En Productos → 'Crear producto' eliges: Carga Manual, Importar Excel o Sincronizar Shopify.",
+          "img": "crear_prod",
+          "cap": "Tres formas de cargar productos."
+        },
+        {
+          "t": "Carga manual paso a paso",
+          "d": "Creas un producto con sus variantes, categoría, descripción y precios."
+        },
+        {
+          "t": "Carga masiva o desde Shopify",
+          "d": "Con Excel subes muchos de golpe; con Shopify se importan automáticamente."
+        }
+      ],
+      "tips": [
+        "Para catálogos grandes, la carga por Excel o Shopify ahorra horas.",
+        "Define bien variantes y SKUs: es como el asesor busca al vender."
+      ],
+      "faq": [
+        {
+          "q": "¿Puedo mezclar productos Shopify y manuales?",
+          "a": "Sí, conviven en el mismo catálogo."
+        }
+      ]
+    },
+    "prod-inventario": {
+      "id": "prod-inventario",
+      "ch": "c3",
+      "title": "Inventario y stock",
+      "one": "El stock por almacén y tienda, con lo disponible y lo reservado.",
+      "para": "Controlas existencias por almacén: stock, reservado y disponible por variante, con edición manual, ajuste o carga por Excel.",
+      "steps": [
+        {
+          "t": "Selecciona el almacén",
+          "d": "Elige el almacén y la tienda para ver su stock actual.",
+          "img": "inventario",
+          "cap": "Stock actual por almacén, con disponible y reservado."
+        },
+        {
+          "t": "Busca y revisa",
+          "d": "Filtra por SKU, nombre o variante; ves stock, reservado, disponible y precio."
+        },
+        {
+          "t": "Ajusta o importa",
+          "d": "Edita cantidades manualmente o usa Importar/Exportar Excel para actualizar en masa."
+        }
+      ],
+      "tips": [
+        "'Disponible' = stock − reservado; puede salir negativo si vendiste más de lo que había.",
+        "Revisa el Historial de Movimientos para auditar cambios de stock."
+      ],
+      "faq": [
+        {
+          "q": "¿Por qué veo stock negativo?",
+          "a": "Porque hay más unidades vendidas o reservadas que las ingresadas; regulariza con una compra o ajuste."
+        }
+      ]
+    },
+    "prod-compras": {
+      "id": "prod-compras",
+      "ch": "c3",
+      "title": "Compras y reposición",
+      "one": "Ingresa stock al almacén registrando las compras a tus proveedores.",
+      "para": "Cada compra registra el comprobante del proveedor y suma stock al inventario; queda un histórico de todas tus reposiciones.",
+      "steps": [
+        {
+          "t": "Revisa el historial de compras",
+          "d": "En Productos → Compras ves cada compra con proveedor, items, total y estado.",
+          "img": "compras",
+          "cap": "Historial de compras por proveedor."
+        },
+        {
+          "t": "Crea una nueva compra",
+          "d": "Paso 1: tipo de comprobante, forma de pago, fecha, proveedor y almacén de destino.",
+          "img": "compra_new",
+          "cap": "Nueva compra → datos del comprobante."
+        },
+        {
+          "t": "Agrega productos y registra",
+          "d": "Paso 2: busca productos del proveedor, arma el carrito y registra la compra para sumar stock.",
+          "img": "compra_prod",
+          "cap": "Agregar productos del proveedor al carrito de compra."
+        }
+      ],
+      "tips": [
+        "Registrar la compra actualiza el inventario automáticamente.",
+        "Asocia cada compra a su proveedor para llevar el histórico por proveedor."
+      ],
+      "faq": [
+        {
+          "q": "¿La compra suma stock sola?",
+          "a": "Sí, al registrarla ingresa las unidades al almacén elegido."
+        }
+      ]
+    },
+    "prod-proveedores": {
+      "id": "prod-proveedores",
+      "ch": "c3",
+      "title": "Proveedores",
+      "one": "Tu directorio de proveedores y las marcas que manejas con cada uno.",
+      "para": "Das de alta proveedores con su contacto y marcas, para asociarlos a tus compras.",
+      "steps": [
+        {
+          "t": "Abre Proveedores",
+          "d": "En Productos → Proveedores ves la lista con contacto, teléfono, email y marcas."
+        },
+        {
+          "t": "Crea un nuevo proveedor",
+          "d": "Con 'Nuevo Proveedor' registras nombre, persona de contacto, teléfono y email.",
+          "img": "proveedores",
+          "cap": "Alta de un nuevo proveedor."
+        },
+        {
+          "t": "Úsalo en tus compras",
+          "d": "Al crear una compra, seleccionas el proveedor desde esta lista."
+        }
+      ],
+      "tips": [
+        "Mantén el contacto actualizado para coordinar reposiciones rápido.",
+        "Un proveedor puede tener varias marcas."
+      ],
+      "faq": [
+        {
+          "q": "¿Puedo crear el proveedor mientras registro una compra?",
+          "a": "Sí, con el botón + junto a 'Proveedor'."
+        }
+      ]
+    },
+    "cc-gestion-cod": {
+      "id": "cc-gestion-cod",
+      "ch": "c4",
+      "title": "Gestión COD",
+      "one": "El call center para confirmar los pedidos contra entrega antes de despacharlos.",
+      "para": "Las ventas COD (por ejemplo de Shopify) se gestionan aquí: se contacta al cliente, se confirma, se hace upselling y, una vez confirmado, el pedido pasa a Ventas para operarse.",
+      "steps": [
+        {
+          "t": "Revisa la cola por estado",
+          "d": "Por confirmar, Contactado, No contesta y Anulados, con contadores por cada uno.",
+          "img": "cc_cod",
+          "cap": "Gestión COD → cola de pedidos por confirmar y métricas del día."
+        },
+        {
+          "t": "Contacta y confirma",
+          "d": "Llama al cliente, confirma datos y, si puedes, agrega productos (upsell)."
+        },
+        {
+          "t": "Pasa el pedido a Ventas",
+          "d": "Al confirmar, el pedido se transfiere al sistema de ventas estándar para su despacho."
+        }
+      ],
+      "tips": [
+        "Los estados de llamada (contactado / no contesta / anulado) ordenan el trabajo del agente.",
+        "El upsell del call center sube el ticket antes de despachar."
+      ],
+      "faq": [
+        {
+          "q": "¿De dónde salen los pedidos COD?",
+          "a": "De plataformas como Shopify u otras integraciones; llegan como leads a confirmar."
+        }
+      ]
+    },
+    "cc-movimientos": {
+      "id": "cc-movimientos",
+      "ch": "c4",
+      "title": "Movimientos y embudo COD",
+      "one": "Las métricas del call center: facturación confirmada, por cobrar, ventas perdidas y conversión.",
+      "para": "Mide el desempeño de la gestión COD: cuánto se confirmó, cuánto está por gestionar, ticket promedio y el embudo de ingresados → confirmados → despachados → entregados.",
+      "steps": [
+        {
+          "t": "Elige el periodo",
+          "d": "Filtra por 7D, 15D, este mes o un rango; ves los KPIs del periodo.",
+          "img": "cc_mov",
+          "cap": "Movimientos y embudo de conversión COD."
+        },
+        {
+          "t": "Lee los indicadores",
+          "d": "Facturación confirmada, pendiente de confirmar, por cobrar, ventas perdidas y ticket promedio."
+        },
+        {
+          "t": "Analiza el embudo",
+          "d": "El embudo COD muestra la conversión final de ingresados a entregados."
+        }
+      ],
+      "tips": [
+        "'Ventas perdidas' te dice cuánta plata se está yendo por pedidos sin cerrar.",
+        "Compara efectividad del día vs. del mes para ver la tendencia."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué es la conversión final?",
+          "a": "El porcentaje de pedidos ingresados que terminan entregados."
+        }
+      ]
+    },
+    "cc-llamadas": {
+      "id": "cc-llamadas",
+      "ch": "c4",
+      "title": "Gestión de llamadas",
+      "one": "El registro de la actividad de llamadas del equipo de atención.",
+      "para": "Complementa la gestión COD con el seguimiento de las llamadas: intentos, resultados y reprogramaciones.",
+      "steps": [
+        {
+          "t": "Abre Gestión de Llamadas",
+          "d": "Dentro de Atención al cliente → Gestión CC."
+        },
+        {
+          "t": "Registra el resultado",
+          "d": "Marca contactado, no contesta o reprogramado según la llamada."
+        },
+        {
+          "t": "Da seguimiento",
+          "d": "Reprograma los que no contestan para volver a intentar."
+        }
+      ],
+      "tips": [
+        "Un buen registro de llamadas evita perder pedidos por falta de seguimiento."
+      ],
+      "faq": [
+        {
+          "q": "¿Se puede reprogramar un pedido?",
+          "a": "Sí, con nueva fecha para reintentar el contacto."
+        }
+      ]
+    },
+    "cc-agentes": {
+      "id": "cc-agentes",
+      "ch": "c4",
+      "title": "Agentes",
+      "one": "Administra a los agentes del call center y su desempeño.",
+      "para": "Das de alta a los agentes de atención y ves su gestión: confirmados, efectividad y upsell.",
+      "steps": [
+        {
+          "t": "Abre Agentes",
+          "d": "En Atención al cliente → Agentes."
+        },
+        {
+          "t": "Gestiona el equipo",
+          "d": "Agrega o edita agentes."
+        },
+        {
+          "t": "Mide desempeño",
+          "d": "Filtra las métricas por agente para ver efectividad y upsell."
+        }
+      ],
+      "tips": [
+        "Usa la efectividad por agente para coaching, no solo para control."
+      ],
+      "faq": [
+        {
+          "q": "¿Puedo ver ventas por agente?",
+          "a": "Sí, los reportes permiten filtrar por vendedor o agente."
+        }
+      ]
+    },
+    "fin-pagos": {
+      "id": "fin-pagos",
+      "ch": "c5",
+      "title": "Pagos pendientes de aprobación",
+      "one": "Verifica y aprueba los comprobantes de pago (Yape, etc.) que suben los equipos.",
+      "para": "Centraliza las ventas con comprobantes por verificar; el administrador aprueba o rechaza cada pago para actualizar los saldos.",
+      "steps": [
+        {
+          "t": "Revisa los pagos pendientes",
+          "d": "En Finanzas → Resumen, pestaña 'Pagos Pendientes', ves las ventas con comprobantes por verificar.",
+          "img": "fin_pagos",
+          "cap": "Pagos pendientes de aprobación."
+        },
+        {
+          "t": "Gestiona el pago",
+          "d": "Abre 'Gestionar Pagos': ves total, pagado y saldo, y el comprobante subido.",
+          "img": "fin_modal",
+          "cap": "Gestión de pagos → aprobar, rechazar o registrar un pago."
+        },
+        {
+          "t": "Aprueba o rechaza",
+          "d": "Aprueba el pago (actualiza el saldo) o recházalo; también puedes registrar un pago nuevo."
+        }
+      ],
+      "tips": [
+        "Aprobar el comprobante es lo que actualiza el saldo del pedido.",
+        "Puedes corregir el monto antes de aprobar si el comprobante no coincide."
+      ],
+      "faq": [
+        {
+          "q": "¿Quién aprueba los pagos?",
+          "a": "El administrador, de forma manual, tras revisar el comprobante."
+        }
+      ]
+    },
+    "fin-liq-courier": {
+      "id": "fin-liq-courier",
+      "ch": "c5",
+      "title": "Liquidaciones courier",
+      "one": "El módulo financiero de cobranzas a couriers, con tarifas y automatizaciones (beta).",
+      "para": "Facilita la conciliación de cuentas y la cobranza de lo que los couriers deben depositar, con visualización de tarifas y estados.",
+      "steps": [
+        {
+          "t": "Abre Liquidaciones Courier",
+          "d": "Desde Finanzas, pestaña 'Liquidaciones Courier'."
+        },
+        {
+          "t": "Concilia por courier",
+          "d": "Revisa tarifas, estados y montos pendientes por cada courier."
+        },
+        {
+          "t": "Gestiona la cobranza",
+          "d": "Da seguimiento a los depósitos pendientes (integración con WhatsApp en camino)."
+        }
+      ],
+      "tips": [
+        "Este módulo está en beta; algunas automatizaciones llegan pronto.",
+        "Cruza esta vista con Operaciones → Liquidaciones COD."
+      ],
+      "faq": [
+        {
+          "q": "¿Es lo mismo que Liquidaciones COD?",
+          "a": "Están relacionados: COD es la vista operativa; aquí es la financiera y de conciliación."
+        }
+      ]
+    },
+    "fin-facturacion": {
+      "id": "fin-facturacion",
+      "ch": "c5",
+      "title": "Facturación SUNAT",
+      "one": "Emite boletas y facturas electrónicas, guías de remisión y notas, con reportes para tu contador.",
+      "para": "Integra POWIP con SUNAT vía OSE: cargas tu certificado digital, configuras series y correlativos, y emites comprobantes de las ventas entregadas.",
+      "steps": [
+        {
+          "t": "Revisa el estado de facturación",
+          "d": "En Finanzas → Facturación ves emitidos hoy, pendientes de envío, rechazados y facturado del mes.",
+          "img": "sunat",
+          "cap": "Facturación SUNAT → estado de comprobantes."
+        },
+        {
+          "t": "Carga tu certificado digital",
+          "d": "En 'Certificado Digital' subes el P12 que firma tus comprobantes antes de enviarlos a SUNAT.",
+          "img": "sunat_cert",
+          "cap": "Certificado digital vigente para emisión."
+        },
+        {
+          "t": "Configura series y emite",
+          "d": "Define series y correlativos, y emite boletas o facturas de las ventas entregadas."
+        }
+      ],
+      "tips": [
+        "Sin certificado digital vigente no se pueden emitir comprobantes.",
+        "La sección Reportes deja todo listo para tu contador."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué necesito para facturar?",
+          "a": "Certificado digital P12 vigente y las series configuradas."
+        }
+      ]
+    },
+    "int-centro": {
+      "id": "int-centro",
+      "ch": "c6",
+      "title": "Centro de Integraciones",
+      "one": "El lugar donde conectas POWIP con couriers y canales externos.",
+      "para": "Administra todas las integraciones de terceros disponibles: couriers (Shalom, Aliclik, EVA), ventas por WhatsApp/IA (Yavendio) y más.",
+      "steps": [
+        {
+          "t": "Abre el Centro de Integraciones",
+          "d": "Desde Configuración → Integraciones.",
+          "img": "integraciones",
+          "cap": "Centro de Integraciones con los servicios disponibles."
+        },
+        {
+          "t": "Elige la integración",
+          "d": "Cada tarjeta muestra el servicio y si está Disponible."
+        },
+        {
+          "t": "Configura la conexión",
+          "d": "Pulsa 'Configurar' y sigue los pasos para conectar tu cuenta."
+        }
+      ],
+      "tips": [
+        "Conectar el courier aquí es lo que habilita generar guías directas.",
+        "Muchas integraciones reciben actualizaciones de estado automáticas por webhook."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué integraciones hay?",
+          "a": "Couriers (Shalom, Aliclik, EVA), Yavendio (WhatsApp/IA), Shopify y Google Sheets, entre otras."
+        }
+      ]
+    },
+    "int-shopify": {
+      "id": "int-shopify",
+      "ch": "c6",
+      "title": "Shopify",
+      "one": "Sincroniza productos y trae pedidos de tu tienda Shopify a POWIP.",
+      "para": "Con Shopify vinculado, tus productos se importan automáticamente y los pedidos (incluidos los COD) entran para gestión y despacho.",
+      "steps": [
+        {
+          "t": "Vincula tu tienda",
+          "d": "En Gestión de Tiendas usa 'Sincronizar con Shopify'."
+        },
+        {
+          "t": "Importa productos",
+          "d": "Desde Productos, 'Sincronizar Shopify' trae el catálogo."
+        },
+        {
+          "t": "Recibe pedidos",
+          "d": "Los pedidos Shopify llegan a Ventas / Gestión COD para procesarse."
+        }
+      ],
+      "tips": [
+        "Los pedidos COD de Shopify se confirman en Atención al cliente antes de despachar.",
+        "Coordina con el equipo de POWIP la sincronización inicial."
+      ],
+      "faq": [
+        {
+          "q": "¿Los pedidos Shopify entran solos?",
+          "a": "Sí, una vez vinculada la tienda se consolidan con el resto."
+        }
+      ]
+    },
+    "int-yavendio": {
+      "id": "int-yavendio",
+      "ch": "c6",
+      "title": "Yavendio (WhatsApp / IA)",
+      "one": "Vende por WhatsApp/IA y recibe automáticamente en POWIP los pedidos cerrados ahí.",
+      "para": "Conectas tu catálogo a Yavendio para vender por WhatsApp con IA; los pedidos cerrados llegan a POWIP para operarse.",
+      "steps": [
+        {
+          "t": "Abre Yavendio en Integraciones",
+          "d": "Tarjeta Yavendio → Configurar."
+        },
+        {
+          "t": "Conecta tu catálogo",
+          "d": "Vincula tu catálogo de POWIP a Yavendio."
+        },
+        {
+          "t": "Recibe los pedidos",
+          "d": "Los pedidos cerrados por WhatsApp/IA entran automáticamente a POWIP."
+        }
+      ],
+      "tips": [
+        "Centraliza en POWIP las ventas de WhatsApp junto con las demás.",
+        "Ideal para no perder pedidos que se cierran por chat."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué es Yavendio?",
+          "a": "Una integración para vender por WhatsApp/IA cuyos pedidos caen en POWIP."
+        }
+      ]
+    },
+    "int-couriers": {
+      "id": "int-couriers",
+      "ch": "c6",
+      "title": "Couriers (Shalom, Aliclik, EVA)",
+      "one": "Conecta tus cuentas de courier para despachar y recibir estados automáticos.",
+      "para": "Cada courier integrado permite generar guías y recibir actualizaciones de estado por webhook, reduciendo el trabajo manual.",
+      "steps": [
+        {
+          "t": "Elige el courier",
+          "d": "En Integraciones, abre Shalom, Aliclik o EVA Courier."
+        },
+        {
+          "t": "Conecta tu cuenta",
+          "d": "Ingresa tus credenciales o datos de la cuenta del courier."
+        },
+        {
+          "t": "Despacha con integración",
+          "d": "Genera guías desde Operaciones y recibe estados automáticos."
+        }
+      ],
+      "tips": [
+        "Shalom tiene el flujo más directo para provincia.",
+        "Para couriers no integrados, exporta a Excel y coordina manual."
+      ],
+      "faq": [
+        {
+          "q": "¿Qué gano integrando el courier?",
+          "a": "Generar guías directo y que el estado del pedido se actualice solo."
+        }
+      ]
+    }
+  },
+  "role": {
+    "c0": "Administrador",
+    "c1": "Asesor comercial",
+    "c2": "Operaciones",
+    "c3": "Administrador",
+    "c4": "Agente · Gestión COD",
+    "c5": "Administrador",
+    "c6": "Administrador"
+  },
+  "cal": "https://calendar.app.google/hr6MCGP8di62n7kk7",
+  "wa": "https://wa.me/51923101193?text=Hola,%20tengo%20una%20duda%20sobre%20POWIP",
+  "start": [
+    {
+      "role": "Asesor comercial",
+      "icon": "user",
+      "desc": "Vendes y registras pedidos.",
+      "steps": [
+        [
+          "registrar-venta",
+          "Registra tu primera venta"
+        ],
+        [
+          "ventas-panel",
+          "Aprende a usar el Panel de Ventas"
+        ],
+        [
+          "packs-promos",
+          "Activa packs y promos para subir el ticket"
+        ],
+        [
+          "clientes",
+          "Maneja tu base de clientes"
+        ]
+      ]
+    },
+    {
+      "role": "Operaciones / Courier",
+      "icon": "truck",
+      "desc": "Despachas y haces seguimiento.",
+      "steps": [
+        [
+          "op-pedidos",
+          "Prepara y despacha los pedidos del día"
+        ],
+        [
+          "op-guias",
+          "Genera guías y rastrea couriers"
+        ],
+        [
+          "op-shalom",
+          "Usa la integración con Shalom"
+        ],
+        [
+          "op-liquidaciones",
+          "Controla las liquidaciones COD"
+        ]
+      ]
+    },
+    {
+      "role": "Administrador",
+      "icon": "gear",
+      "desc": "Configuras y controlas el negocio.",
+      "steps": [
+        [
+          "primeros-pasos",
+          "Configura tu empresa"
+        ],
+        [
+          "tiendas-almacenes",
+          "Crea tiendas, almacenes y couriers"
+        ],
+        [
+          "usuarios",
+          "Da de alta a tu equipo con roles"
+        ],
+        [
+          "prod-lista",
+          "Carga tu catálogo de productos"
+        ],
+        [
+          "fin-facturacion",
+          "Deja lista la facturación SUNAT"
+        ],
+        [
+          "int-centro",
+          "Conecta tus integraciones"
+        ]
+      ]
+    }
+  ],
+  "flow": [
+    [
+      "Venta registrada",
+      "Se carga el pedido (manual o de un anuncio).",
+      "registrar-venta",
+      "c1"
+    ],
+    [
+      "Confirmación COD",
+      "Si es contra entrega, el call center confirma con el cliente.",
+      "cc-gestion-cod",
+      "c4"
+    ],
+    [
+      "Picking & packing",
+      "Operaciones prepara el pedido y lo marca 'Preparado'.",
+      "op-pedidos",
+      "c2"
+    ],
+    [
+      "Guía de salida",
+      "Se agrupan pedidos y se genera la guía para el courier.",
+      "op-guias",
+      "c2"
+    ],
+    [
+      "En tránsito",
+      "El courier lleva el pedido; se hace seguimiento.",
+      "op-pedidos",
+      "c2"
+    ],
+    [
+      "Entrega",
+      "El pedido llega al cliente y se marca 'Entregado'.",
+      "op-pedidos",
+      "c2"
+    ],
+    [
+      "Liquidación",
+      "El courier deposita el COD cobrado; se concilia.",
+      "op-liquidaciones",
+      "c2"
+    ],
+    [
+      "Facturación SUNAT",
+      "Se emite boleta o factura electrónica de la venta.",
+      "fin-facturacion",
+      "c5"
+    ]
+  ],
+  "states": [
+    {
+      "grupo": "Estados del pedido",
+      "rows": [
+        [
+          "Pendiente",
+          "Venta creada, aún por procesar.",
+          "Prepárala (picking/packing) o confírmala.",
+          "warn"
+        ],
+        [
+          "Preparado",
+          "Picking y packing hechos.",
+          "Genera la guía de salida.",
+          "ok"
+        ],
+        [
+          "En tránsito",
+          "Despachado con un courier.",
+          "Haz seguimiento; marca entregado al llegar.",
+          "info"
+        ],
+        [
+          "Necesita atención",
+          "Entrega fallida o incidencia.",
+          "Reprograma o gestiona el pedido.",
+          "warn"
+        ],
+        [
+          "Entregado",
+          "Llegó al cliente.",
+          "Verifica el pago y la liquidación.",
+          "ok"
+        ],
+        [
+          "Reprogramado",
+          "Agendado para otra fecha.",
+          "Se libera para despacho en la fecha nueva.",
+          "info"
+        ],
+        [
+          "Anulado",
+          "Pedido cancelado.",
+          "Queda registrado; no se despacha.",
+          "muted"
+        ]
+      ]
+    },
+    {
+      "grupo": "Estados de la guía",
+      "rows": [
+        [
+          "Creada",
+          "Guía generada, aún sin aprobar ni asignar courier.",
+          "Apruébala y asigna el courier (aviso a las +24h).",
+          "warn"
+        ],
+        [
+          "Aprobada",
+          "Lista para salir con el courier.",
+          "Despacha; luego rastrea por courier.",
+          "ok"
+        ]
+      ]
+    },
+    {
+      "grupo": "Pagos y liquidaciones",
+      "rows": [
+        [
+          "Pago pendiente",
+          "Comprobante (Yape, etc.) por verificar.",
+          "Aprueba o rechaza en Finanzas → Pagos.",
+          "warn"
+        ],
+        [
+          "En plazo",
+          "COD dentro de los ~15 días de liquidación.",
+          "Espera el depósito del courier.",
+          "info"
+        ],
+        [
+          "Vencido",
+          "COD fuera de plazo sin depositar.",
+          "Haz seguimiento de cobranza al courier.",
+          "warn"
+        ],
+        [
+          "Liquidado",
+          "El courier ya depositó el COD.",
+          "Nada; el pedido queda cerrado.",
+          "ok"
+        ]
+      ]
+    }
+  ],
+  "glossary": [
+    [
+      "COD (contra entrega)",
+      "'Cash on Delivery': el cliente paga al recibir. Estos pedidos se confirman por teléfono antes de despachar."
+    ],
+    [
+      "Lead",
+      "Un pedido o contacto por gestionar; en COD, alguien a quien llamar para confirmar."
+    ],
+    [
+      "Nota de venta",
+      "El comprobante interno del pedido; se comparte por WhatsApp, se imprime o se descarga en PDF."
+    ],
+    [
+      "Picking & packing",
+      "Recoger los productos del almacén (picking) y empacarlos (packing) para despachar."
+    ],
+    [
+      "Guía de salida / guía courier",
+      "Documento que agrupa pedidos para entregarlos a un courier y controlar el despacho."
+    ],
+    [
+      "Liquidación",
+      "El proceso de que el courier te deposite el dinero que cobró en las entregas COD."
+    ],
+    [
+      "Ticket promedio",
+      "El valor promedio de cada pedido; sube con packs, promos y upsell."
+    ],
+    [
+      "Upsell / upselling",
+      "Agregar productos a un pedido (p. ej. en la llamada) para aumentar su valor."
+    ],
+    [
+      "Adelanto / abono parcial",
+      "Un pago parcial del pedido; el saldo queda 'por cobrar' hasta completarse."
+    ],
+    [
+      "Enlace de rastreo",
+      "Link que ve el cliente para seguir el estado de su pedido en tiempo real."
+    ],
+    [
+      "Canal de venta / de cierre",
+      "De dónde vino el pedido (WhatsApp, Instagram, TikTok, Shopify…) y dónde se cerró."
+    ],
+    [
+      "Almacén",
+      "El lugar de donde se descuenta el stock al vender; una tienda puede tener varios."
+    ],
+    [
+      "Variante / SKU",
+      "Cada combinación de un producto (talla, color) con su código único (SKU)."
+    ],
+    [
+      "OSE / SUNAT",
+      "SUNAT es la autoridad tributaria; el OSE es el operador que valida tus comprobantes electrónicos."
+    ],
+    [
+      "Certificado digital (P12)",
+      "Archivo que firma tus comprobantes antes de enviarlos a SUNAT; debe estar vigente."
+    ]
+  ],
+  "news": [
+    [
+      "beta",
+      "Finanzas en beta",
+      "El módulo de liquidaciones de couriers está en beta, con mejoras en camino para conciliación y cobranza."
+    ],
+    [
+      "pronto",
+      "Mercado Pago para cobros automatizados",
+      "Integración para automatizar el cobro de saldos, próximamente."
+    ],
+    [
+      "pronto",
+      "Automatizaciones de WhatsApp",
+      "Recordatorios y gestiones automáticas por WhatsApp en liquidaciones, próximamente."
+    ],
+    [
+      "pronto",
+      "Integraciones oficiales con transportistas",
+      "Hoy algunos couriers requieren carga manual (copiar/pegar); trabajamos en integraciones oficiales para automatizar la asignación de pedidos."
+    ],
+    [
+      "info",
+      "Programa de referidos",
+      "¿Quieres recomendar POWIP? Pídele al equipo tu enlace de referidos por WhatsApp."
+    ]
+  ]
+}
