@@ -35,4 +35,6 @@ NEXT_PUBLIC_FRONTEND_URL
 ```
 
 ## Normas aplicables
-`docs/normas/nextjs-normas.md`
+
+- **Lógica** (App Router, Server/Client Components, hooks, services HTTP, react-query): skill `nextjs-server-components`
+- **Tests** (React Testing Library, renderHook): skill `nextjs-testing-rtl`
