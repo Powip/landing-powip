@@ -57,6 +57,8 @@ export const SCREENSHOTS: Record<string, string> = Object.fromEntries(
 export const MODULE_VIDEOS: Record<string, string> = {
   'primeros-pasos': 'ID1zqVFgpEk',
   'google-sheets': 'ASVHHmTLa_o',
+  'ventas-panel': 'SR2PfogeYlg',
+  'registrar-venta': 'SR2PfogeYlg',
   'op-pedidos': 'N6cSeuDkU5s',
   'op-liquidaciones': 'Q5pnD5T-PtU',
   'prod-inventario': 'bdZguLoS87U',
