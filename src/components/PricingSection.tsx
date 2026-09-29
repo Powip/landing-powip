@@ -1,10 +1,12 @@
 'use client';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { onboardingHref } from '@/lib/constants';
 
 const plans = [
   {
     name: 'BASIC',
+    appPlan: 'Basic',
     monthly: 99,
     annual: 799,
     oldMonthly: 149,
@@ -15,6 +17,7 @@ const plans = [
   },
   {
     name: 'STANDARD',
+    appPlan: 'Medium',
     monthly: 189,
     annual: 1399,
     oldMonthly: 239,
@@ -25,6 +28,7 @@ const plans = [
   },
   {
     name: 'FULL',
+    appPlan: 'Scale',
     monthly: 269,
     annual: 1999,
     oldMonthly: 299,
@@ -130,7 +134,7 @@ export default function PricingSection() {
                   <small className="block font-medium text-[12.5px] opacity-70">pedidos / mes</small>
                 </div>
                 <Link
-                  href={`/crear-cuenta?plan=${plan.name}`}
+                  href={onboardingHref(plan.appPlan, price, isAnnual)}
                   aria-label={`Crear cuenta con el plan ${plan.name}`}
                   className={`mt-auto pt-5 w-full font-bold py-3 rounded-xl text-center ${
                     plan.highlighted ? 'bg-white text-[#4F3A96]' : 'bg-[#4F3A96] text-white'
