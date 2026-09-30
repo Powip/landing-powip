@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Wallet, Package, Zap, TrendingUp, Truck } from 'lucide-react';
+import { ONBOARDING_URL } from '@/lib/constants';
 
 const SIDEBAR_ITEMS = ['Dashboard', 'Comercial', 'Operaciones', 'Finanzas', 'Couriers', 'Reportes'];
 
@@ -37,7 +38,7 @@ export default function HeroSection() {
 
           <div className="mt-7 flex flex-wrap items-center gap-4">
             <Link
-              href="/crear-cuenta"
+              href={ONBOARDING_URL}
               className="inline-flex items-center gap-2 bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-bold text-base px-8 py-4 rounded-2xl shadow-[0_12px_28px_rgba(79,58,150,0.36)]"
             >
               Crea tu cuenta <ArrowRight className="w-4 h-4" aria-hidden="true" />

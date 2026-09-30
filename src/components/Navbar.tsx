@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { ONBOARDING_URL } from '@/lib/constants';
 
 export default function Navbar() {
   return (
@@ -27,13 +28,13 @@ export default function Navbar() {
         <Link href="https://www.powip.tech/login" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
           Iniciar sesión
         </Link>
-        <Link href="/crear-cuenta" className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-sm px-6 py-3 rounded-md">
+        <Link href={ONBOARDING_URL} className="bg-[#4F3A96] hover:bg-[#3d2d75] transition-colors text-white font-semibold text-sm px-6 py-3 rounded-md">
           Crea tu cuenta
         </Link>
       </div>
 
       <div className="md:hidden flex items-center">
-        <Link href="/crear-cuenta" className="bg-[#4F3A96] text-white font-semibold text-sm px-4 py-2.5 rounded-md">
+        <Link href={ONBOARDING_URL} className="bg-[#4F3A96] text-white font-semibold text-sm px-4 py-2.5 rounded-md">
           Crear cuenta
         </Link>
       </div>
