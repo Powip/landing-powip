@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { ONBOARDING_URL } from '@/lib/constants';
 
 export default function BottomCTA() {
   return (
@@ -29,7 +30,7 @@ export default function BottomCTA() {
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              href="/crear-cuenta"
+              href={ONBOARDING_URL}
               className="inline-flex items-center gap-2 bg-white text-[#4F3A96] font-bold text-lg px-9 py-[18px] rounded-2xl shadow-[0_4px_18px_rgba(46,33,104,0.08)]"
             >
               Crea tu cuenta →
