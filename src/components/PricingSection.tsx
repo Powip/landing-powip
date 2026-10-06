@@ -154,7 +154,7 @@ export default function PricingSection() {
                 <li key={f} className="flex gap-2"><span className="text-[#1E8C86]" aria-hidden="true">✓</span>{f}</li>
               ))}
             </ul>
-            <Link href="/crear-cuenta?plan=ENTERPRISE" aria-label="Solicitar el plan Enterprise" className="mt-auto w-full font-bold py-3 rounded-xl text-center bg-[#4F3A96] text-white">
+            <Link href="/demo" aria-label="Solicitar el plan Enterprise" className="mt-auto w-full font-bold py-3 rounded-xl text-center bg-[#4F3A96] text-white">
               Hablemos
             </Link>
           </div>
