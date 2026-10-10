@@ -1,5 +1,5 @@
 'use client';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import { onboardingHref } from '@/lib/constants';
 
@@ -8,9 +8,7 @@ const plans = [
     name: 'BASIC',
     appPlan: 'Basic',
     monthly: 99,
-    annual: 799,
     oldMonthly: 149,
-    oldAnnual: 1188,
     features: ['Todos los módulos', 'Usuarios ilimitados', 'Integración con couriers', 'Facturación SUNAT', 'Soporte por chat'],
     orders: 'Hasta 999',
     highlighted: false,
@@ -19,9 +17,7 @@ const plans = [
     name: 'STANDARD',
     appPlan: 'Medium',
     monthly: 189,
-    annual: 1399,
     oldMonthly: 239,
-    oldAnnual: 2268,
     features: ['Todo lo de BASIC', 'Reportes y métricas', 'Automatizaciones', 'Soporte prioritario'],
     orders: 'Hasta 1999',
     highlighted: true,
@@ -30,9 +26,7 @@ const plans = [
     name: 'FULL',
     appPlan: 'Scale',
     monthly: 269,
-    annual: 1999,
     oldMonthly: 299,
-    oldAnnual: 3228,
     features: ['Todo lo de STANDARD', 'Múltiples almacenes', 'Liquidaciones COD', 'Soporte premium'],
     orders: 'Hasta 5999',
     highlighted: false,
@@ -40,7 +34,6 @@ const plans = [
 ];
 
 export default function PricingSection() {
-  const [isAnnual, setIsAnnual] = useState(false);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const standardCardRef = useRef<HTMLDivElement>(null);
 
@@ -73,23 +66,6 @@ export default function PricingSection() {
           ✅ Sin permanencia · sin contratos · todos los módulos incluidos · cambia o cancela cuando quieras
         </div>
 
-        <div role="group" aria-label="Ciclo de facturación" className="inline-flex bg-[#eef0f8] rounded-full p-1 gap-1">
-          <button
-            onClick={() => setIsAnnual(false)}
-            aria-pressed={!isAnnual}
-            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${!isAnnual ? 'bg-[#4F3A96] text-white' : 'text-[#3a2389]'}`}
-          >
-            Mensual
-          </button>
-          <button
-            onClick={() => setIsAnnual(true)}
-            aria-pressed={isAnnual}
-            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${isAnnual ? 'bg-[#4F3A96] text-white' : 'text-[#3a2389]'}`}
-          >
-            Anual −30%
-          </button>
-        </div>
-
         <div
           ref={scrollerRef}
           role="region"
@@ -98,8 +74,6 @@ export default function PricingSection() {
           className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar -mx-6 px-6 pt-6 pb-8 sm:mx-0 sm:px-0 sm:pt-0 sm:pb-0 mask-[linear-gradient(90deg,#000_92%,transparent)] sm:mask-none"
         >
           {plans.map((plan) => {
-            const price = isAnnual ? plan.annual : plan.monthly;
-            const oldPrice = isAnnual ? plan.oldAnnual : plan.oldMonthly;
             return (
               <div
                 key={plan.name}
@@ -116,10 +90,10 @@ export default function PricingSection() {
                   </span>
                 )}
                 <div className={`font-extrabold text-[19px] tracking-wide ${plan.highlighted ? 'text-white' : 'text-[#3a2389]'}`}>{plan.name}</div>
-                <div className={`mt-3.5 text-[15px] line-through opacity-60 ${plan.highlighted ? 'text-white' : 'text-gray-400'}`}>S/ {oldPrice}</div>
+                <div className={`mt-3.5 text-[15px] line-through opacity-60 ${plan.highlighted ? 'text-white' : 'text-gray-400'}`}>S/ {plan.oldMonthly}</div>
                 <div className={`text-[42px] font-black leading-none tracking-tight ${plan.highlighted ? 'text-white' : 'text-[#1B1730]'}`}>
-                  S/{price}
-                  <small className="text-[15px] font-semibold opacity-75"> {isAnnual ? '/año' : '/mes'}</small>
+                  S/{plan.monthly}
+                  <small className="text-[15px] font-semibold opacity-75"> /mes</small>
                 </div>
                 <ul className="mt-[18px] mb-[18px] text-[13.5px] flex flex-col gap-2 text-left">
                   {plan.features.map((f) => (
@@ -134,7 +108,7 @@ export default function PricingSection() {
                   <small className="block font-medium text-[12.5px] opacity-70">pedidos / mes</small>
                 </div>
                 <Link
-                  href={onboardingHref(plan.appPlan, price, isAnnual)}
+                  href={onboardingHref(plan.appPlan, plan.monthly, false)}
                   aria-label={`Crear cuenta con el plan ${plan.name}`}
                   className={`mt-auto pt-5 w-full font-bold py-3 rounded-xl text-center ${
                     plan.highlighted ? 'bg-white text-[#4F3A96]' : 'bg-[#4F3A96] text-white'
@@ -154,7 +128,7 @@ export default function PricingSection() {
                 <li key={f} className="flex gap-2"><span className="text-[#1E8C86]" aria-hidden="true">✓</span>{f}</li>
               ))}
             </ul>
-            <Link href="/crear-cuenta?plan=ENTERPRISE" aria-label="Solicitar el plan Enterprise" className="mt-auto w-full font-bold py-3 rounded-xl text-center bg-[#4F3A96] text-white">
+            <Link href="/demo" aria-label="Solicitar el plan Enterprise" className="mt-auto w-full font-bold py-3 rounded-xl text-center bg-[#4F3A96] text-white">
               Hablemos
             </Link>
           </div>

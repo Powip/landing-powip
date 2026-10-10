@@ -10,7 +10,7 @@ import LegalList from '@/components/legal/LegalList';
 export const metadata: Metadata = {
   title: 'Términos y Condiciones',
   description:
-    'Términos y Condiciones de uso de la plataforma POWIP, operada por POWIP Technology SAC. Versión 2.1, vigente desde el 24 de mayo de 2026.',
+    'Términos y Condiciones de uso de la plataforma POWIP, operada por POWIP Technology SAC. Versión 2.2, vigente desde el 9 de octubre de 2026.',
   alternates: { canonical: '/terminos' },
 };
 
@@ -42,8 +42,8 @@ export default function TerminosPage() {
         eyebrow="Marco legal"
         title="Términos y Condiciones de Uso"
         subtitle="Plataforma POWIP — Gestión Integral de Pedidos, Logística y Operaciones"
-        version="2.1"
-        date="24 de mayo de 2026"
+        version="2.2"
+        date="Vigente desde el 9 de octubre de 2026"
       />
 
       <div className="px-6 md:px-20 pb-20">
@@ -54,7 +54,7 @@ export default function TerminosPage() {
             <p>
               Los presentes Términos y Condiciones regulan el acceso y uso de la plataforma POWIP, operada por{' '}
               <b>POWIP TECHNOLOGY SAC</b>, empresa debidamente constituida bajo las leyes de la República del
-              Perú, con RUC 20616141971, con domicilio fiscal en Av. Venezuela 625 - Oficina 918, Breña, Lima,
+              Perú, con RUC 20616141971, con domicilio fiscal en Av. Venezuela 625, Oficina 918, Breña, Lima,
               Perú.
             </p>
             <p>
@@ -272,6 +272,15 @@ export default function TerminosPage() {
                 equivalente al tiempo de interrupción, como único remedio disponible.
               </LegalNote>
             </LegalSection>
+
+            <LegalSection level={3} title="5.7 Contratación mediante Shopify">
+              <p>
+                Si el Merchant contrata POWIP desde la Shopify App Store, el plan se cobra en dólares
+                estadounidenses a través de la facturación de Shopify, según los precios publicados en la ficha de
+                la app. Los cambios de plan y la cancelación se hacen desde la app, y desinstalarla cancela la
+                suscripción. En todo lo demás se aplican estos Términos.
+              </p>
+            </LegalSection>
           </LegalSection>
 
           <LegalSection id="6" title="6. Disponibilidad del Servicio">
@@ -293,7 +302,7 @@ export default function TerminosPage() {
               <LegalList
                 items={[
                   'Fuerza mayor o eventos fuera del control razonable de POWIP.',
-                  'Fallas de proveedores de infraestructura de terceros (AWS, Google Cloud, u otros).',
+                  'Fallas de proveedores de infraestructura en la nube (Supabase, Vercel y Railway).',
                   'Cortes de internet o energía externos a la infraestructura de POWIP.',
                   'Interrupciones originadas por las propias Plataformas Integradas (APIs, cambios de política, etc.).',
                   'Acciones u omisiones del Merchant o sus usuarios.',
@@ -414,7 +423,56 @@ export default function TerminosPage() {
                 una solicitud válida de eliminación.
               </p>
             </LegalSection>
-            <LegalSection level={3} title="9.5 Derechos del Merchant y sus Clientes">
+            <LegalSection level={3} title="9.5 Encargo de tratamiento de datos personales">
+              <p>
+                <b>a) Roles.</b> Respecto de los datos de sus compradores, el Merchant es titular del banco de datos
+                y responsable del tratamiento, y POWIP es encargado del tratamiento, conforme a la Ley N.° 29733 y
+                su Reglamento.
+              </p>
+              <p>
+                <b>b) Instrucciones.</b> POWIP trata esos datos solo para prestar los servicios contratados y según
+                las instrucciones del Merchant, que se entienden dadas al configurar y usar la plataforma. No los
+                usa para fines propios, no los vende ni los cede.
+              </p>
+              <p>
+                <b>c) Confidencialidad.</b> Todo el personal y proveedor de POWIP con acceso a los datos está
+                obligado a guardar confidencialidad, incluso después de terminada su relación con POWIP.
+              </p>
+              <p>
+                <b>d) Seguridad.</b> POWIP aplica las medidas de seguridad descritas en la cláusula 8 y en la
+                Política de Privacidad.
+              </p>
+              <p>
+                <b>e) Subencargados.</b> El Merchant autoriza a POWIP a apoyarse en los subencargados listados en la
+                Política de Privacidad. POWIP avisará con 15 días de anticipación antes de agregar uno nuevo y
+                responde por su cumplimiento.
+              </p>
+              <p>
+                <b>f) Transferencias internacionales.</b> El Merchant autoriza las transferencias descritas en la
+                Política de Privacidad, que se realizan con un nivel adecuado de protección o con garantías
+                equivalentes.
+              </p>
+              <p>
+                <b>g) Derechos de los titulares.</b> POWIP ayudará al Merchant a responder las solicitudes de
+                acceso, rectificación, cancelación, oposición y portabilidad de sus compradores dentro de los plazos
+                legales.
+              </p>
+              <p>
+                <b>h) Incidentes.</b> POWIP notificará al Merchant cualquier incidente de seguridad que afecte sus
+                datos en un máximo de 24 horas desde que tome conocimiento, con la información disponible para que
+                el Merchant cumpla su deber de notificar a la autoridad y a los titulares.
+              </p>
+              <p>
+                <b>i) Fin del servicio.</b> Al terminar el servicio, POWIP pondrá los datos a disposición del
+                Merchant para su descarga y los eliminará de forma segura en un máximo de 30 días calendario, salvo
+                que la ley exija conservarlos.
+              </p>
+              <p>
+                <b>j) Verificación.</b> A solicitud razonable del Merchant, y como máximo una vez al año, POWIP
+                entregará información que acredite el cumplimiento de esta cláusula.
+              </p>
+            </LegalSection>
+            <LegalSection level={3} title="9.6 Derechos del Merchant y sus Clientes">
               <p>
                 El Merchant y sus clientes pueden solicitar en cualquier momento: acceso, rectificación,
                 cancelación, oposición y portabilidad de sus datos. Solicitudes a: hola@powip.lat. POWIP
@@ -575,7 +633,7 @@ export default function TerminosPage() {
               items={[
                 <><b>POWIP TECHNOLOGY SAC</b></>,
                 <>RUC: 20616141971</>,
-                <>Dirección: Calle Portugal 129, Breña, Lima, Perú</>,
+                <>Dirección: Av. Venezuela 625, Oficina 918, Breña, Lima, Perú</>,
                 <>Email: <a href="mailto:hola@powip.lat" className="text-[#4F3A96] font-semibold hover:underline">hola@powip.lat</a></>,
                 <>Teléfono / WhatsApp: 923 101 193</>,
                 <>Sitio web: www.powip.lat</>,
@@ -585,7 +643,7 @@ export default function TerminosPage() {
           </LegalSection>
 
           <p className="pt-10 text-[12.5px] text-[#9895ad] border-t border-gray-100 mt-4">
-            POWIP TECHNOLOGY SAC · Todos los derechos reservados · 24 de mayo de 2026
+            POWIP TECHNOLOGY SAC · Todos los derechos reservados · 9 de octubre de 2026
           </p>
         </article>
       </div>

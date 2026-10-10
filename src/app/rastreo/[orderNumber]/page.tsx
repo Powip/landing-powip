@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import {
   Package,
@@ -12,61 +12,16 @@ import {
   ShoppingBag,
   Send,
   Lock,
+  Download,
+  ShieldCheck,
 } from "lucide-react";
-
-/* -----------------------------------------
-   Types
------------------------------------------ */
-
-interface TrackingItem {
-  productName: string;
-  quantity: number;
-  unitPrice: number;
-  subtotal: number;
-  attributes?: Record<string, any>;
-}
-
-interface TrackingTimeline {
-  step: string;
-  label: string;
-  completed: boolean;
-  current: boolean;
-}
-
-interface TrackingData {
-  orderNumber: string;
-  status: string;
-  deliveryType: string;
-  createdAt: string;
-  customer: {
-    fullName: string;
-    district?: string;
-    city?: string;
-    province?: string;
-  };
-  items: TrackingItem[];
-  totals: {
-    grandTotal: number;
-    totalPaid: number;
-    pendingAmount: number;
-  };
-  timeline: TrackingTimeline[];
-  shipping?: {
-    courierName?: string | null;
-    trackingNumber?: string | null;
-    pickupKey?: string | null;
-  };
-  courier?: string | null;
-  businessName?: string;
-  businessPhone?: string | null;
-  shippingInfo?: {
-    shippingKey?: string | null;
-    shippingCode?: string | null;
-    shalomDestinationAgency?: string | null;
-    externalTrackingNumber?: string | null;
-    trackingUrl?: string | null;
-  } | null;
-}
+import type { TrackingData, UpsellOffer } from "@/components/rastreo/types";
+import { resolveClientState } from "@/components/rastreo/clientState";
+import AgencyPicker from "@/components/rastreo/AgencyPicker";
+import YapePanel from "@/components/rastreo/YapePanel";
+import UpsellList from "@/components/rastreo/UpsellList";
+import RecompraFlow from "@/components/rastreo/RecompraFlow";
+import { usePollingResource } from "@/lib/usePollingResource";
 
 /* -----------------------------------------
    Status Color/Icon Helpers
@@ -116,39 +71,114 @@ export default function RastreoPage() {
   const params = useParams();
   const orderNumber = params.orderNumber as string;
 
-  const [data, setData] = useState<TrackingData | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // Deja de pollear en estados terminales (entregado/anulado) — ya no hay
+  // nada que el backend vaya a cambiar solo ahí.
+  const {
+    data,
+    loading,
+    error,
+    refetch: refetchTracking,
+  } = usePollingResource<TrackingData>({
+    url: orderNumber
+      ? `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}`
+      : null,
+    intervalMs: 30000,
+    notFoundMessage: "Pedido no encontrado",
+    genericErrorMessage: "Error al cargar el pedido",
+    shouldStopPolling: (d) => {
+      const s = resolveClientState(d);
+      return s === "cobrado" || s === "anulado";
+    },
+  });
+  const fetchTracking = useCallback(() => refetchTracking(), [refetchTracking]);
 
+  // Ofertas de upsell — fetch independiente del polling de tracking (no
+  // cambian tan seguido). Si falla, no rompe la página: el upsell es un
+  // extra, no el flujo principal.
+  const [upsellOffers, setUpsellOffers] = useState<UpsellOffer[]>([]);
   useEffect(() => {
-    const fetchTracking = async () => {
+    if (!orderNumber) return;
+    let cancelled = false;
+    (async () => {
       try {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}`,
+          `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}/upsell`,
         );
-
-        if (!res.ok) {
-          if (res.status === 404) {
-            setError("Pedido no encontrado");
-          } else {
-            setError("Error al cargar el pedido");
-          }
-          return;
-        }
-
+        if (!res.ok) return;
         const json = await res.json();
-        setData(json);
-      } catch (err) {
-        setError("Error de conexión");
-      } finally {
-        setLoading(false);
+        if (!cancelled) {
+          setUpsellOffers(Array.isArray(json) ? json : (json?.ofertas ?? []));
+        }
+      } catch {
+        // silencioso a propósito, ver comentario arriba
       }
+    })();
+    return () => {
+      cancelled = true;
     };
-
-    if (orderNumber) {
-      fetchTracking();
-    }
   }, [orderNumber]);
+
+  const handleUpsellAdded = (offerId: string) => {
+    setUpsellOffers((prev) => prev.filter((o) => o.id !== offerId));
+    fetchTracking();
+  };
+
+  const [payingMp, setPayingMp] = useState(false);
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [showYapePanel, setShowYapePanel] = useState(false);
+
+  // Endpoint asumido siguiendo la convención existente (`/tracking/:orderNumber`).
+  // No está confirmado con backend todavía. Ver docs/hito1-backend-requirements.md.
+  const handlePayWithMp = async () => {
+    setPaymentError(null);
+    setPayingMp(true);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}/mp/preferencia`,
+        { method: "POST" },
+      );
+
+      if (!res.ok) {
+        setPaymentError("No pudimos iniciar el pago. Intenta de nuevo.");
+        return;
+      }
+
+      const json = await res.json();
+      if (!json?.initPoint) {
+        setPaymentError("No pudimos iniciar el pago. Intenta de nuevo.");
+        return;
+      }
+
+      window.location.href = json.initPoint;
+    } catch {
+      setPaymentError("Error de conexión al iniciar el pago.");
+    } finally {
+      setPayingMp(false);
+    }
+  };
+
+  const [confirmingReceipt, setConfirmingReceipt] = useState(false);
+  const [receiptError, setReceiptError] = useState<string | null>(null);
+
+  const handleConfirmReceipt = async () => {
+    setReceiptError(null);
+    setConfirmingReceipt(true);
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}/confirmar-recepcion`,
+        { method: "POST" },
+      );
+      if (!res.ok) {
+        setReceiptError("No pudimos confirmar la recepción. Intenta de nuevo.");
+        return;
+      }
+      await fetchTracking();
+    } catch {
+      setReceiptError("Error de conexión al confirmar.");
+    } finally {
+      setConfirmingReceipt(false);
+    }
+  };
 
   /* Loading State */
   if (loading) {
@@ -185,8 +215,15 @@ export default function RastreoPage() {
     );
   }
 
-  const isDelivered = data.status === "ENTREGADO";
-  const isCancelled = data.status === "ANULADO";
+  const clientState = resolveClientState(data);
+  const isDelivered = clientState === "cobrado";
+  const isCancelled = clientState === "anulado";
+  const deliveryCode = data.deliveryCode?.code || data.shippingInfo?.shippingKey || null;
+  const upsellAntes = upsellOffers.filter((o) => o.showWhen === "antes" || o.showWhen === "ambos");
+  const upsellDespues = upsellOffers.filter((o) => o.showWhen === "despues" || o.showWhen === "ambos");
+  const customerAddress = [data.customer.district, data.customer.city, data.customer.province]
+    .filter(Boolean)
+    .join(", ") || "Tu dirección registrada";
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -402,34 +439,18 @@ export default function RastreoPage() {
                   </p>
                 </div>
               )}
-
-              {/* Clave — condicional según saldo */}
-              <div className="bg-white/5 rounded-2xl p-4 relative overflow-hidden">
-                <p className="text-white/50 text-xs mb-1">Clave de retiro</p>
-                {data.totals.pendingAmount <= 0 ? (
-                  <>
-                    <p className="text-green-300 font-mono font-bold text-2xl tracking-widest">
-                      {data.shippingInfo.shippingKey || "—"}
-                    </p>
-                    <p className="text-white/30 text-[10px] mt-1">Necesaria para retirar en agencia</p>
-                  </>
-                ) : (
-                  <>
-                    <p className="text-white font-mono font-bold text-2xl tracking-widest blur-sm select-none">
-                      {data.shippingInfo.shippingKey ? "●●●●" : "—"}
-                    </p>
-                    <div className="mt-2 flex items-start gap-1.5">
-                      <Lock className="h-3 w-3 text-amber-400 mt-0.5 flex-shrink-0" />
-                      <p className="text-amber-300 text-[11px] leading-snug">
-                        Para ver la clave debes saldar el total del pedido{" "}
-                        <span className="font-bold">(S/ {data.totals.pendingAmount.toFixed(2)} pendiente)</span>
-                      </p>
-                    </div>
-                  </>
-                )}
-              </div>
             </div>
           </div>
+        )}
+
+        {/* Elegir agencia Shalom (gate pre-despacho) */}
+        {clientState === "recojo" && (
+          <AgencyPicker
+            orderNumber={orderNumber}
+            province={data.customer.province}
+            city={data.customer.city}
+            onConfirmed={() => fetchTracking()}
+          />
         )}
 
         {/* Products */}
@@ -491,50 +512,172 @@ export default function RastreoPage() {
           </div>
         </div>
 
-        {/* Aviso de pago — solo si tiene saldo pendiente */}
-        {data.totals.pendingAmount > 0 && (
-        <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10 space-y-4">
-          <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 space-y-2">
-            <p className="text-amber-200 font-bold flex items-center gap-2">
-              <AlertCircle className="h-5 w-5" />
-              ADVERTENCIA DE SEGURIDAD Y RECOJO
+        {/* Cobro con Mercado Pago / Yape — solo en los estados donde
+            corresponde. Atados a clientState (no a pendingAmount>0 solo)
+            para que nunca se muestren en "camino"/"cobrado", donde ya se
+            despachó o entregó aunque quedara un saldo residual. */}
+        {clientState === "yape" && (
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-3xl p-6 text-center space-y-1">
+            <p className="text-amber-200 font-bold">
+              Tu comprobante de Yape está en revisión
             </p>
-            <p className="text-white/80 text-sm">
-              El paquete ya está en tránsito. Es obligatorio cancelar el saldo
-              pendiente para evitar que la mercadería sea retenida.
-            </p>
-            <p className="text-white/80 text-sm">
-              Según las políticas de transporte, si el paquete no es retirado en
-              el tiempo establecido, pasará a{' '}
-              <span className="font-bold text-red-400">
-                ZONA DE DESTRUCCIÓN / ABANDONO LEGAL
-              </span>
-              .
-            </p>
-            <p className="text-white/60 text-xs mt-2 italic">
-              IMPORTANTE:{' '}
-              {data.businessName || 'La empresa'} no se hace responsable por la
-              pérdida definitiva del producto, ni se realizarán reembolsos por
-              paquetes que pasen a destrucción debido a la falta de pago o
-              recojo del cliente.
+            <p className="text-white/60 text-sm">
+              El vendedor lo confirma en un máximo de 30 minutos y tu código se activa solo.
             </p>
           </div>
+        )}
 
-          <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6 text-center space-y-4">
-            <p className="text-blue-200 font-bold flex items-center justify-center gap-2">
-              <Clock className="h-5 w-5" />
-              ATENCIÓN: VALIDACIÓN DE PAGO
+        {clientState === "deuda" && (
+          <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10 space-y-4">
+            <div>
+              <p className="text-white/60 text-sm">Saldo pendiente</p>
+              <p className="text-amber-400 font-bold text-3xl">
+                S/ {data.totals.pendingAmount.toFixed(2)}
+              </p>
+            </div>
+            <p className="text-white/70 text-sm">
+              Paga tu saldo para <span className="font-semibold text-white">habilitar tu código de entrega</span> y
+              recibir tu pedido. Sin pago no sale de despacho.
             </p>
-            <p className="text-white/90">
-              El vendedor se contactará con usted a la brevedad para validar su
-              pago y coordinar la entrega definitiva.
+
+            <button
+              onClick={handlePayWithMp}
+              disabled={payingMp}
+              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 hover:to-sky-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl transition-colors"
+            >
+              {payingMp ? (
+                <>
+                  <span className="h-4 w-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                  Redirigiendo a Mercado Pago...
+                </>
+              ) : (
+                <>
+                  Pagar S/ {data.totals.pendingAmount.toFixed(2)} con
+                  <span className="bg-white text-sky-600 font-extrabold text-xs px-2 py-1 rounded-md">
+                    mercadopago
+                  </span>
+                </>
+              )}
+            </button>
+
+            {paymentError && (
+              <p className="text-red-400 text-sm text-center">{paymentError}</p>
+            )}
+
+            <p className="text-white/40 text-xs text-center">
+              Tarjeta, Yape y transferencia · procesado por Mercado Pago
             </p>
-            <p className="text-white/70 text-sm italic">
-              Por favor, tenga al alcance su comprobante de pago para agilizar el
-              proceso cuando sea contactado.
+
+            <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-3 flex items-start gap-2">
+              <Lock className="h-4 w-4 text-purple-300 mt-0.5 flex-shrink-0" />
+              <p className="text-purple-200 text-xs leading-snug">
+                Pagas en línea con tarjeta o Yape (dentro de Mercado Pago). El
+                repartidor no cobra efectivo y tu código se activa al instante.
+              </p>
+            </div>
+
+            {/* Yape directo — opcional, requiere flag + número del negocio */}
+            {data.yapeDirectoEnabled && data.yapeDirectNumber && (
+              <>
+                <button
+                  onClick={() => setShowYapePanel((v) => !v)}
+                  className="w-full text-center text-white/60 text-xs underline underline-offset-2"
+                >
+                  {showYapePanel ? "Ocultar pago por Yape" : "¿Prefieres pagar por Yape?"}
+                </button>
+                {showYapePanel && (
+                  <YapePanel
+                    orderNumber={orderNumber}
+                    amount={data.totals.pendingAmount}
+                    yapeNumber={data.yapeDirectNumber}
+                    businessName={data.businessName}
+                    qrImageUrl={data.yapeQrImageUrl}
+                    onSubmitted={() => fetchTracking()}
+                  />
+                )}
+              </>
+            )}
+
+            <p className="text-white/30 text-[10px] text-center leading-snug">
+              Si el saldo no se paga y el pedido no se retira dentro del plazo del
+              courier, puede pasar a destrucción/abandono según sus políticas de
+              transporte. {data.businessName || "La empresa"} no se hace responsable
+              por pérdidas ni reembolsos en ese caso.
             </p>
           </div>
-        </div>
+        )}
+
+        {/* Upsell antes del pago */}
+        {clientState === "deuda" && (
+          <UpsellList orderNumber={orderNumber} offers={upsellAntes} onAdded={handleUpsellAdded} />
+        )}
+
+        {/* Código de entrega + descargas — una vez pagado */}
+        {(clientState === "pagado" || clientState === "camino" || clientState === "cobrado") &&
+          deliveryCode && (
+            <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-6 space-y-4">
+              <h3 className="text-green-300 font-semibold flex items-center gap-2">
+                <ShieldCheck className="h-5 w-5" />
+                Código de entrega activo
+              </h3>
+              <div className="bg-black/20 border border-dashed border-green-500/30 rounded-2xl p-5 text-center">
+                <p className="text-white/40 text-[10px] uppercase tracking-widest">
+                  Muéstralo al recibir tu pedido
+                </p>
+                <p className="text-green-300 font-mono font-extrabold text-4xl tracking-[0.5em] mt-1">
+                  {deliveryCode}
+                </p>
+                {data.shippingInfo?.shalomDestinationAgency && (
+                  <p className="text-white/50 text-xs mt-2">
+                    {data.shippingInfo.shalomDestinationAgency}
+                  </p>
+                )}
+              </div>
+              <div className="flex gap-3">
+                <a
+                  href={`${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}/constancia.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white text-xs font-semibold py-3 rounded-xl hover:bg-white/10"
+                >
+                  <Download className="h-4 w-4" /> Constancia de pago
+                </a>
+                <a
+                  href={`${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}/guia.pdf`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex-1 flex items-center justify-center gap-2 bg-white/5 border border-white/10 text-white text-xs font-semibold py-3 rounded-xl hover:bg-white/10"
+                >
+                  <Download className="h-4 w-4" /> Guía de envío
+                </a>
+              </div>
+            </div>
+          )}
+
+        {/* Upsell después del pago, antes del despacho */}
+        {clientState === "pagado" && (
+          <UpsellList orderNumber={orderNumber} offers={upsellDespues} onAdded={handleUpsellAdded} />
+        )}
+
+        {/* Confirmar recepción */}
+        {clientState === "camino" && (
+          <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-6 border border-white/10 text-center space-y-3">
+            <p className="text-white font-semibold">¿Ya recibiste tu pedido?</p>
+            <p className="text-white/50 text-xs">Confírmalo para cerrar tu orden.</p>
+            <button
+              onClick={handleConfirmReceipt}
+              disabled={confirmingReceipt}
+              className="w-full border border-green-500/40 text-green-300 font-bold py-3 rounded-2xl disabled:opacity-50"
+            >
+              {confirmingReceipt ? "Confirmando..." : "✓ Confirmar que recibí mi pedido"}
+            </button>
+            {receiptError && <p className="text-red-400 text-sm">{receiptError}</p>}
+          </div>
+        )}
+
+        {/* Recompra */}
+        {clientState === "cobrado" && (
+          <RecompraFlow orderNumber={orderNumber} defaultAddress={customerAddress} />
         )}
 
         {/* Footer */}

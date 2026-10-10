@@ -32,7 +32,21 @@ export function EndCta({ title, desc }: EndCtaProps) {
 }
 
 export function Foot() {
-  return <footer className="foot">Centro de Ayuda POWIP · Hecho para los negocios que venden con POWIP</footer>;
+  return (
+    <footer className="foot">
+      <p>Centro de Ayuda POWIP · Hecho para los negocios que venden con POWIP</p>
+      <div className="foot-legal">
+        <p>POWIP TECHNOLOGY SAC · RUC 20616141971 · Av. Venezuela 625, Oficina 918, Breña, Lima, Perú</p>
+        <p>
+          Soporte: <a href="mailto:hola@powip.lat">hola@powip.lat</a>
+        </p>
+        <p>
+          <a href="/terminos">Términos y condiciones</a> · <a href="/privacidad">Política de privacidad</a> ·{' '}
+          <a href="/preguntas-frecuentes">Preguntas frecuentes</a>
+        </p>
+      </div>
+    </footer>
+  );
 }
 
 export function Crumb({ name }: { name: string }) {
