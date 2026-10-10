@@ -276,6 +276,8 @@
 
 .hc .intro { font-size: 17px; color: var(--ink-2); margin: 14px 0 0; max-width: 640px; }
 .hc footer.foot { border-top: 1px solid var(--line); padding: 24px; text-align: center; color: var(--muted); font-size: 13px; }
+.hc footer.foot .foot-legal { margin-top: 14px; display: flex; flex-direction: column; gap: 4px; font-size: 12.5px; line-height: 1.5; }
+.hc footer.foot .foot-legal a:hover { color: var(--brand); text-decoration: underline; }
 
 .hc :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; border-radius: 6px; }
 

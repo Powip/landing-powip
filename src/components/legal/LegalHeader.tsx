@@ -10,7 +10,7 @@ export default function LegalHeader({
 }: {
   eyebrow: string;
   title: string;
-  subtitle: string;
+  subtitle?: string;
   version: string;
   date: string;
   intro?: React.ReactNode;
@@ -24,7 +24,7 @@ export default function LegalHeader({
         <h1 className="mt-4 text-[#4F3A96] font-bold text-3xl md:text-[44px] leading-tight tracking-tight">
           {title}
         </h1>
-        <p className="mt-2 text-[#4a4664] text-base md:text-lg">{subtitle}</p>
+        {subtitle && <p className="mt-2 text-[#4a4664] text-base md:text-lg">{subtitle}</p>}
         <p className="mt-3 text-[#67637E] text-[13.5px] font-medium">
           Versión {version} · {date}
         </p>

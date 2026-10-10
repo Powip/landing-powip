@@ -131,8 +131,12 @@ const CATEGORIES: FaqCategory[] = [
         a: (
           <>
             <p>
-              POWIP ofrece suscripción mensual y anual. La suscripción anual incluye un descuento sobre el
-              precio mensual. El cobro se realiza al inicio de cada período.
+              Los precios publicados en www.powip.lat corresponden a la suscripción mensual. El cobro se realiza
+              al inicio de cada período.
+            </p>
+            <p>
+              Si te interesa la modalidad anual, escríbenos a hola@powip.lat y te informaremos las condiciones
+              vigentes.
             </p>
             <p>Para el plan Enterprise, las condiciones de pago se acuerdan de forma personalizada con nuestro equipo comercial.</p>
           </>
@@ -253,6 +257,10 @@ const CATEGORIES: FaqCategory[] = [
           </>
         ),
       },
+      {
+        q: '¿Puedo usar POWIP con mi tienda Shopify?',
+        a: <p>Sí. Te conectamos tu tienda en la configuración inicial y tus pedidos llegan solos a POWIP.</p>,
+      },
     ],
   },
   {
@@ -296,6 +304,32 @@ const CATEGORIES: FaqCategory[] = [
         ),
       },
       {
+        q: '¿Quién es dueño de los datos de mis compradores?',
+        a: (
+          <p>
+            Tú. POWIP los trata solo por tu cuenta y para gestionar tus pedidos, como encargado del tratamiento
+            según la Ley 29733. No los vendemos ni los usamos para otros fines.
+          </p>
+        ),
+      },
+      {
+        q: '¿Con quién comparte POWIP los datos de mis compradores?',
+        a: (
+          <p>
+            Solo con el courier que eliges para cada envío y con los proveedores tecnológicos que listamos en
+            nuestra{' '}
+            <a href="/privacidad" className="text-[#4F3A96] font-semibold hover:underline">
+              Política de Privacidad
+            </a>
+            .
+          </p>
+        ),
+      },
+      {
+        q: '¿Qué pasa con mis datos si dejo de usar POWIP?',
+        a: <p>Puedes descargarlos y los eliminamos de forma segura en un máximo de 30 días.</p>,
+      },
+      {
         q: '¿POWIP es responsable por lo que ocurra en mis canales de venta o con mis clientes?',
         a: (
           <>
@@ -322,11 +356,11 @@ const CATEGORIES: FaqCategory[] = [
             <p>Al contratar POWIP, el Merchant acepta y suscribe el siguiente marco legal:</p>
             <ul className="list-disc pl-5 flex flex-col gap-1 marker:text-[#1E8C86]">
               <li>
-                <b>Términos y Condiciones v2.1:</b> define las reglas de uso de la plataforma, responsabilidades
+                <b>Términos y Condiciones v2.2:</b> define las reglas de uso de la plataforma, responsabilidades
                 y condiciones generales del servicio.
               </li>
               <li>
-                <b>Política de Privacidad v2.1:</b> regula el tratamiento de datos personales conforme a la Ley
+                <b>Política de Privacidad v2.2:</b> regula el tratamiento de datos personales conforme a la Ley
                 N.° 29733 (Perú).
               </li>
               <li>
@@ -502,7 +536,7 @@ export default function PreguntasFrecuentesPage() {
         title="Preguntas Frecuentes"
         subtitle="Para Merchants y equipo comercial de POWIP"
         version="1.1"
-        date="24 de mayo de 2026"
+        date="9 de octubre de 2026"
         intro={
           <>
             Este documento reúne las preguntas más frecuentes de Merchants y del equipo comercial de POWIP. Para
@@ -559,7 +593,7 @@ export default function PreguntasFrecuentesPage() {
           — respondemos en menos de 24 horas hábiles.
         </p>
         <p className="max-w-3xl mx-auto pt-3 text-center text-[12.5px] text-[#9895ad]">
-          POWIP TECHNOLOGY SAC · Preguntas Frecuentes · 24 de mayo de 2026
+          POWIP TECHNOLOGY SAC · Preguntas Frecuentes · 9 de octubre de 2026
         </p>
       </div>
 

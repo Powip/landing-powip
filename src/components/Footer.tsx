@@ -55,26 +55,7 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Column 2: Policies */}
-      <div className="flex flex-col items-center md:items-start gap-4 w-full md:w-auto pt-8 md:pt-0 border-t border-gray-100 md:border-0">
-        <h4 className="text-[#333333] font-bold text-base mb-2">
-          Políticas y condiciones
-        </h4>
-        <Link
-          href="/privacidad"
-          className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors"
-        >
-          Política de privacidad
-        </Link>
-        <Link
-          href="/terminos"
-          className="text-[#666666] text-sm hover:text-[#4F3A96] transition-colors"
-        >
-          Términos y condiciones
-        </Link>
-      </div>
-
-      {/* Column 3: Resources */}
+      {/* Column 2: Resources */}
       <div className="flex flex-col items-center md:items-start gap-4 w-full md:w-auto pt-8 md:pt-0 border-t border-gray-100 md:border-0">
         <h4 className="text-[#333333] font-bold text-base mb-2">
           Recursos adicionales
@@ -93,7 +74,7 @@ export default function Footer() {
         </Link>
       </div>
 
-      {/* Column 4: Contact */}
+      {/* Column 3: Contact */}
       <div className="flex flex-col items-center md:items-start gap-4 w-full md:w-auto pt-8 md:pt-0 border-t border-gray-100 md:border-0">
         <h4 className="text-[#333333] font-bold text-base mb-2">Contacto</h4>
         <a
@@ -110,6 +91,29 @@ export default function Footer() {
         >
           Whatsapp
         </a>
+      </div>
+
+      <div className="w-full pt-8 border-t border-gray-100 flex flex-col items-center md:items-start gap-2 text-[13px] text-[#666666] leading-relaxed">
+        <p>POWIP TECHNOLOGY SAC · RUC 20616141971 · Av. Venezuela 625, Oficina 918, Breña, Lima, Perú</p>
+        <p>
+          Soporte:{" "}
+          <a href="mailto:hola@powip.lat" className="hover:text-[#4F3A96] transition-colors">
+            hola@powip.lat
+          </a>
+        </p>
+        <p>
+          <Link href="/terminos" className="hover:text-[#4F3A96] transition-colors">
+            Términos y condiciones
+          </Link>
+          {" · "}
+          <Link href="/privacidad" className="hover:text-[#4F3A96] transition-colors">
+            Política de privacidad
+          </Link>
+          {" · "}
+          <Link href="/preguntas-frecuentes" className="hover:text-[#4F3A96] transition-colors">
+            Preguntas frecuentes
+          </Link>
+        </p>
       </div>
     </footer>
   );

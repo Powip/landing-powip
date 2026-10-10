@@ -1,5 +1,5 @@
 'use client';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import Link from 'next/link';
 import type { PartnerData } from '@/data/partners';
 
@@ -7,9 +7,7 @@ const plans = [
   {
     name: 'BASIC',
     monthly: 99,
-    annual: 799,
     oldMonthly: 149,
-    oldAnnual: 1188,
     features: ['Gestión de pedidos', 'Inventario básico', 'Integración con courier', 'Soporte por chat'],
     orders: 'Hasta 999',
     highlighted: false,
@@ -17,9 +15,7 @@ const plans = [
   {
     name: 'STANDARD',
     monthly: 189,
-    annual: 1399,
     oldMonthly: 239,
-    oldAnnual: 2268,
     features: ['Todo lo de BASIC', 'Inventario avanzado', 'Reportes y métricas', 'Automatizaciones', 'Soporte prioritario'],
     orders: 'Hasta 1999',
     highlighted: true,
@@ -27,9 +23,7 @@ const plans = [
   {
     name: 'FULL',
     monthly: 269,
-    annual: 1999,
     oldMonthly: 299,
-    oldAnnual: 3228,
     features: ['Todo lo de STANDARD', 'Múltiples almacenes', 'Liquidaciones COD', 'Usuarios y permisos', 'Soporte premium'],
     orders: 'Hasta 5999',
     highlighted: false,
@@ -37,7 +31,6 @@ const plans = [
 ];
 
 export default function PartnersPricing({ partner, signupHref }: { partner: PartnerData; signupHref: string }) {
-  const [isAnnual, setIsAnnual] = useState(false);
   const scrollerRef = useRef<HTMLDivElement>(null);
   const standardCardRef = useRef<HTMLDivElement>(null);
 
@@ -66,23 +59,6 @@ export default function PartnersPricing({ partner, signupHref }: { partner: Part
           🎁 Por venir de <b>{partner.offerPartnerName}</b>: pagas tu 1er mes normal y tu <b>2da mensualidad al 50%</b>. Se aplica solo al crear tu cuenta desde aquí.
         </div>
 
-        <div role="group" aria-label="Ciclo de facturación" className="inline-flex bg-[#eef0f8] rounded-full p-1 gap-1">
-          <button
-            onClick={() => setIsAnnual(false)}
-            aria-pressed={!isAnnual}
-            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${!isAnnual ? 'bg-[#4F3A96] text-white' : 'text-[#3a2389]'}`}
-          >
-            Mensual
-          </button>
-          <button
-            onClick={() => setIsAnnual(true)}
-            aria-pressed={isAnnual}
-            className={`px-6 py-2.5 rounded-full font-bold text-sm transition-all ${isAnnual ? 'bg-[#4F3A96] text-white' : 'text-[#3a2389]'}`}
-          >
-            Anual −30%
-          </button>
-        </div>
-
         <div
           ref={scrollerRef}
           role="region"
@@ -91,8 +67,6 @@ export default function PartnersPricing({ partner, signupHref }: { partner: Part
           className="flex sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full items-stretch overflow-x-auto sm:overflow-visible snap-x snap-mandatory no-scrollbar -mx-6 px-6 pt-6 pb-8 sm:mx-0 sm:px-0 sm:pt-0 sm:pb-0 mask-[linear-gradient(90deg,#000_92%,transparent)] sm:mask-none"
         >
           {plans.map((plan) => {
-            const price = isAnnual ? plan.annual : plan.monthly;
-            const oldPrice = isAnnual ? plan.oldAnnual : plan.oldMonthly;
             return (
               <div
                 key={plan.name}
@@ -109,10 +83,10 @@ export default function PartnersPricing({ partner, signupHref }: { partner: Part
                   </span>
                 )}
                 <div className={`font-extrabold text-[19px] tracking-wide ${plan.highlighted ? 'text-white' : 'text-[#3a2389]'}`}>{plan.name}</div>
-                <div className={`mt-3.5 text-[15px] line-through opacity-60 ${plan.highlighted ? 'text-white' : 'text-gray-400'}`}>S/ {oldPrice}</div>
+                <div className={`mt-3.5 text-[15px] line-through opacity-60 ${plan.highlighted ? 'text-white' : 'text-gray-400'}`}>S/ {plan.oldMonthly}</div>
                 <div className={`text-[42px] font-black leading-none tracking-tight ${plan.highlighted ? 'text-white' : 'text-[#1B1730]'}`}>
-                  S/{price}
-                  <small className="text-[15px] font-semibold opacity-75"> {isAnnual ? '/año' : '/mes'}</small>
+                  S/{plan.monthly}
+                  <small className="text-[15px] font-semibold opacity-75"> /mes</small>
                 </div>
                 <ul className="mt-4.5 mt-[18px] mb-4.5 mb-[18px] text-[13.5px] flex flex-col gap-2 text-left">
                   {plan.features.map((f) => (

@@ -1,6 +1,6 @@
 import { ChevronRight } from 'lucide-react';
 import { HELP_DATA, HOME_VIDEO_ID, QUICK_PAGES } from '../data';
-import { EndCta } from '../CtaBlock';
+import { EndCta, Foot } from '../CtaBlock';
 import YouTubeEmbed from '../YouTubeEmbed';
 
 export default function HomePage() {
@@ -49,6 +49,7 @@ export default function HomePage() {
           desc="Escríbenos por WhatsApp o agenda una llamada corta y te ayudamos a configurar tu operación."
         />
       </div>
+      <Foot />
     </>
   );
 }
