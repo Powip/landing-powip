@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import type { TrackingData, UpsellOffer } from "@/components/rastreo/types";
 import { resolveClientState } from "@/components/rastreo/clientState";
+import { getVisibleDeliveryCode, hasConfirmedFullPayment, shouldStopTrackingPolling } from "@/components/rastreo/deliveryCode";
 import AgencyPicker from "@/components/rastreo/AgencyPicker";
 import YapePanel from "@/components/rastreo/YapePanel";
 import UpsellList from "@/components/rastreo/UpsellList";
@@ -71,8 +72,7 @@ export default function RastreoPage() {
   const params = useParams();
   const orderNumber = params.orderNumber as string;
 
-  // Deja de pollear en estados terminales (entregado/anulado) — ya no hay
-  // nada que el backend vaya a cambiar solo ahí.
+  // Anulado es terminal; entregado con deuda sigue consultando el pago.
   const {
     data,
     loading,
@@ -83,12 +83,11 @@ export default function RastreoPage() {
       ? `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}`
       : null,
     intervalMs: 30000,
+    cache: "no-store",
+    discardDataOnError: true,
     notFoundMessage: "Pedido no encontrado",
     genericErrorMessage: "Error al cargar el pedido",
-    shouldStopPolling: (d) => {
-      const s = resolveClientState(d);
-      return s === "cobrado" || s === "anulado";
-    },
+    shouldStopPolling: shouldStopTrackingPolling,
   });
   const fetchTracking = useCallback(() => refetchTracking(), [refetchTracking]);
 
@@ -218,7 +217,9 @@ export default function RastreoPage() {
   const clientState = resolveClientState(data);
   const isDelivered = clientState === "cobrado";
   const isCancelled = clientState === "anulado";
-  const deliveryCode = data.deliveryCode?.code || data.shippingInfo?.shippingKey || null;
+  const deliveryCode = getVisibleDeliveryCode(data);
+  const deliveryCodeBlocked = !isCancelled && !hasConfirmedFullPayment(data) &&
+    Boolean(data.deliveryCode || data.shippingInfo);
   const upsellAntes = upsellOffers.filter((o) => o.showWhen === "antes" || o.showWhen === "ambos");
   const upsellDespues = upsellOffers.filter((o) => o.showWhen === "despues" || o.showWhen === "ambos");
   const customerAddress = [data.customer.district, data.customer.city, data.customer.province]
@@ -612,7 +613,19 @@ export default function RastreoPage() {
           <UpsellList orderNumber={orderNumber} offers={upsellAntes} onAdded={handleUpsellAdded} />
         )}
 
-        {/* Código de entrega + descargas — una vez pagado */}
+        {deliveryCodeBlocked && (
+          <div className="bg-amber-500/10 border border-amber-500/20 rounded-3xl p-6 flex items-start gap-3">
+            <Lock className="h-5 w-5 text-amber-300 mt-0.5 flex-shrink-0" />
+            <div>
+              <p className="text-amber-200 font-semibold">Código de entrega bloqueado</p>
+              <p className="text-white/60 text-sm mt-1">
+                Tu código se habilita cuando el pago total del pedido esté confirmado.
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Código y descargas requieren saldo válido, aunque el pedido esté en camino. */}
         {(clientState === "pagado" || clientState === "camino" || clientState === "cobrado") &&
           deliveryCode && (
             <div className="bg-green-500/10 border border-green-500/20 rounded-3xl p-6 space-y-4">
