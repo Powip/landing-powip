@@ -8,6 +8,10 @@ interface UsePollingResourceOptions<T> {
   intervalMs: number;
   notFoundMessage: string;
   genericErrorMessage: string;
+  cache?: RequestCache;
+  // Opt-in for resources carrying secrets: a failed refresh must not keep
+  // rendering a previously authorized value. Existing callers keep their UX.
+  discardDataOnError?: boolean;
   // Si devuelve true con el último dato recibido, deja de pollear (ej. guía
   // cerrada, pedido entregado/anulado) — no tiene sentido seguir pegándole
   // al backend por algo que ya no va a cambiar.
@@ -38,6 +42,8 @@ export function usePollingResource<T>({
   notFoundMessage,
   genericErrorMessage,
   shouldStopPolling,
+  cache,
+  discardDataOnError = false,
 }: UsePollingResourceOptions<T>): UsePollingResourceResult<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
@@ -63,12 +69,16 @@ export function usePollingResource<T>({
       if (!url) return;
       const requestId = ++requestIdRef.current;
       try {
-        const res = await fetch(url);
+        const res = await fetch(url, cache ? { cache } : undefined);
 
         if (!isMountedRef.current || requestId !== requestIdRef.current) return;
 
         if (!res.ok) {
-          if (isInitial) {
+          if (discardDataOnError) {
+            dataRef.current = null;
+            setData(null);
+          }
+          if (isInitial || discardDataOnError) {
             setError(res.status === 404 ? notFoundMessage : genericErrorMessage);
           }
           return;
@@ -77,10 +87,14 @@ export function usePollingResource<T>({
         const json = (await res.json()) as T;
         if (!isMountedRef.current || requestId !== requestIdRef.current) return;
         setData(json);
-        if (isInitial) setError(null);
+        if (isInitial || discardDataOnError) setError(null);
       } catch {
-        if (isMountedRef.current && requestId === requestIdRef.current && isInitial) {
-          setError(genericErrorMessage);
+        if (isMountedRef.current && requestId === requestIdRef.current) {
+          if (discardDataOnError) {
+            dataRef.current = null;
+            setData(null);
+          }
+          if (isInitial || discardDataOnError) setError(genericErrorMessage);
         }
       } finally {
         if (isMountedRef.current && requestId === requestIdRef.current && isInitial) {
@@ -88,11 +102,17 @@ export function usePollingResource<T>({
         }
       }
     },
-    [url, notFoundMessage, genericErrorMessage],
+    [url, notFoundMessage, genericErrorMessage, cache, discardDataOnError],
   );
 
   useEffect(() => {
     if (!url) return;
+    if (discardDataOnError) {
+      dataRef.current = null;
+      setData(null);
+      setLoading(true);
+      setError(null);
+    }
     fetchResource(true);
     const interval = setInterval(() => {
       if (dataRef.current && shouldStopPolling?.(dataRef.current)) {
@@ -105,7 +125,7 @@ export function usePollingResource<T>({
     // shouldStopPolling se lee vía ref a propósito: no debe reiniciar el
     // interval cada vez que cambia (normalmente es una función inline).
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url, intervalMs, fetchResource]);
+  }, [url, intervalMs, fetchResource, discardDataOnError]);
 
   const refetch = useCallback(() => {
     fetchResource(false);
