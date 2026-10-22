@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test:tracking-key": "node --test tests/deliveryCode.test.mjs tests/pollingSecrets.test.mjs tests/trackingPageRender.test.mjs"
+    "test:tracking-key": "node --test tests/deliveryCode.test.mjs tests/pollingSecrets.test.mjs tests/trackingPageRender.test.mjs",
+    "test:tracking-payment": "node --test tests/trackingPaymentAvailability.test.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.99.2",

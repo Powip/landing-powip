@@ -117,6 +117,28 @@ salvo el catálogo de agencias, que es transversal a un pedido.
 
 ### 2.1 Crear preferencia de pago Mercado Pago
 
+**Estado verificado el 21/10/2026:** esta ruta no está implementada en
+`ms-ventas`. La landing no debe ofrecer un cobro que siempre falla. Como
+mitigación, el botón se habilita únicamente cuando el tracking incluye:
+
+```json
+{ "paymentCapabilities": { "mercadoPago": true } }
+```
+
+Si el campo falta, es `null` o no contiene el booleano `true`, la página
+muestra «Pago en línea no disponible» y permite contactar a la tienda si
+el tracking contiene su teléfono. Un 404, 405 o 501 de la preferencia
+también retira el botón durante esa visita. El saldo y las reglas que
+protegen el código de entrega siguen vigentes.
+
+Esta capacidad es un contrato de disponibilidad, no una autorización de
+pago. El backend debe publicarla solo después de resolver la cuenta
+receptora de la tienda y completar la creación idempotente de preferencias
+por saldo y la confirmación verificada de pagos. El retorno del navegador
+no confirma un pago. Esta mitigación no implementa ni activa el cobro real.
+Cada negocio debe autorizar su propia cuenta mediante OAuth; los cobros
+deben conservar ese collector y no usar una cuenta central como respaldo.
+
 ```
 POST /tracking/:orderNumber/mp/preferencia
 ```

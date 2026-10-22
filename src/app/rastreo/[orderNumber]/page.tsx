@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "next/navigation";
 import {
   Package,
@@ -124,18 +124,40 @@ export default function RastreoPage() {
 
   const [payingMp, setPayingMp] = useState(false);
   const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [mpUnavailable, setMpUnavailable] = useState(false);
   const [showYapePanel, setShowYapePanel] = useState(false);
+  const paymentRequest = useRef<AbortController | null>(null);
+  const canPayWithMp = data?.paymentCapabilities?.mercadoPago === true && !mpUnavailable;
 
-  // Endpoint asumido siguiendo la convención existente (`/tracking/:orderNumber`).
-  // No está confirmado con backend todavía. Ver docs/hito1-backend-requirements.md.
+  useEffect(() => {
+    setPayingMp(false);
+    setMpUnavailable(false);
+    setPaymentError(null);
+    return () => {
+      paymentRequest.current?.abort();
+      paymentRequest.current = null;
+    };
+  }, [orderNumber]);
+
+  // Do not call the preference route until the backend advertises support.
   const handlePayWithMp = async () => {
+    if (!canPayWithMp || paymentRequest.current || error || !data || resolveClientState(data) !== "deuda") return;
+    const request = new AbortController();
+    paymentRequest.current = request;
+    const isCurrentRequest = () => paymentRequest.current === request && !request.signal.aborted;
     setPaymentError(null);
     setPayingMp(true);
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_VENTAS}/tracking/${orderNumber}/mp/preferencia`,
-        { method: "POST" },
+        { method: "POST", signal: request.signal },
       );
+      if (!isCurrentRequest()) return;
+
+      if (res.status === 404 || res.status === 405 || res.status === 501) {
+        setMpUnavailable(true);
+        return;
+      }
 
       if (!res.ok) {
         setPaymentError("No pudimos iniciar el pago. Intenta de nuevo.");
@@ -143,6 +165,7 @@ export default function RastreoPage() {
       }
 
       const json = await res.json();
+      if (!isCurrentRequest()) return;
       if (!json?.initPoint) {
         setPaymentError("No pudimos iniciar el pago. Intenta de nuevo.");
         return;
@@ -150,9 +173,12 @@ export default function RastreoPage() {
 
       window.location.href = json.initPoint;
     } catch {
-      setPaymentError("Error de conexión al iniciar el pago.");
+      if (isCurrentRequest()) setPaymentError("Error de conexión al iniciar el pago.");
     } finally {
-      setPayingMp(false);
+      if (isCurrentRequest()) {
+        paymentRequest.current = null;
+        setPayingMp(false);
+      }
     }
   };
 
@@ -225,6 +251,10 @@ export default function RastreoPage() {
   const customerAddress = [data.customer.district, data.customer.city, data.customer.province]
     .filter(Boolean)
     .join(", ") || "Tu dirección registrada";
+  const phoneDigits = data.businessPhone?.replace(/\D/g, "") || "";
+  const businessPhone = /^\d{7,15}$/.test(phoneDigits)
+    ? `${data.businessPhone?.trim().startsWith("+") ? "+" : ""}${phoneDigits}`
+    : null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -541,41 +571,61 @@ export default function RastreoPage() {
               recibir tu pedido. Sin pago no sale de despacho.
             </p>
 
-            <button
-              onClick={handlePayWithMp}
-              disabled={payingMp}
-              className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 hover:to-sky-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl transition-colors"
-            >
-              {payingMp ? (
-                <>
-                  <span className="h-4 w-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
-                  Redirigiendo a Mercado Pago...
-                </>
-              ) : (
-                <>
-                  Pagar S/ {data.totals.pendingAmount.toFixed(2)} con
-                  <span className="bg-white text-sky-600 font-extrabold text-xs px-2 py-1 rounded-md">
-                    mercadopago
-                  </span>
-                </>
-              )}
-            </button>
+            {canPayWithMp ? (
+              <>
+                <button
+                  onClick={handlePayWithMp}
+                  disabled={payingMp}
+                  className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-400 hover:to-sky-500 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-4 rounded-2xl transition-colors"
+                >
+                  {payingMp ? (
+                    <>
+                      <span className="h-4 w-4 rounded-full border-2 border-white/40 border-t-white animate-spin" />
+                      Redirigiendo a Mercado Pago...
+                    </>
+                  ) : (
+                    <>
+                      Pagar S/ {data.totals.pendingAmount.toFixed(2)} con
+                      <span className="bg-white text-sky-600 font-extrabold text-xs px-2 py-1 rounded-md">
+                        mercadopago
+                      </span>
+                    </>
+                  )}
+                </button>
 
-            {paymentError && (
-              <p className="text-red-400 text-sm text-center">{paymentError}</p>
+                {paymentError && (
+                  <p className="text-red-400 text-sm text-center">{paymentError}</p>
+                )}
+
+                <p className="text-white/40 text-xs text-center">
+                  Tarjeta, Yape y transferencia · procesado por Mercado Pago
+                </p>
+
+                <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-3 flex items-start gap-2">
+                  <Lock className="h-4 w-4 text-purple-300 mt-0.5 flex-shrink-0" />
+                  <p className="text-purple-200 text-xs leading-snug">
+                    Pagas en línea con tarjeta o Yape (dentro de Mercado Pago). El
+                    repartidor no cobra efectivo y tu código se activa al instante.
+                  </p>
+                </div>
+              </>
+            ) : (
+              <div className="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 space-y-3" role="status">
+                <p className="text-amber-200 font-semibold">Pago en línea no disponible</p>
+                <p className="text-white/70 text-sm">
+                  Contacta a {data.businessName || "la tienda"} para coordinar el pago de tu pedido.
+                  Tu saldo y tu código de entrega se actualizarán cuando el pago esté confirmado.
+                </p>
+                {businessPhone && (
+                  <a
+                    href={`tel:${businessPhone}`}
+                    className="inline-flex items-center justify-center border border-amber-400/40 text-amber-200 font-semibold py-2 px-4 rounded-xl hover:bg-amber-500/10"
+                  >
+                    Contactar a la tienda
+                  </a>
+                )}
+              </div>
             )}
-
-            <p className="text-white/40 text-xs text-center">
-              Tarjeta, Yape y transferencia · procesado por Mercado Pago
-            </p>
-
-            <div className="bg-purple-500/10 border border-purple-500/20 rounded-xl p-3 flex items-start gap-2">
-              <Lock className="h-4 w-4 text-purple-300 mt-0.5 flex-shrink-0" />
-              <p className="text-purple-200 text-xs leading-snug">
-                Pagas en línea con tarjeta o Yape (dentro de Mercado Pago). El
-                repartidor no cobra efectivo y tu código se activa al instante.
-              </p>
-            </div>
 
             {/* Yape directo — opcional, requiere flag + número del negocio */}
             {data.yapeDirectoEnabled && data.yapeDirectNumber && (

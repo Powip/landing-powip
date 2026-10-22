@@ -39,6 +39,11 @@ export interface TrackingData {
   courier?: string | null;
   businessName?: string;
   businessPhone?: string | null;
+  // Only the backend can confirm that this order has a working payment flow.
+  // Older responses omit this field and must not offer an unimplemented checkout.
+  paymentCapabilities?: {
+    mercadoPago?: boolean;
+  } | null;
   shippingInfo?: {
     shippingKey?: string | null;
     shippingCode?: string | null;
