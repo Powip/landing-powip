@@ -518,6 +518,17 @@ export default function RastreoPage() {
             ))}
           </div>
 
+          {data.customerNotes?.trim() && (
+            <div className="mt-4 pt-4 border-t border-white/10">
+              <h4 className="text-white font-semibold mb-2">
+                Comentarios del pedido
+              </h4>
+              <p className="text-white/70 text-sm whitespace-pre-wrap [overflow-wrap:anywhere]">
+                {data.customerNotes}
+              </p>
+            </div>
+          )}
+
           {/* Totals */}
           <div className="mt-4 pt-4 border-t border-white/10 space-y-2">
             <div className="flex justify-between text-white">

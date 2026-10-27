@@ -25,6 +25,7 @@ export interface TrackingData {
     province?: string;
   };
   items: TrackingItem[];
+  customerNotes?: string | null;
   totals: {
     grandTotal: number;
     totalPaid: number;
