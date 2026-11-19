@@ -1,26 +1,20 @@
 import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
 import ProblemsSection from "@/components/ProblemsSection";
-import StepsSection from "@/components/StepsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import PricingSection from "@/components/PricingSection";
 import BottomCTA from "@/components/BottomCTA";
-import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
-import LandingRibbon from "@/components/landing/LandingRibbon";
+import LandingHeroVideo from "@/components/landing/LandingHeroVideo";
 import LandingMarquee from "@/components/landing/LandingMarquee";
-import LandingPersonas from "@/components/landing/LandingPersonas";
-import LandingEcosystem from "@/components/landing/LandingEcosystem";
-import LandingFeatureRows from "@/components/landing/LandingFeatureRows";
+import LandingChange from "@/components/landing/LandingChange";
+import LandingProof from "@/components/landing/LandingProof";
 import LandingStatsBand from "@/components/landing/LandingStatsBand";
-import LandingBento from "@/components/landing/LandingBento";
-import LandingIntegrationsGrid from "@/components/landing/LandingIntegrationsGrid";
-import LandingVideo from "@/components/landing/LandingVideo";
-import LandingCompare from "@/components/landing/LandingCompare";
+import LandingHowItWorks from "@/components/landing/LandingHowItWorks";
+import LandingMore from "@/components/landing/LandingMore";
+import LandingSegments from "@/components/landing/LandingSegments";
 import LandingFAQ from "@/components/landing/LandingFAQ";
-import LandingDemoTeaser from "@/components/landing/LandingDemoTeaser";
+import LandingFooter from "@/components/landing/LandingFooter";
 import LandingDemoStickyBar from "@/components/landing/LandingDemoStickyBar";
 
 export default function Home() {
@@ -31,12 +25,11 @@ export default function Home() {
       </a>
 
       <header>
-        <LandingRibbon />
         <Navbar />
       </header>
 
       <main id="main-content">
-        <HeroSection />
+        <LandingHeroVideo />
         <LandingMarquee />
 
         <ScrollReveal>
@@ -44,15 +37,11 @@ export default function Home() {
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <LandingPersonas />
+          <LandingChange />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <LandingEcosystem />
-        </ScrollReveal>
-
-        <ScrollReveal delay={100}>
-          <LandingFeatureRows />
+          <LandingProof />
         </ScrollReveal>
 
         <ScrollReveal>
@@ -60,23 +49,15 @@ export default function Home() {
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <LandingBento />
+          <LandingHowItWorks />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <LandingIntegrationsGrid />
+          <LandingMore />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
-          <StepsSection />
-        </ScrollReveal>
-
-        <ScrollReveal delay={100}>
-          <TestimonialsSection />
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <LandingVideo />
+          <LandingSegments />
         </ScrollReveal>
 
         <ScrollReveal delay={100}>
@@ -84,15 +65,7 @@ export default function Home() {
         </ScrollReveal>
 
         <ScrollReveal>
-          <LandingCompare />
-        </ScrollReveal>
-
-        <ScrollReveal>
           <LandingFAQ />
-        </ScrollReveal>
-
-        <ScrollReveal>
-          <LandingDemoTeaser />
         </ScrollReveal>
 
         <ScrollReveal>
@@ -100,7 +73,7 @@ export default function Home() {
         </ScrollReveal>
       </main>
 
-      <Footer />
+      <LandingFooter />
       <WhatsAppButton />
       <LandingDemoStickyBar />
     </div>
