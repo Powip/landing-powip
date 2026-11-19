@@ -7,6 +7,7 @@ import { Play } from 'lucide-react';
 const VIDEO_ID = 'EKNc-CjCeuA';
 const CLIENT_NAME = 'Valeria';
 const CLIENT_BUSINESS = 'CleoJoyas';
+const COVER_SRC = '/landing/testimonios/cleojoyas-portada.webp';
 
 /**
  * Video de la sección "Prueba real", en formato vertical 9:16 como el Short.
@@ -30,17 +31,16 @@ export default function LandingProofVideo() {
           type="button"
           onClick={() => setIsPlaying(true)}
           aria-label={`Reproducir el testimonio de ${CLIENT_NAME}, ${CLIENT_BUSINESS}`}
-          className="group absolute inset-0 w-full h-full flex items-center justify-center bg-[radial-gradient(circle_at_30%_40%,#6C4FE0,#2E2168)]"
+          className="group absolute inset-0 w-full h-full flex items-center justify-center bg-[#2E2168]"
         >
-          <span className="absolute top-5 left-6 right-6 text-white text-left">
-            <b className="block font-bold text-lg">{CLIENT_NAME}</b>
-            <span className="block text-[13.5px] text-[#d9d2ea] font-medium">{CLIENT_BUSINESS} · usa POWIP</span>
-          </span>
-          <span className="w-20 h-20 rounded-full bg-white flex items-center justify-center shadow-[0_14px_44px_rgba(0,0,0,0.35)] transition-transform group-hover:scale-110">
-            <Play className="w-7 h-7 text-[#4F3A96] fill-[#4F3A96] ml-1" aria-hidden="true" />
-          </span>
-          <span className="absolute bottom-5 right-6 text-white text-[13px] font-semibold bg-black/40 px-3.5 py-1.5 rounded-full">
-            Reproducir video
+          {/* Portada del Short: ya incluye el nombre de la clienta y del negocio */}
+          <img
+            src={COVER_SRC}
+            alt={`${CLIENT_NAME}, de ${CLIENT_BUSINESS}, cuenta por qué POWIP es su aliado para crecer`}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <span className="absolute left-1/2 top-[56%] -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-[0_14px_44px_rgba(0,0,0,0.35)] transition-transform group-hover:scale-110">
+            <Play className="w-6 h-6 text-[#4F3A96] fill-[#4F3A96] ml-1" aria-hidden="true" />
           </span>
         </button>
       )}
