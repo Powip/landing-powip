@@ -6,8 +6,7 @@ import LandingProofVideo from '@/components/landing/LandingProofVideo';
  * Sección "Prueba real": video de testimonio + testimonios de clientes.
  * Los testimonios escritos son los reales de la landing (TestimonialsSection).
  *
- * PENDIENTE: el video usa por ahora el de YouTube que ya tenía la landing.
- * Se reemplazará por el testimonio en video de la clienta.
+ * El video es el testimonio de Valeria (CleoJoyas), en LandingProofVideo.
  */
 export default function LandingProof() {
   return (
@@ -25,7 +24,7 @@ export default function LandingProof() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-8 items-stretch">
+        <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 items-center">
           <LandingProofVideo />
 
           <div className="flex flex-col gap-5">
