@@ -3,34 +3,30 @@ import Link from 'next/link';
 
 const FAQS = [
   {
-    q: '¿Cuánto demora en estar listo?',
-    a: 'Minutos. Creas tu cuenta, conectas tus canales y couriers, y empiezas a despachar el mismo día. Sin instalaciones ni migraciones eternas — y con soporte 1 a 1 desde el primer día.',
+    q: '¿Funciona con mi WhatsApp e Instagram?',
+    a: 'Sí. Conectas tus canales de venta y todos los pedidos caen en un solo tablero, con el origen marcado. También TikTok Live, Shopify y marketplaces.',
   },
   {
-    q: '¿Tengo que cambiar mi courier o mi plataforma de venta?',
-    a: 'No. POWIP se integra con lo que ya usas (Shalom, Eva, Olva, Shopify, WhatsApp, marketplaces y más). No reemplaza tus herramientas, las conecta y ordena en un solo lugar.',
+    q: '¿Se integra con Shalom y Olva? ¿Imprimo las etiquetas?',
+    a: 'Sí, con Shalom y Olva por API. Generas la guía desde POWIP, traemos el voucher y el tracking, y el estado se actualiza solo hasta marcar Entregado. Las etiquetas de envío salen listas para imprimir — nunca más escribir direcciones a mano.',
   },
   {
-    q: '¿Hay permanencia o contratos?',
-    a: 'Ninguna. Sin permanencia, sin contratos. Cambias o cancelas tu plan cuando tu negocio lo necesite.',
+    q: '¿Puedo importar mis pedidos actuales?',
+    a: 'Sí. Importas desde Excel o conectas tus canales y empiezas a operar sobre lo que ya tienes, sin partir de cero.',
   },
   {
-    q: '¿Sirve si vendo por WhatsApp y contraentrega (COD)?',
-    a: 'Es exactamente para eso. POWIP está hecho para ecommerce COD en Perú: confirmación, despacho, cobranza contraentrega, rendición de motorizados y liquidaciones incluidas.',
+    q: '¿Cuánto tardo en empezar?',
+    a: 'Minutos. Creas tu cuenta, conectas canales y couriers, y despachas el mismo día. Si quieres, te acompañamos en una demo para dejarlo listo contigo.',
   },
   {
-    q: '¿Qué pasa con mis pedidos actuales?',
-    a: 'Los importas fácil y siguen fluyendo. Nuestro equipo te acompaña en el onboarding para que no pierdas ni un pedido en la transición.',
-  },
-  {
-    q: '¿POWIP factura a SUNAT?',
-    a: 'Sí. Emites boletas y facturas electrónicas y las envías a tu cliente automáticamente, desde la misma plataforma.',
+    q: '¿Tengo permanencia?',
+    a: 'No. Es mensual, sin contratos atados. Cambias de plan o cancelas cuando quieras.',
   },
 ];
 
 export default function LandingFAQ() {
   return (
-    <section className="w-full py-24 px-6 md:px-20 bg-[#FAFAFA]">
+    <section id="faq" className="w-full py-24 px-6 md:px-20 bg-[#FAFAFA] scroll-mt-24">
       <div className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
           <span className="inline-block text-[#006B82] font-bold uppercase text-xs tracking-wide bg-[#E0F7FA] border border-[#80DEEA] px-3.5 py-1.5 rounded-full">

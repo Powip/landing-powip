@@ -12,15 +12,18 @@ export default function Navbar() {
         <span className="text-[#4F3A96] font-bold text-[28px] tracking-tight font-heading">POWIP</span>
       </Link>
 
-      <div className="hidden md:flex items-center gap-9">
-        <Link href="/#ecosistema" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
-          Ecosistema
+      <div className="hidden lg:flex items-center gap-7 xl:gap-9">
+        <Link href="/#como" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
+          Cómo funciona
         </Link>
-        <Link href="/#producto" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
-          Producto
+        <Link href="/#para-quien" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
+          Para quién
         </Link>
         <Link href="/#precios" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
           Precios
+        </Link>
+        <Link href="/#faq" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
+          Preguntas
         </Link>
         <Link href="/demo" className="text-[#333333] font-semibold text-base hover:text-[#4F3A96] transition-colors">
           Demo
@@ -33,7 +36,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <div className="md:hidden flex items-center">
+      <div className="lg:hidden flex items-center">
         <Link href={ONBOARDING_URL} className="bg-[#4F3A96] text-white font-semibold text-sm px-4 py-2.5 rounded-md">
           Crear cuenta
         </Link>

@@ -221,3 +221,33 @@ button:focus-visible,
 .skip-link:focus {
   top: 1rem;
 }
+
+/* ===== LANDING V2 (mockup "del plumón a la etiqueta") ===== */
+@keyframes landingFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes landingPulse {
+  0% { box-shadow: 0 0 0 0 rgba(34, 184, 166, 0.55); }
+  70% { box-shadow: 0 0 0 10px rgba(34, 184, 166, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(34, 184, 166, 0); }
+}
+
+@keyframes landingSlideX {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(6px); }
+}
+
+.animate-landing-float {
+  animation: landingFloat 3.6s ease-in-out infinite;
+}
+
+.animate-landing-pulse {
+  animation: landingPulse 2.2s infinite;
+}
+
+.animate-landing-slide-x {
+  display: inline-block;
+  animation: landingSlideX 1.5s ease-in-out infinite;
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TESTIMONIALS = [
+export const TESTIMONIALS = [
   {
     quote:
       'Antes de Powip teníamos pedidos por WhatsApp, Instagram y Shopify, y todo se anotaba en Excel. Era un caos y siempre se escapaban pedidos o se duplicaban. Con Powip ahora todo entra a un solo lugar y nuestro equipo puede procesar los pedidos mucho más rápido.',
