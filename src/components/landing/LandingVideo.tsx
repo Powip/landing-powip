@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 
-const VIDEO_ID = 'eR3NaHgyLC0';
+export const VIDEO_ID = 'eR3NaHgyLC0';
 
 export default function LandingVideo() {
   const [isPlaying, setIsPlaying] = useState(false);

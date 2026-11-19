@@ -1,12 +1,13 @@
 import React from 'react';
 import { TESTIMONIALS } from '@/components/TestimonialsSection';
+import LandingProofVideo from '@/components/landing/LandingProofVideo';
 
 /**
  * Sección "Prueba real": video de testimonio + testimonios de clientes.
  * Los testimonios escritos son los reales de la landing (TestimonialsSection).
  *
- * PENDIENTE: el bloque de video es un marcador. Se reemplazará por el video
- * de YouTube de la clienta (iframe) con su nombre y negocio reales.
+ * PENDIENTE: el video usa por ahora el de YouTube que ya tenía la landing.
+ * Se reemplazará por el testimonio en video de la clienta.
  */
 export default function LandingProof() {
   return (
@@ -25,28 +26,7 @@ export default function LandingProof() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr] gap-8 items-stretch">
-          {/* Marcador del video de testimonio (YouTube pendiente) */}
-          <div
-            className="relative rounded-3xl overflow-hidden min-h-[340px] md:min-h-[420px] flex items-end bg-gradient-to-br from-[#2b2142] to-[#4F3A96] shadow-[0_30px_70px_rgba(45,25,90,0.3)]"
-            aria-label="Testimonio en video (próximamente)"
-            role="img"
-          >
-            <div
-              className="absolute inset-0 bg-[radial-gradient(500px_300px_at_70%_20%,rgba(124,58,237,0.5),transparent),repeating-linear-gradient(135deg,rgba(255,255,255,0.03)_0_12px,transparent_12px_24px)]"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[86px] h-[86px] rounded-full bg-white/95 flex items-center justify-center shadow-[0_12px_40px_rgba(0,0,0,0.3)]"
-              aria-hidden="true"
-            >
-              <span className="ml-1.5 border-l-[26px] border-l-[#4F3A96] border-y-[16px] border-y-transparent" />
-            </div>
-            <div className="relative z-10 w-full px-7 py-7 text-white bg-gradient-to-t from-[#140f23]/80 to-transparent">
-              <div className="text-[13px] font-bold text-[#c9b8f5] uppercase tracking-wider">▶ Testimonio en video</div>
-              <b className="block text-[22px] font-extrabold mt-1.5">[Nombre de tu clienta]</b>
-              <span className="text-[14.5px] text-[#d9d2ea]">[Su negocio] · usa POWIP todos los días</span>
-            </div>
-          </div>
+          <LandingProofVideo />
 
           <div className="flex flex-col gap-5">
             {TESTIMONIALS.map((t) => (
