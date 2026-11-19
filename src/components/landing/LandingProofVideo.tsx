@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { Play } from 'lucide-react';
 
 /** Testimonio en video (YouTube Short, vertical) de Valeria, CleoJoyas. */
-const VIDEO_ID = 'EKNc-CjCeuA';
+const VIDEO_ID = '5BtyZQmRcX0';
 const CLIENT_NAME = 'Valeria';
 const CLIENT_BUSINESS = 'CleoJoyas';
 const COVER_SRC = '/landing/testimonios/cleojoyas-portada.webp';
