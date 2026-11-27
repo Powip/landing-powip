@@ -49,6 +49,8 @@ export interface TrackingData {
     shippingKey?: string | null;
     shippingCode?: string | null;
     shalomDestinationAgency?: string | null;
+    /** Agencia de retiro de otros couriers (p. ej. Olva); Shalom usa shalomDestinationAgency. */
+    shippingOffice?: string | null;
     externalTrackingNumber?: string | null;
     trackingUrl?: string | null;
     /** Último estado de la guía en Shalom (lo actualiza ms-integrations). */

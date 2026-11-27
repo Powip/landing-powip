@@ -258,6 +258,9 @@ export default function RastreoPage() {
   const isDelivered = clientState === "cobrado";
   const isCancelled = clientState === "anulado";
   const deliveryCode = getVisibleDeliveryCode(data);
+  // Shalom manda su agencia en shalomDestinationAgency; Olva (y el resto) en shippingOffice.
+  const pickupAgency =
+    data.shippingInfo?.shalomDestinationAgency || data.shippingInfo?.shippingOffice || null;
   const deliveryCodeBlocked = !isCancelled && !hasConfirmedFullPayment(data) &&
     Boolean(data.deliveryCode || data.shippingInfo);
   const upsellAntes = upsellOffers.filter((o) => o.showWhen === "antes" || o.showWhen === "ambos");
@@ -491,11 +494,11 @@ export default function RastreoPage() {
               )}
 
               {/* Agencia destino */}
-              {data.shippingInfo.shalomDestinationAgency && (
+              {pickupAgency && (
                 <div className="bg-white/5 rounded-2xl p-4">
                   <p className="text-white/50 text-xs mb-1">Agencia de retiro</p>
                   <p className="text-white font-semibold">
-                    {data.shippingInfo.shalomDestinationAgency}
+                    {pickupAgency}
                   </p>
                 </div>
               )}
@@ -730,9 +733,9 @@ export default function RastreoPage() {
                 <p className="text-green-300 font-mono font-extrabold text-4xl tracking-[0.5em] mt-1">
                   {deliveryCode}
                 </p>
-                {data.shippingInfo?.shalomDestinationAgency && (
+                {pickupAgency && (
                   <p className="text-white/50 text-xs mt-2">
-                    {data.shippingInfo.shalomDestinationAgency}
+                    {pickupAgency}
                   </p>
                 )}
               </div>
