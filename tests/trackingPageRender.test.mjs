@@ -134,3 +134,33 @@ test("rastreo opts into no-store and fail-closed polling", () => {
   assert.equal(pollingOptions.discardDataOnError, true);
   assert.equal(pollingOptions.shouldStopPolling(fixture({ status: "ENTREGADO" })), false);
 });
+
+// FEAT-35: ms-ventas manda la agencia de Olva en shippingInfo.shippingOffice (Shalom usa shalomDestinationAgency).
+test("Olva agency pickup shows the pickup office in the shipped card and next to the delivery code", () => {
+  const html = render(fixture({
+    courier: "Olva Courier",
+    totals: { grandTotal: 65, totalPaid: 65, pendingAmount: 0 },
+    shippingInfo: {
+      shippingKey: "TEST-SHIPPING-SECRET",
+      externalTrackingNumber: "TEST-OLVA-GUIDE",
+      shippingOffice: "TEST OLVA AGENCY",
+    },
+  }));
+  assert.match(html, /Agencia de retiro/);
+  assert.equal(html.match(/TEST OLVA AGENCY/g)?.length, 2);
+  assert.match(html, /TEST-OLVA-GUIDE/);
+});
+
+test("Shalom destination agency still wins over shippingOffice", () => {
+  const html = render(fixture({
+    totals: { grandTotal: 65, totalPaid: 65, pendingAmount: 0 },
+    shippingInfo: {
+      shippingKey: "TEST-SHIPPING-SECRET",
+      shippingCode: "TEST-CODE",
+      shalomDestinationAgency: "TEST SHALOM AGENCY",
+      shippingOffice: "TEST OTHER OFFICE",
+    },
+  }));
+  assert.match(html, /TEST SHALOM AGENCY/);
+  assert.doesNotMatch(html, /TEST OTHER OFFICE/);
+});
