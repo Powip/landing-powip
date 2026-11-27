@@ -24,6 +24,20 @@ import UpsellList from "@/components/rastreo/UpsellList";
 import RecompraFlow from "@/components/rastreo/RecompraFlow";
 import { usePollingResource } from "@/lib/usePollingResource";
 
+/** Fecha del último estado de Shalom en hora de Lima, p. ej. «20 nov., 10:05». */
+function formatShalomStatusAt(value?: string | null): string | null {
+  if (!value) return null;
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return new Intl.DateTimeFormat("es-PE", {
+    day: "numeric",
+    month: "short",
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: "America/Lima",
+  }).format(date);
+}
+
 /* -----------------------------------------
    Status Color/Icon Helpers
 ----------------------------------------- */
@@ -427,6 +441,21 @@ export default function RastreoPage() {
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Último estado en Shalom */}
+              {data.shippingInfo.shalomStatusLabel && (
+                <div className="bg-white/5 rounded-2xl p-4 sm:col-span-2">
+                  <p className="text-white/50 text-xs mb-1">Estado en Shalom</p>
+                  <p className="text-white font-semibold text-lg">
+                    {data.shippingInfo.shalomStatusLabel}
+                  </p>
+                  {formatShalomStatusAt(data.shippingInfo.shalomStatusAt) && (
+                    <p className="text-white/30 text-[10px] mt-1">
+                      Actualizado el {formatShalomStatusAt(data.shippingInfo.shalomStatusAt)}
+                    </p>
+                  )}
+                </div>
+              )}
+
               {/* Nro guía con link */}
               {data.shippingInfo.externalTrackingNumber && (
                 <div className="bg-white/5 rounded-2xl p-4">

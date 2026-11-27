@@ -51,6 +51,11 @@ export interface TrackingData {
     shalomDestinationAgency?: string | null;
     externalTrackingNumber?: string | null;
     trackingUrl?: string | null;
+    /** Último estado de la guía en Shalom (lo actualiza ms-integrations). */
+    shalomStatus?: string | null;
+    shalomStatusLabel?: string | null;
+    /** ISO: cuándo Powip detectó ese estado. */
+    shalomStatusAt?: string | null;
   } | null;
   // Campos del Hito 1 que el backend todavía no expone — opcionales para
   // no romper nada mientras se confirma el contrato real. Ver
